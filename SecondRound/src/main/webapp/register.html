@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>NFT 注册页面</title>
+</head>
+<body>
+<main>
+  <section class="register-container">
+    <h1>NFT 注册页面</h1>
+    <form id="register-form">
+      <div class="input-container">
+        <label for="username">用户名</label>
+        <input type="text" id="username" placeholder="请输入您的用户名">
+      </div>
+      <div class="input-container">
+        <label for="password">密码</label>
+        <input type="password" id="password" placeholder="请输入您的密码">
+      </div>
+      <div class="input-container">
+        <label for="avatar">头像</label>
+        <div class="avatar-container">
+          <input type="file" id="avatar" accept="image/*">
+          <img id="avatar-preview" src="#" alt="头像预览">
+          <div class="avatar-mask">
+            <span>选择文件</span>
+          </div>
+        </div>
+      </div>
+      <button type="submit">注册</button>
+    </form>
+  </section>
+</main>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(function() {
+    $('#register-form').on('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      $.ajax({
+        url: '/register',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          alert('注册成功！');
+        },
+        error: function(xhr) {
+          alert('注册失败：' + xhr.responseText);
+        }
+      });
+    });
+  });
+
+  const avatarInput = document.querySelector('#avatar');
+  const avatarPreview = document.querySelector('#avatar-preview');
+  const avatarMask = document.querySelector('.avatar-mask');
+
+  avatarInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        avatarPreview.src = reader.result;
+      }
+      reader.readAsDataURL(file);
+      avatarMask.classList.add('hidden');
+    } else {
+      avatarPreview.src = '#';
+      avatarMask.classList.remove('hidden');
+    }
+  });
+</script>
+
+</body>
+</html>
