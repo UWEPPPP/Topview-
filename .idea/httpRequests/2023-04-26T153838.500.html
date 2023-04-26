@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh">
+<head><title>HTTP状态 500 - 内部服务器错误</title>
+    <style type="text/css">body {
+        font-family: Tahoma, Arial, sans-serif;
+    }
+
+    h1, h2, h3, b {
+        color: white;
+        background-color: #525D76;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    a {
+        color: black;
+    }
+
+    .line {
+        height: 1px;
+        background-color: #525D76;
+        border: none;
+    }</style>
+</head>
+<body><h1>HTTP状态 500 - 内部服务器错误</h1>
+<hr class="line"/>
+<p><b>类型</b> 异常报告</p>
+<p><b>消息</b> org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException: the request doesn&#39;t contain
+    a multipart&#47;form-data or multipart&#47;mixed stream, content type header is null</p>
+<p><b>描述</b> 服务器遇到一个意外的情况，阻止它完成请求。</p>
+<p><b>例外情况</b></p>
+<pre>javax.servlet.ServletException: org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException: the request doesn&#39;t contain a multipart&#47;form-data or multipart&#47;mixed stream, content type header is null
+	org.apache.catalina.connector.Request.parseParts(Request.java:2979)
+	org.apache.catalina.connector.Request.getParts(Request.java:2835)
+	org.apache.catalina.connector.Request.getPart(Request.java:3010)
+	org.apache.catalina.connector.RequestFacade.getPart(RequestFacade.java:834)
+	controller.RegisterServlet.doPost(RegisterServlet.java:29)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:528)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+</pre>
+<p><b>根本原因。</b></p>
+<pre>org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException: the request doesn&#39;t contain a multipart&#47;form-data or multipart&#47;mixed stream, content type header is null
+	org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.init(FileItemIteratorImpl.java:151)
+	org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.getMultiPartStream(FileItemIteratorImpl.java:205)
+	org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.findNextItem(FileItemIteratorImpl.java:224)
+	org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.&lt;init&gt;(FileItemIteratorImpl.java:142)
+	org.apache.tomcat.util.http.fileupload.FileUploadBase.getItemIterator(FileUploadBase.java:277)
+	org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:301)
+	org.apache.catalina.connector.Request.parseParts(Request.java:2941)
+	org.apache.catalina.connector.Request.getParts(Request.java:2835)
+	org.apache.catalina.connector.Request.getPart(Request.java:3010)
+	org.apache.catalina.connector.RequestFacade.getPart(RequestFacade.java:834)
+	controller.RegisterServlet.doPost(RegisterServlet.java:29)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:528)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:596)
+	org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+</pre>
+<p><b>):注意</b> 主要问题的全部 stack 信息可以在 server logs 里查看</p>
+<hr class="line"/>
+<h3>Apache Tomcat/9.0.72</h3></body>
+</html>
