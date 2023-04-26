@@ -1,80 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>NFT 注册页面</title>
+  <title>注册新账户</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
 </head>
 <body>
-<main>
-  <section class="register-container">
-    <h1>NFT 注册页面</h1>
-    <form id="register-form">
-      <div class="input-container">
-        <label for="username">用户名</label>
-        <input type="text" id="username" placeholder="请输入您的用户名">
-      </div>
-      <div class="input-container">
-        <label for="password">密码</label>
-        <input type="password" id="password" placeholder="请输入您的密码">
-      </div>
-      <div class="input-container">
-        <label for="avatar">头像</label>
-        <div class="avatar-container">
-          <input type="file" id="avatar" accept="image/*">
-          <img id="avatar-preview" src="#" alt="头像预览">
-          <div class="avatar-mask">
-            <span>选择文件</span>
-          </div>
-        </div>
-      </div>
-      <button type="submit">注册</button>
-    </form>
-  </section>
-</main>
+<h1>注册新账户</h1>
+<form action="/register" method="post" enctype="multipart/form-data">
+  <label for="username">用户名：</label>
+  <input type="text" id="username" name="username" required>
 
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-  $(function() {
-    $('#register-form').on('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      $.ajax({
-        url: '/register',
-        method: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          alert('注册成功！');
-        },
-        error: function(xhr) {
-          alert('注册失败：' + xhr.responseText);
-        }
-      });
-    });
-  });
+  <label for="password">密码：</label>
+  <input type="password" id="password" name="password" required>
 
-  const avatarInput = document.querySelector('#avatar');
-  const avatarPreview = document.querySelector('#avatar-preview');
-  const avatarMask = document.querySelector('.avatar-mask');
+  <label for="avatar">头像：</label>
+  <input type="file" id="avatar" name="avatar" accept="image/*">
 
-  avatarInput.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function() {
-        avatarPreview.src = reader.result;
-      }
-      reader.readAsDataURL(file);
-      avatarMask.classList.add('hidden');
-    } else {
-      avatarPreview.src = '#';
-      avatarMask.classList.remove('hidden');
-    }
-  });
-</script>
-
+  <input type="submit" value="注册">
+</form>
 </body>
 </html>

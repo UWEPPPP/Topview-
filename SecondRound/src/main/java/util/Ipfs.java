@@ -17,8 +17,8 @@ import java.io.IOException;
  */
 public class Ipfs {
     public static final IPFS IPFS =new IPFS("/ip4/127.0.0.1/tcp/5001");
-    public static String upload( String fileName) throws IOException {
-        NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(new File(fileName));
+    public static String upload( String fileName,byte[] bytes) throws IOException {
+        NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(fileName,bytes);
         MerkleNode addResult = IPFS.add(file).get(0);
         return addResult.hash.toString();
     }

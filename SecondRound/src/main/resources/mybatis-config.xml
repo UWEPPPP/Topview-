@@ -17,4 +17,5 @@
     <mappers>
         <mapper resource="dao/UserMapper.xml"/>
     </mappers>
+
 </configuration>

@@ -20,22 +20,19 @@ public class RegisterService {
     public static RegisterService getInstance() {
         return RegisterServiceInstance.INSTANCE;
     }
-    public void register(String username, String password, String fileName ) throws IOException {
+    public void register(String username, String password, String fileName, byte[] byteArray) throws IOException {
         // 在这里将用户数据和头像 IPFS 哈希值保存到数据库中
-        String upload = Ipfs.upload(fileName);
+        String upload = Ipfs.upload(fileName,byteArray);
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = new User();
-        user.setName("man");
-        user.setPassword("111");
+        user.setName(username);
+        user.setPassword(password);
         user.setProfile(upload);
-        user.setContract_address("0x111");
-        user.setPrivate_key("0x111");
-        user.setBalance("1111");
-        userMapper.insertUser(user);
+        user.setContract_address();
         sqlSession.commit();
     }
 }

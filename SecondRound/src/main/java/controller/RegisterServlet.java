@@ -1,5 +1,6 @@
 package controller;
 
+import org.apache.commons.io.IOUtils;
 import service.Factory;
 import service.RegisterService;
 
@@ -22,12 +23,13 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("test");
+        request.setCharacterEncoding("UTF-8");
+
         // 获取提交的表单数据
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Part avatarPart = request.getPart("avatar");
-        System.out.println("testTwo");
+        System.out.println(username+"|"+password+"|"+avatarPart);
         // 验证表单数据
         if (username == null || username.trim().isEmpty() ||
                 password == null || password.trim().isEmpty() ||
@@ -35,11 +37,13 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("register.html");
             return;
         }
-        System.out.println("TestThree");
         // 保存用户头像到服务器
-        String avatarFileName = Paths.get(avatarPart.getSubmittedFileName()).getFileName().toString();
+        String submittedFileName = avatarPart.getSubmittedFileName();
+        InputStream inputStream = avatarPart.getInputStream();
+        byte[] byteArray = IOUtils.toByteArray(inputStream);
+        System.out.println(submittedFileName);
         RegisterService registerService = Factory.getRegisterService();
-        registerService.register(username, password, avatarFileName);
+        registerService.register(username, password, submittedFileName,byteArray);
         // 重定向到登录页面
         response.sendRedirect("login.html");
     }

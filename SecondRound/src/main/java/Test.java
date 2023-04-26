@@ -19,19 +19,8 @@ public class Test {
         Test test = new Test();
         String upload = test.upload(ipfs, "SecondRound/下载.jpg");
         String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = new User();
-        user.setName("man");
-        user.setPassword("123");
-        user.setProfile(upload);
-        user.setContract_address("0x123");
-        user.setPrivate_key("0x123");
-        user.setBalance("100");
-        userMapper.insertUser(user);
-        sqlSession.commit();
+        byte[] qmUckEQPV1HU4KktNGAnjdoc68jsq4WVPZeBj8tmk2KiNKS = Ipfs.download("QmUckEQPV1HU4KktNGAnjdoc68jsq4WVPZeBj8tmk2KiNK");
+
     }
 
     public String upload(IPFS ipfs, String fileName) throws IOException {
