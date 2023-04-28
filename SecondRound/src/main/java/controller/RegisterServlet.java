@@ -1,6 +1,7 @@
 package controller;
 
 import org.apache.commons.io.IOUtils;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.Factory;
 import service.RegisterService;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +45,11 @@ public class RegisterServlet extends HttpServlet {
         byte[] byteArray = IOUtils.toByteArray(inputStream);
         System.out.println(submittedFileName);
         RegisterService registerService = Factory.getRegisterService();
-        registerService.register(username, password, submittedFileName,byteArray);
+        try {
+            registerService.register(username, password, submittedFileName,byteArray);
+        } catch (ContractException | SQLException e) {
+            throw new RuntimeException(e);
+        }
         // 重定向到登录页面
         response.sendRedirect("login.html");
     }

@@ -1,6 +1,9 @@
 package controller;
 
 
+import service.Factory;
+import service.LoginService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +23,10 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (username == null || username.trim().isEmpty() ||
-                password == null || password.trim().isEmpty() ||
+                password == null || password.trim().isEmpty()
                 ) {
-            resp.sendRedirect("login.html");
+            LoginService loginService = Factory.getLoginService();
+            loginService.login(username,password);
             return;
         }
     }

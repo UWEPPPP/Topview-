@@ -1,17 +1,10 @@
-import dao.UserMapper;
-import entity.po.User;
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import io.ipfs.multihash.Multihash;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import util.Ipfs;
 
 import java.io.*;
-import java.net.URLEncoder;
 
 public class Test {
     public static void main(String[] args) throws IOException {
