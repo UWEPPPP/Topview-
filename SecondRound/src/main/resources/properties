@@ -1,0 +1,7 @@
+#properties
+#Thu Jan 05 20:52:48 CST 2023
+URL=jdbc:mysql://localhost:3306/nft
+password=liujiahui1Y
+username=root
+maxConnections=20
+initConnections=10

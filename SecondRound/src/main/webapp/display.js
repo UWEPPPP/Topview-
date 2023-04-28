@@ -11,7 +11,7 @@ const collectionData = [
     {
         id: 2,
         name: '藏品2',
-        image: 'https://via.placeholder.com/200x150',
+        image: 'https://ipfs.io/ipfs/Qmdm3VcsXioGcVfyqPWG8ts9eLztmvSJn7BhMwh7jdzNAz',
         caster: '铸造者2',
         date: '2023-04-27',
         price: 200

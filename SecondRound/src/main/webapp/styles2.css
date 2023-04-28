@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+#collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.item {
+    width: 30%;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.item img {
+    width: 100%;
+}
+
+.item h3 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.item p {
+    margin: 10px 0;
+    font-size: 16px;
+}

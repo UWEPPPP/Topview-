@@ -1,19 +1,21 @@
+package service;
+
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import io.ipfs.multihash.Multihash;
+import util.CryptoUtil;
 import util.Ipfs;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        IPFS ipfs=new IPFS("/ip4/127.0.0.1/tcp/5001");
-        Test test = new Test();
-        String upload = test.upload(ipfs, "SecondRound/下载.jpg");
-        String resource = "mybatis-config.xml";
-        byte[] qmUckEQPV1HU4KktNGAnjdoc68jsq4WVPZeBj8tmk2KiNKS = Ipfs.download("QmUckEQPV1HU4KktNGAnjdoc68jsq4WVPZeBj8tmk2KiNK");
-
+        String s = CryptoUtil.readPassword("SecondRound/src/main/resources/password.txt");
+        System.out.println(s);
+        String s1 = CryptoUtil.encryptHexPrivateKey("123456", "SecondRound/src/main/resources/password.txt");
+        System.out.println(s1);
     }
 
     public String upload(IPFS ipfs, String fileName) throws IOException {

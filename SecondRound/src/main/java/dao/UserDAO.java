@@ -20,7 +20,7 @@ public class UserDAO implements IDao {
     }
 
     @Override
-    public int insert(Object obj) throws SQLException {
+    public int insert(Object obj) throws SQLException, ClassNotFoundException {
         User user = (User) obj;
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("insert into nft.ntf_user(name, profile, contract_address, private_key, balance, password) values(?,?,?,?,?,?)");
@@ -44,7 +44,7 @@ public class UserDAO implements IDao {
     }
 
     @Override
-    public ResultSet select(Object obj) throws SQLException {
+    public ResultSet select(Object obj) throws SQLException, ClassNotFoundException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from nft.ntf_user where name = ? and password = ?");
         preparedStatement.setString(1, ((User) obj).getName());

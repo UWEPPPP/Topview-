@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>个人信息页面</title>
+  <link rel="stylesheet" href="personal-info.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // 发送HTTP GET请求，获取JSON数据
+      $.getJSON('data', function(data) {
+        // 解析JSON数据并在页面中展示头像
+        $('#avatar').attr('src', data.image);
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        // 接收响应时出现错误
+        console.log('Error: ' + errorThrown);
+      });
+    });
+  </script>
+</head>
+<body>
+<header>
+  <div class="user-profile">
+    <img id="avatar" alt="User Avatar">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<header>
+  <h1>个人信息</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="#">个人信息</a></li>
+    <li><a href="casting.html">铸造藏品</a></li>
+    <li><a href="display.html">展示藏品</a></li>
+    <li><a href="search.html">搜索藏品</a></li>
+    <li><a href="purchase.html">购买藏品</a></li>
+    <li><a href="transfer.html">转增藏品</a></li>
+    <li><a href="trace.html">追溯藏品</a></li>
+  </ul>
+</nav>
+<section>
+  <form>
+    <div>
+      <label for="avatar">头像：</label>
+      <input type="file" id="avatar2" name="avatar">
+    </div>
+    <div>
+      <label for="name1">名字：</label>
+      <label for="name1"></label><input type="text" id="name1" name="name">
+    </div>
+    <div>
+      <label for="email">邮箱：</label>
+      <input type="email" id="email" name="email">
+    </div>
+    <div>
+      <label for="password">密码：</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <button type="submit">保存</button>
+  </form>
+</section>
+<footer>
+  <p>版权所有 &copy; 2023 藏品管理系统</p>
+</footer>
+</body>
+</html>

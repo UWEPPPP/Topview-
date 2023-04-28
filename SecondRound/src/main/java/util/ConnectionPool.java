@@ -1,5 +1,7 @@
 package util;
 
+import com.fasterxml.jackson.databind.ext.CoreXMLDeserializers;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -21,8 +23,9 @@ public class ConnectionPool {
     private Integer allConnections;
     private BlockingQueue<Connection> connectionPool;
 
-    private ConnectionPool() {
-        try (FileReader fre = new FileReader("src/resource/properties")) {
+    private ConnectionPool() throws ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (FileReader fre = new FileReader("D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\src\\main\\resources\\properties")) {
             Properties properties = new Properties();
             properties.load(fre);
             maxConnections = Integer.parseInt(properties.getProperty("maxConnections"));
@@ -41,7 +44,7 @@ public class ConnectionPool {
         }
     }
 
-    public static synchronized ConnectionPool getInstance() {
+    public static synchronized ConnectionPool getInstance() throws ClassNotFoundException {
         if (instance == null) {
             instance = new ConnectionPool();
         }

@@ -3,13 +3,6 @@ package service;
 import dao.FactoryDAO;
 import dao.UserDAO;
 import entity.po.User;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.client.Client;
-import org.fisco.bcos.sdk.crypto.CryptoSuite;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
@@ -18,13 +11,15 @@ import util.CryptoUtil;
 import util.Ipfs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 
+/**
+ * 注册服务
+ *
+ * @author 刘家辉
+ * &#064;date  2023/04/28
+ */
 public class RegisterService {
-    private static final BcosSDK SDK = BcosSDK.build("config-example.toml");
-    private static final Client CLIENT = SDK.getClient(1);
-    private static final CryptoSuite CRYPTO_SUITE = CLIENT.getCryptoSuite();
     private RegisterService() {
     }
     public static class  RegisterServiceInstance {
@@ -33,12 +28,13 @@ public class RegisterService {
     public static RegisterService getInstance() {
         return RegisterServiceInstance.INSTANCE;
     }
-    public void register(String username, String password, String fileName, byte[] byteArray) throws IOException, ContractException, SQLException {
-        CryptoKeyPair keyPair = CRYPTO_SUITE.createKeyPair();
+    public void register(String username, String password, String fileName, byte[] byteArray) throws IOException, ContractException, SQLException, ClassNotFoundException {
+        CryptoKeyPair keyPair = Contract.setNftMarket();
         String hexPrivateKey = keyPair.getHexPrivateKey();
-        String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey, "src/resource/password.txt");
-        String userPassword = CryptoUtil.encryptHexPrivateKey(password, "src/resource/password.txt");
-        Contract.getInstance().setNftMarket(NftMarket.deploy(CLIENT, keyPair));
+        System.out.println(hexPrivateKey);
+        String paddedStr = String.format("%-32s", password).replace(' ', '0');
+        String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey, "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt");
+        String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr, "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt");
         String upload = Ipfs.upload(fileName,byteArray);
         User user = new User();
         user.setName(username);
@@ -49,7 +45,7 @@ public class RegisterService {
         user.setBalance(String.valueOf(1000));
         UserDAO userDaoInstance = FactoryDAO.getUserDaoInstance();
         int insert = userDaoInstance.insert(user);
-        NftMarket nftMarket = Contract.getInstance().getNftMarket();
+        NftMarket nftMarket = Contract.getNftMarket();
         TransactionReceipt register = nftMarket.regiter();
         String status = register.getStatus();
         String check= "0x0";

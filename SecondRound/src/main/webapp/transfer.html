@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>转增藏品 - 藏品管理系统</title>
+    <link rel="stylesheet" href="transfer.css">
+</head>
+<body>
+
+<header>
+    <h1>藏品管理系统</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="personal-info.html">个人信息</a></li>
+        <li><a href="casting.html">铸造藏品</a></li>
+        <li><a href="display.html">展示藏品</a></li>
+        <li><a href="search.html">搜索藏品</a></li>
+        <li><a href="purchase.html">购买藏品</a></li>
+        <li><a href="#" class="active">转增藏品</a></li>
+        <li><a href="trace.html">追溯藏品</a></li>
+    </ul>
+</nav>
+<section id="transfer">
+    <h2>转增藏品</h2>
+    <form>
+        <div>
+            <label for="recipient">接收者：</label>
+            <input type="text" id="recipient" name="recipient">
+        </div>
+        <div>
+            <label for="collection-item">藏品：</label>
+            <select id="collection-item" name="collection-item">
+                <option value="1">藏品1</option>
+                <option value="2">藏品2</option>
+                <option value="3">藏品3</option>
+            </select>
+        </div>
+        <button type="submit">转增</button>
+    </form>
+</section>
+<footer>
+    <p>版权所有 &copy; 2023 藏品管理系统</p>
+</footer>
+
+</body>
+</html>

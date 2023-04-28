@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
         if (username == null || username.trim().isEmpty() ||
                 password == null || password.trim().isEmpty() ||
                 avatarPart == null) {
-            response.sendRedirect("register.html");
+            response.sendRedirect("src/webapp/register.html");
             return;
         }
         // 保存用户头像到服务器
@@ -47,10 +47,10 @@ public class RegisterServlet extends HttpServlet {
         RegisterService registerService = Factory.getRegisterService();
         try {
             registerService.register(username, password, submittedFileName,byteArray);
-        } catch (ContractException | SQLException e) {
+        } catch (ContractException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         // 重定向到登录页面
-        response.sendRedirect("login.html");
+        response.sendRedirect("src/webapp/login.html");
     }
 }

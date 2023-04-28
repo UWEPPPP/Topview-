@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>铸造藏品页面</title>
+    <link rel="stylesheet" href="casting.css">
+</head>
+<body>
+<header>
+    <h1>铸造藏品</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="personal-info.html">个人信息</a></li>
+        <li><a href="#">铸造藏品</a></li>
+        <li><a href="display.html">展示藏品</a></li>
+        <li><a href="search.html">搜索藏品</a></li>
+        <li><a href="purchase.html">购买藏品</a></li>
+        <li><a href="transfer.html">转增藏品</a></li>
+        <li><a href="trace.html">追溯藏品</a></li>
+    </ul>
+</nav>
+<section>
+    <h2>铸造藏品表单</h2>
+    <form>
+        <div>
+            <label for="name">藏品名字：</label>
+            <label for="name1"></label><input type="text" id="name1" name="name">
+        </div>
+        <div>
+            <label for="description">藏品描述：</label>
+            <textarea id="description" name="description" rows="5"></textarea>
+        </div>
+        <div>
+            <label for="material">藏品材质：</label>
+            <select id="material" name="material">
+                <option value="brass">黄铜</option>
+                <option value="bronze">青铜</option>
+                <option value="silver">银</option>
+                <option value="gold">金</option>
+            </select>
+        </div>
+        <div>
+            <label for="weight">藏品重量：</label>
+            <label for="weight1"></label><input type="number" id="weight1" name="weight" step="0.1">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+</section>
+<footer>
+    <p>版权所有 &copy; 2023 藏品管理系统</p>
+</footer>
+</body>
+</html>
