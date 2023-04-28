@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>藏品管理系统</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+
+<header>
+    <h1>藏品管理系统</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="#" class="active">个人信息</a></li>
+        <li><a href="#">铸造藏品</a></li>
+        <li><a href="#">展示藏品</a></li>
+        <li><a href="#">搜索藏品</a></li>
+        <li><a href="#">购买藏品</a></li>
+        <li><a href="#">转增藏品</a></li>
+        <li><a href="#">追溯藏品</a></li>
+    </ul>
+</nav>
+<section id="personal-info">
+    <h2>个人信息</h2>
+    <form>
+        <div>
+            <label for="avatar">头像：</label>
+            <input type="file" id="avatar" name="avatar">
+        </div>
+        <div>
+            <label for="name">名字：</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <button type="submit">保存</button>
+    </form>
+</section>
+<section id="casting">
+    <h2>铸造藏品</h2>
+    <form>
+        <div>
+            <label for="name">名称：</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <label for="material">材料：</label>
+            <input type="text" id="material" name="material">
+        </div>
+        <div>
+            <label for="date">日期：</label>
+            <input type="date" id="date" name="date">
+        </div>
+        <button type="submit">铸造</button>
+    </form>
+</section>
+<section id="display">
+    <h2>展示藏品</h2>
+    <div id="collection"></div>
+</section>
+<section id="search">
+    <h2>搜索藏品</h2>
+    <form>
+        <div>
+            <label for="id">唯一标识：</label>
+            <input type="text" id="id" name="id">
+        </div>
+        <div>
+            <label for="name">名称：</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <label for="caster">铸造者：</label>
+            <input type="text" id="caster" name="caster">
+        </div>
+        <button type="submit">搜索</button>
+    </form>
+</section>
+<section id="purchase">
+    <h2>购买藏品</h2>
+    <div id="purchase-info">
+        <p>您当前的余额为：100元</p>
+        <div>
+            <label for="amount">购买金额：</label>
+            <input type="number" id="amount" name="amount" min="1" max="100">
+        </div>
+        <button type="submit">购买</button>
+    </div>
+</section>
+<section id="transfer">
+    <h2>转增藏品</h2>
+    <form>
+        <div>
+            <label for="recipient">接收者：</label>
+            <input type="text" id="recipient" name="recipient">
+        </div>
+        <div>
+            <label for="collection-item">藏品：</label>
+            <select id="collection-item" name="collection-item">
+                <option value="1">藏品1</option>
+                <option value="2">藏品2</option>
+                <option value="3">藏品3</option>
+            </select>
+        </div>
+        <button type="submit">转增</button>
+    </form>
+</section>
+<section id="trace">
+    <h2>追溯藏品</h2>
+    <form>
+        <div>
+            <label for="trace-id">唯一标识：</label>
+            <input type="text" id="trace-id" name="trace-id">
+        </div>
+        <button type="submit">追溯</button>
+    </form>
+</section>
+<footer>
+    <p>版权所有 &copy; 2023 藏品管理系统</p>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>

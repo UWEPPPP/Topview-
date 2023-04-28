@@ -9,29 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="feat:编写了部分合约">
-      <change afterPath="$PROJECT_DIR$/SecondRound/config-example.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/NftMarket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/CryptoUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/password.txt" afterDir="false" />
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="feat:实现登陆注册功能">
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/enter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/FactoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/FactoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/Factory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/dao/UserMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/mybatis-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +27,8 @@
         <option value="package-info" />
         <option value="Interface" />
         <option value="Mybatis Mapper" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -253,7 +236,7 @@
       <workItem from="1682517652382" duration="6764000" />
       <workItem from="1682567056166" duration="320000" />
       <workItem from="1682644476484" duration="679000" />
-      <workItem from="1682662213598" duration="3890000" />
+      <workItem from="1682662213598" duration="5814000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -276,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682528783604</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat:实现登陆注册功能">
+      <created>1682677602571</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682677602571</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +298,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initialize" />
     <MESSAGE value="feat:编写了部分合约" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat:编写了部分合约" />
+    <MESSAGE value="feat:实现登陆注册功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:实现登陆注册功能" />
   </component>
 </project>
