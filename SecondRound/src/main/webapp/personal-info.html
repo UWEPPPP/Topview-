@@ -33,6 +33,7 @@
   <div>
     <img src="" alt="头像" id="avatar">
     <h2 id="name"></h2>
+    <h2 id="balance" name="balance"></h2>
   </div>
 </section>
 <footer>
@@ -44,6 +45,7 @@
     $.getJSON("/login", function(data) {
       $("#avatar").attr("src", data.avatar);
       $("#name").text(data.name);
+      $("#balance").text(data.balance);
     });
   });
 </script>

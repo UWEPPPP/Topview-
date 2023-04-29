@@ -23,14 +23,17 @@ public class UserDAO implements IDao {
     public int insert(Object obj) throws SQLException, ClassNotFoundException {
         User user = (User) obj;
         Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into nft.ntf_user(name, profile, contract_address, private_key, balance, password) values(?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into nft.nft_user(name, profile, contract_address, private_key, balance, password) values(?,?,?,?,?,?)");
         preparedStatement.setString(1, user.getName());
         preparedStatement.setString(2, user.getProfile());
         preparedStatement.setString(3, user.getContract_address());
         preparedStatement.setString(4, user.getPrivate_key());
         preparedStatement.setInt(5, Integer.parseInt(user.getBalance()));
         preparedStatement.setString(6, user.getPassword());
-        return preparedStatement.executeUpdate();
+        int result = preparedStatement.executeUpdate();
+        ConnectionPool.getInstance().releaseConnection(connection);
+        ConnectionPool.close(preparedStatement, null);
+        return result;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class UserDAO implements IDao {
     @Override
     public User select(Object obj) throws SQLException, ClassNotFoundException {
         Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from nft.ntf_user where name = ? and password = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from nft.nft_user where name = ? and password = ?");
         preparedStatement.setString(1, ((User) obj).getName());
         preparedStatement.setString(2, ((User) obj).getPassword());
 
@@ -60,6 +63,7 @@ public class UserDAO implements IDao {
             user.setBalance(resultSet.getString("balance"));
             user.setPassword(resultSet.getString("password"));
             ConnectionPool.getInstance().releaseConnection(connection);
+            ConnectionPool.close(preparedStatement, resultSet);
             return user;
         }else {
             return null;

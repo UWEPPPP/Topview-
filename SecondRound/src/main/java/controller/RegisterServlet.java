@@ -5,11 +5,6 @@ import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.Factory;
 import service.RegisterService;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 
+/**
+ * @author LiuJiaHui
+ */
 @WebServlet("/register")
 @MultipartConfig
 public class RegisterServlet extends HttpServlet {
@@ -40,16 +41,16 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         // 保存用户头像到服务器
-        String submittedFileName = avatarPart.getSubmittedFileName();
         InputStream inputStream = avatarPart.getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
-        System.out.println(submittedFileName);
+
         RegisterService registerService = Factory.getRegisterService();
         try {
-            registerService.register(username, password, submittedFileName,byteArray);
+            registerService.register(username, password,byteArray);
         } catch (ContractException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        inputStream.close();
         // 重定向到登录页面
         response.sendRedirect("/login.html");
     }

@@ -9,18 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="fix:修复登录部分bug">
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="fix:实现基本的7个页面（前端）">
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/NftDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/conf/ca.crt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/conf/sdk.crt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/conf/sdk.key" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/config-example.toml" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/config-example.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/FactoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/FactoryDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/t.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/t.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/Factory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/CryptoUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/CryptoUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Ipfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Ipfs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,9 +45,9 @@
         <option value="package-info" />
         <option value="Interface" />
         <option value="Mybatis Mapper" />
-        <option value="Class" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -82,7 +93,7 @@
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/resources/conf&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -92,7 +103,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -103,18 +114,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\resources\conf" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\resources" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java\service" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound" />
-      <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\resources\dao" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat 服务器.Tomcat 9.0.72">
+  <component name="RunManager" selected="HTTP 请求.generated-requests | #24">
     <configuration name="generated-requests | #24" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="24" requestIdentifier="#24" runType="运行单个请求">
       <method v="2" />
     </configuration>
@@ -248,7 +259,10 @@
       <workItem from="1682662213598" duration="15795000" />
       <workItem from="1682690876778" duration="6679000" />
       <workItem from="1682736429955" duration="3166000" />
-      <workItem from="1682746383813" duration="1076000" />
+      <workItem from="1682746383813" duration="2046000" />
+      <workItem from="1682752276005" duration="3753000" />
+      <workItem from="1682769958573" duration="7577000" />
+      <workItem from="1682780289191" duration="2890000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -292,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682693287213</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix:实现基本的7个页面（前端）">
+      <created>1682747547602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682747547602</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,6 +348,18 @@
     <MESSAGE value="feat:实现登陆注册功能" />
     <MESSAGE value="feat:实现主页" />
     <MESSAGE value="fix:修复登录部分bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix:修复登录部分bug" />
+    <MESSAGE value="fix:实现基本的7个页面（前端）" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix:实现基本的7个页面（前端）" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
         Map<String,Object> message = new HashMap<>(2);
         message.put("image",download);
         message.put("name",user.getName());
+        message.put("balance",user.getBalance());
         String jsonString = JSON.toJSONString(message);
         resp.setContentType("application/json");
         resp.getWriter().write(jsonString);
@@ -47,14 +48,13 @@ public class LoginServlet extends HttpServlet {
         if (username == null || username.trim(  ).isEmpty() ||
                 password == null || password.trim().isEmpty()
                 ) {
-            resp.sendRedirect("login.html");
+            resp.sendRedirect("login.html?登录失败");
         }else {
             LoginService loginService = Factory.getLoginService();
             try {
                 User login = loginService.login(username, password);
                 if(login==null){
-                    System.out.println("登录失败");
-                    resp.sendRedirect("login.html");
+                    resp.sendRedirect("login.html?登录失败");
                 }else {
                     req.getSession().setAttribute("user",login);
                     resp.sendRedirect("personal-info.html");

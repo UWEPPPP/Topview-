@@ -28,14 +28,14 @@ public class RegisterService {
     public static RegisterService getInstance() {
         return RegisterServiceInstance.INSTANCE;
     }
-    public void register(String username, String password, String fileName, byte[] byteArray) throws IOException, ContractException, SQLException, ClassNotFoundException {
+    public void register(String username, String password,  byte[] byteArray) throws IOException, ContractException, SQLException, ClassNotFoundException {
         CryptoKeyPair keyPair = Contract.setNftMarket();
         String hexPrivateKey = keyPair.getHexPrivateKey();
         System.out.println(hexPrivateKey);
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
         String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
-        String upload = Ipfs.upload(fileName,byteArray);
+        String upload = Ipfs.upload(byteArray);
         User user = new User();
         user.setName(username);
         user.setPassword(userPassword);

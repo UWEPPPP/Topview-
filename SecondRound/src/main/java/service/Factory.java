@@ -8,6 +8,10 @@ public class Factory {
         return LoginService.getInstance();
     }
 
+    public static MintService getMintService(){
+        return MintService.getInstance();
+    }
+
 
 
 }

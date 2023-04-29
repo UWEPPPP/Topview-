@@ -22,10 +22,10 @@
 </nav>
 <section>
     <h2>铸造数字藏品表单</h2>
-    <form>
+    <form action="/mint" method="post" enctype="multipart/form-data">
         <div>
             <label for="name1">藏品名字：</label>
-            <label for="name1"></label><input type="text" id="name1" name="name">
+            <input type="text" id="name1" name="name">
         </div>
         <div>
             <label for="description">藏品描述：</label>
@@ -41,12 +41,12 @@
             </select>
         </div>
         <div>
-            <label for="edition">藏品版数：</label>
-            <input type="number" id="edition" name="edition" min="1">
-        </div>
-        <div>
             <label for="price">藏品价格：</label>
             <input type="number" id="price" name="price" step="0.0001">
+        </div>
+        <div>
+            <label for="file">上传文件：</label>
+            <input type="file" id="file" name="file">
         </div>
         <button type="submit">提交</button>
     </form>

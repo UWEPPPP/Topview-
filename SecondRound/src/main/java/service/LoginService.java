@@ -9,6 +9,12 @@ import util.CryptoUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 登录服务
+ *
+ * @author 刘家辉
+ * {@code @date} 2023/04/29
+ */
 public class LoginService {
     private LoginService() {
     }
