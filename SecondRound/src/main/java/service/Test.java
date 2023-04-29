@@ -14,7 +14,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         String s = CryptoUtil.readPassword("SecondRound/src/main/resources/password.txt");
         System.out.println(s);
-        String s1 = CryptoUtil.encryptHexPrivateKey("123456", "SecondRound/src/main/resources/password.txt");
+        String s1 = CryptoUtil.encryptHexPrivateKey("123456");
         System.out.println(s1);
     }
 

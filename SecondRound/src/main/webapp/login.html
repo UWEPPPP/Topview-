@@ -10,17 +10,16 @@
 <main>
     <section class="login-container">
         <h1>NFT 登录页面</h1>
-        <form action="
-">
+        <form action="/login" method="post" enctype="multipart/form-data">
             <div class="input-container">
                 <label for="username">用户名</label>
-                <input type="text" id="username" placeholder="请输入您的用户名">
+                <input type="text" id="username" name="username" placeholder="请输入我的用户名">
             </div>
             <div class="input-container">
                 <label for="password">密码</label>
-                <input type="password" id="password" placeholder="请输入您的密码">
+                <input type="password" id="password" name="password" placeholder="请输入您的密码">
             </div>
-            <button type="submit">登录</button>
+            <button type="submit">登录  </button>
         </form>
         <div class="register-link">
             还没有账号？<a href="register.html">点此注册</a>

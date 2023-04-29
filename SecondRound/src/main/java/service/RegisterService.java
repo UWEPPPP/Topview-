@@ -33,8 +33,8 @@ public class RegisterService {
         String hexPrivateKey = keyPair.getHexPrivateKey();
         System.out.println(hexPrivateKey);
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
-        String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey, "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt");
-        String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr, "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt");
+        String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
+        String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String upload = Ipfs.upload(fileName,byteArray);
         User user = new User();
         user.setName(username);

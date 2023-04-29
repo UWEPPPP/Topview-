@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class CryptoUtil {
     private static SecretKey key;
+    private static final String path="D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt";
 
     public static SecretKey generateSecretKey(String password) {
         if (key != null) {
@@ -42,7 +43,7 @@ public class CryptoUtil {
      * @param privateKey 私钥
      * @return {@link String}
      */
-    public static String encryptHexPrivateKey(String privateKey, String path) {
+    public static String encryptHexPrivateKey(String privateKey) {
         String result;
         SecretKey aes = generateSecretKey(readPassword(path));
         try {
@@ -57,7 +58,7 @@ public class CryptoUtil {
         return result;
     }
 
-    public static String decryptHexPrivateKey(String privateKey, String path) {
+    public static String decryptHexPrivateKey(String privateKey) {
         SecretKey aes = generateSecretKey(readPassword(path));
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");

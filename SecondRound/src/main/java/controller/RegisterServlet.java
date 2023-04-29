@@ -51,6 +51,6 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         // 重定向到登录页面
-        response.sendRedirect("src/webapp/login.html");
+        response.sendRedirect("/login.html");
     }
 }

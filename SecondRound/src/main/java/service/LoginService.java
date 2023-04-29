@@ -22,19 +22,17 @@ public class LoginService {
     public User login(String name, String password) throws SQLException, ClassNotFoundException {
         UserDAO userDaoInstance = FactoryDAO.getUserDaoInstance();
         User user = new User();
-        String cryptedPassword = CryptoUtil.encryptHexPrivateKey(password, "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt");
+        String paddedStr = String.format("%-32s", password).replace(' ', '0');
+        String encryptPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         user.setName(name);
-        user.setPassword(cryptedPassword);
-        ResultSet select = userDaoInstance.select(user);
-        if (!select.next()) {
+        user.setPassword(encryptPassword);
+        System.out.println(name+" "+encryptPassword);
+        User select = userDaoInstance.select(user);
+        if (select==null) {
             return null;
         }else {
-            user.setBalance(String.valueOf(select.getInt("balance")));
-            user.setContract_address(select.getString("contract_address"));
-            user.setPrivate_key(select.getString("private_key"));
-            user.setProfile(select.getString("profile"));
-            Contract.setNftMarket(user.getPrivate_key());
-            return  user;
+            Contract.setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivate_key()));
+            return  select;
         }
 
     }

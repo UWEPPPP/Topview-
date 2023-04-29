@@ -2,17 +2,17 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>铸造藏品页面</title>
+    <title>铸造数字藏品页面</title>
     <link rel="stylesheet" href="casting.css">
 </head>
 <body>
 <header>
-    <h1>铸造藏品</h1>
+    <h1>铸造数字藏品</h1>
 </header>
 <nav>
     <ul>
         <li><a href="personal-info.html">个人信息</a></li>
-        <li><a href="#">铸造藏品</a></li>
+        <li><a href="#">铸造数字藏品</a></li>
         <li><a href="display.html">展示藏品</a></li>
         <li><a href="search.html">搜索藏品</a></li>
         <li><a href="purchase.html">购买藏品</a></li>
@@ -21,10 +21,10 @@
     </ul>
 </nav>
 <section>
-    <h2>铸造藏品表单</h2>
+    <h2>铸造数字藏品表单</h2>
     <form>
         <div>
-            <label for="name">藏品名字：</label>
+            <label for="name1">藏品名字：</label>
             <label for="name1"></label><input type="text" id="name1" name="name">
         </div>
         <div>
@@ -32,17 +32,21 @@
             <textarea id="description" name="description" rows="5"></textarea>
         </div>
         <div>
-            <label for="material">藏品材质：</label>
-            <select id="material" name="material">
-                <option value="brass">黄铜</option>
-                <option value="bronze">青铜</option>
-                <option value="silver">银</option>
-                <option value="gold">金</option>
+            <label for="type">藏品类型：</label>
+            <select id="type" name="type">
+                <option value="artwork">艺术作品</option>
+                <option value="music">音乐作品</option>
+                <option value="video">视频作品</option>
+                <option value="game">游戏道具</option>
             </select>
         </div>
         <div>
-            <label for="weight">藏品重量：</label>
-            <label for="weight1"></label><input type="number" id="weight1" name="weight" step="0.1">
+            <label for="edition">藏品版数：</label>
+            <input type="number" id="edition" name="edition" min="1">
+        </div>
+        <div>
+            <label for="price">藏品价格：</label>
+            <input type="number" id="price" name="price" step="0.0001">
         </div>
         <button type="submit">提交</button>
     </form>
