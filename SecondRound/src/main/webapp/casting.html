@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <title>铸造数字藏品页面</title>
     <link rel="stylesheet" href="casting.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 引入jQuery库 -->
 </head>
 <body>
-<header>
-    <h1>铸造数字藏品</h1>
-</header>
+    <header>
+        <div class="info-container">
+            <img src="" alt="头像" id="avatar" class="avatar">
+            <h1 class="name" id="name"></h1>
+            <p class="balance" id="balance"></p>
+        </div>
+    </header>
 <nav>
     <ul>
         <li><a href="personal-info.html">个人信息</a></li>
@@ -22,7 +28,7 @@
 </nav>
 <section>
     <h2>铸造数字藏品表单</h2>
-    <form action="/mint" method="post" enctype="multipart/form-data">
+    <form id="form" enctype="multipart/form-data">
         <div>
             <label for="name1">藏品名字：</label>
             <input type="text" id="name1" name="name">
@@ -48,11 +54,49 @@
             <label for="file">上传文件：</label>
             <input type="file" id="file" name="file">
         </div>
-        <button type="submit">提交</button>
+        <button type="submit" id="submit-btn">提交</button>
     </form>
 </section>
 <footer>
     <p>版权所有 &copy; 2023 藏品管理系统</p>
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function() {
+        // 获取个人信息
+        $.getJSON("/login", function(data) {
+            $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+            $("#name").text(data.name);
+            $("#new-name").val(data.name);  // 将当前姓名填入输入框
+            $("#balance").text("余额：" + data.balance); // 显示余额
+        });
+        });
+    $(document).ready(function() {
+        $("#form").submit(function(event) {
+            event.preventDefault();
+
+            // 获取表单数据
+            let formData = new FormData(this);
+
+            // 发送POST请求
+            $.ajax({
+                url: '/mint',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    // 处理请求成功的结果
+                    console.log("success");
+                },
+                error: function(error) {
+                    console.error(error);
+                    // 处理请求失败的结果
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

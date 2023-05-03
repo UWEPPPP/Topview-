@@ -6,9 +6,12 @@
     <link rel="stylesheet" href="transfer.css">
 </head>
 <body>
-
 <header>
-    <h1>藏品管理系统</h1>
+    <div class="info-container">
+        <img src="" alt="头像" id="avatar" class="avatar">
+        <h1 class="name" id="name"></h1>
+        <p class="balance" id="balance"></p>
+    </div>
 </header>
 <nav>
     <ul>
@@ -43,5 +46,18 @@
     <p>版权所有 &copy; 2023 藏品管理系统</p>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function() {
+        // 获取个人信息
+        $.getJSON("/login", function(data) {
+            $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+            $("#name").text(data.name);
+            $("#new-name").val(data.name);  // 将当前姓名填入输入框
+            $("#balance").text("余额：" + data.balance); // 显示余额
+        });
+    });
+    // 你的 JavaScript 代码
+</script>
 </body>
 </html>

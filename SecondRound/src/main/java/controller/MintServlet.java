@@ -66,7 +66,9 @@ public class MintServlet extends HttpServlet {
         try {
             Boolean mint = mintService.mint(nft, jsonString);
             if(mint){
-
+            resp.setStatus(200);
+            }else {
+                resp.setStatus(500);
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

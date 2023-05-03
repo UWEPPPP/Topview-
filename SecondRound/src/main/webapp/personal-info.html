@@ -7,18 +7,13 @@
 </head>
 <body>
 <header>
-  <nav>
-    <ul>
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="info-container">
+    <img src="" alt="头像" id="avatar" class="avatar">
+    <h1 class="name" id="name"></h1>
+    <p class="balance" id="balance"></p>
+  </div>
 </header>
-<header>
-  <h1>个人信息</h1>
-</header>
-<nav>
+<nav class="main-nav">
   <ul>
     <li><a href="#">个人信息</a></li>
     <li><a href="casting.html">铸造藏品</a></li>
@@ -29,11 +24,18 @@
     <li><a href="trace.html">追溯藏品</a></li>
   </ul>
 </nav>
-<section>
-  <div>
-    <img src="" alt="头像" id="avatar">
-    <h2 id="name"></h2>
-    <h2 id="balance" name="balance"></h2>
+<section class="personal-info">
+  <div class="info-container">
+    <form id="update-name-form" class="update-form">
+      <label for="new-name">姓名：</label>
+      <input type="text" id="new-name" name="new-name" required>
+      <button type="submit">更新姓名</button>
+    </form>
+    <form id="update-avatar-form" class="update-form">
+      <label for="new-avatar">头像：</label>
+      <input type="file" id="new-avatar" name="new-avatar" accept="image/*" required>
+      <button type="submit">更新头像</button>
+    </form>
   </div>
 </section>
 <footer>
@@ -42,10 +44,48 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(function() {
+    // 获取个人信息
     $.getJSON("/login", function(data) {
-      $("#avatar").attr("src", data.avatar);
+      $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
       $("#name").text(data.name);
-      $("#balance").text(data.balance);
+      $("#new-name").val(data.name);  // 将当前姓名填入输入框
+      $("#balance").text("余额：" + data.balance); // 显示余额
+    });
+
+    // 更新姓名
+    $("#update-name-form").submit(function(event) {
+      event.preventDefault();  // 阻止默认提交
+      let newName = $("#new-name").val();
+      $.post("/update-name", { name: newName }, function(response) {
+        $("#name").text(newName);
+        alert("姓名已更新！");
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+        alert("更新失败，请稍后再试！");
+      });
+    });
+
+    // 更新头像
+    $("#update-avatar-form").submit(function(event) {
+      event.preventDefault();  // 阻止默认提交
+      let newAvatar = $("#new-avatar")[0].files[0];
+      let formData = new FormData();
+      formData.append("avatar", newAvatar);
+      $.ajax({
+        type: "POST",
+        url: "/update-avatar",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          $("#avatar").attr("src", response.avatar_url);
+          alert("头像已更新！");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+          alert("更新失败，请稍后再试！");
+        }
+      });
     });
   });
 </script>

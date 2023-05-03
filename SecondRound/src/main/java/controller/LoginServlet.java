@@ -30,9 +30,8 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         String profile = user.getProfile();
-        byte[] download = Ipfs.download(profile);
         Map<String,Object> message = new HashMap<>(2);
-        message.put("image",download);
+        message.put("image",profile);
         message.put("name",user.getName());
         message.put("balance",user.getBalance());
         String jsonString = JSON.toJSONString(message);
