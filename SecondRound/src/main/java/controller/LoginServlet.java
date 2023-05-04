@@ -3,9 +3,8 @@ package controller;
 
 import com.alibaba.fastjson.JSON;
 import entity.po.User;
-import service.Factory;
+import service.FactoryService;
 import service.LoginService;
-import util.Ipfs;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -49,7 +48,7 @@ public class LoginServlet extends HttpServlet {
                 ) {
             resp.sendRedirect("login.html?登录失败");
         }else {
-            LoginService loginService = Factory.getLoginService();
+            LoginService loginService = FactoryService.getLoginService();
             try {
                 User login = loginService.login(username, password);
                 if(login==null){
@@ -57,8 +56,6 @@ public class LoginServlet extends HttpServlet {
                 }else {
                     req.getSession().setAttribute("user",login);
                     resp.sendRedirect("personal-info.html");
-
-
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 throw new RuntimeException(e);

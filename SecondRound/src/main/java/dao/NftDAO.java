@@ -23,7 +23,7 @@ public class NftDAO implements  IDao{
         return NftDaoHolder.INSTANCE;
     }
     @Override
-    public int insert(Object obj) throws SQLException, ClassNotFoundException {
+    public Object insert(Object obj) throws SQLException, ClassNotFoundException {
         Nft nft = (Nft) obj;
         Connection connection = ConnectionPool.getInstance().getConnection();
         String sql = "insert into nft.nfts(name, ipfs_cid, price, type, owner, description) values(?,?,?,?,?,?)";
@@ -41,13 +41,13 @@ public class NftDAO implements  IDao{
     }
 
     @Override
-    public void delete(Object obj) {
-
+    public Object delete(Object obj) {
+      return null;
     }
 
     @Override
-    public void update(Object obj) {
-
+    public Object update(Object obj) {
+         return null;
     }
 
     @Override

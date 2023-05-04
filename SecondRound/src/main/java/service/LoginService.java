@@ -6,7 +6,6 @@ import entity.po.User;
 import util.Contract;
 import util.CryptoUtil;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -37,7 +36,7 @@ public class LoginService {
         if (select==null) {
             return null;
         }else {
-            Contract.setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivate_key()));
+            Contract.setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivateKey()));
             return  select;
         }
 

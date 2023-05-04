@@ -3,8 +3,8 @@ package dao;
 import java.sql.SQLException;
 
 public interface IDao {
-    public int insert(Object obj) throws SQLException, ClassNotFoundException;
-    public void delete(Object obj);
-    public void update(Object obj);
+    public Object insert(Object obj) throws SQLException, ClassNotFoundException;
+    public Object delete(Object obj);
+    public Object update(Object obj) throws ClassNotFoundException, SQLException;
     public Object select(Object obj) throws SQLException, ClassNotFoundException;
 }

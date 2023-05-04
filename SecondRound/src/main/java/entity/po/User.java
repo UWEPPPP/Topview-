@@ -4,8 +4,8 @@ public class User {
     private String name;
     private String password;
     private String profile;
-    private String contract_address;
-    private String private_key;
+    private String contractAddress;
+    private String privateKey;
     private String balance;
 
     public String getName() {
@@ -32,20 +32,20 @@ public class User {
         this.profile = profile;
     }
 
-    public String getContract_address() {
-        return contract_address;
+    public String getContractAddress() {
+        return contractAddress;
     }
 
-    public void setContract_address(String contract_address) {
-        this.contract_address = contract_address;
+    public void setContractAddress(String contractAddress) {
+        this.contractAddress = contractAddress;
     }
 
-    public String getPrivate_key() {
-        return private_key;
+    public String getPrivateKey() {
+        return privateKey;
     }
 
-    public void setPrivate_key(String private_key) {
-        this.private_key = private_key;
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
     }
 
     public String getBalance() {
