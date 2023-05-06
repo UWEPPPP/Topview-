@@ -1,5 +1,7 @@
 package entity.po;
 
+import java.math.BigInteger;
+
 /**
  * 非功能性测试
  *
@@ -13,6 +15,7 @@ public class Nft {
   private String type;
   private String owner;
   private String description;
+    private BigInteger tokenId;
 
     public String getName() {
         return name;
@@ -61,5 +64,13 @@ public class Nft {
 
     public void setIpfsCid(String ipfsCid) {
         this.ipfsCid = ipfsCid;
+    }
+
+    public void setTokenId(BigInteger tokenId) {
+        this.tokenId = tokenId;
+    }
+
+    public BigInteger getTokenId() {
+        return tokenId;
     }
 }

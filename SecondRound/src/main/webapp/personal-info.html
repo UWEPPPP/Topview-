@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <title>个人信息页面</title>
   <link rel="stylesheet" href="css/personal-info.css">
+  <link rel="stylesheet" href="css/display.css">
 </head>
 <body>
 <header>
   <div class="info-container">
-    <img src="" alt="头像" id="avatar" class="avatar">
+    <img src="" alt="头像" id="avatar" class="avatar" >
     <h1 class="name" id="name"></h1>
     <p class="balance" id="balance"></p>
   </div>
+  <button onclick="logout()">退出</button>
 </header>
 <nav class="main-nav">
   <ul>
@@ -19,7 +21,6 @@
     <li><a href="casting.html">铸造藏品</a></li>
     <li><a href="display.html">展示藏品</a></li>
     <li><a href="search.html">搜索藏品</a></li>
-    <li><a href="purchase.html">购买藏品</a></li>
     <li><a href="transfer.html">转增藏品</a></li>
     <li><a href="trace.html">追溯藏品</a></li>
   </ul>
@@ -38,11 +39,22 @@
     </form>
   </div>
 </section>
+<section id="display">
+  <h2>我的NFT</h2>
+  <div id="nftContainer"></div>
+</section>
 <footer>
   <p>版权所有 &copy; 2023 藏品管理系统</p>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  function logout() {
+    // 发送GET请求到/logout路径，表示退出登录
+    fetch('/logout').then(function(response) {
+      // 重定向到登录页面
+      window.location.href = '/login.html';
+    });
+  }
   $(function() {
     // 获取个人信息
     $.getJSON("/login", function(data) {
@@ -94,6 +106,27 @@
           alert("更新失败，请稍后再试！");
         }
       });
+    });
+
+    // 获取我的NFT列表
+    $.getJSON("/display", function(datas) {
+      const data = JSON.parse(JSON.stringify(datas));
+      if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          let nft = data[i];
+          let nftCard = `
+            <div class="nft-card">
+              <img src="https://ipfs.io/ipfs/${nft.ipfsCid}" alt="${nft.name}" width="100px">
+              <h3>${nft.name}</h3>
+              <p>${nft.description}</p>
+              <p class="price">价格：${nft.price} ETH</p>
+            </div>
+          `;
+          $("#nftContainer").append(nftCard);
+        }
+      } else {
+        $("#nftContainer").html("<p>您还没有任何NFT。</p>");
+      }
     });
   });
 </script>

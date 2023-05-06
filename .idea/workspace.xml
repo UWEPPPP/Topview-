@@ -10,30 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="fix:实现修改个人信息">
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/SearchServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TraceServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TransferServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/SearchService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/TraceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/TransferService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/InfoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/InfoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/NftDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/NftDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/FactoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/FactoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/InfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/InfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/t.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/NftMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/MyToken.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/MyToken.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/purchase.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/search.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/js/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/js/display.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/purchase.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +51,8 @@
         <option value="Interface" />
         <option value="Mybatis Mapper" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -94,7 +98,7 @@
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/resources/conf&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/java/service/wrapper&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -115,13 +119,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java\service\wrapper" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\resources\conf" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\resources" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java\service" />
-      <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\webapp" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\webapp\js" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\webapp\css" />
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound" />
@@ -277,6 +282,7 @@
       <workItem from="1683190530854" duration="12651000" />
       <workItem from="1683342925539" duration="1073000" />
       <workItem from="1683349894974" duration="3981000" />
+      <workItem from="1683361610398" duration="18055000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -351,7 +357,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="dev" />
                       </list>
                     </value>
                   </entry>

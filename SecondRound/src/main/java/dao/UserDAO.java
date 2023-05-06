@@ -51,9 +51,9 @@ public class UserDAO implements IDao {
     }
 
     @Override
-    public Object update(Object obj) throws ClassNotFoundException, SQLException {
+    public Object update(Object...obj) throws ClassNotFoundException, SQLException {
         Connection connection = ConnectionPool.getInstance().getConnection();
-        Map<String,Object> map = CastUtil.cast(obj);
+        Map<String,Object> map = CastUtil.cast(obj[0]);
         PreparedStatement preparedStatement = connection.prepareStatement("update nft.nft_user set "+ map.get("choice") +" = ? where contract_address = ?");
         preparedStatement.setString(1, (String)map.get("update"));
         preparedStatement.setString(2, (String)map.get("contractAddress"));
