@@ -54,10 +54,9 @@ public class UserDAO implements IDao {
     public Object update(Object obj) throws ClassNotFoundException, SQLException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         Map<String,Object> map = CastUtil.cast(obj);
-        PreparedStatement preparedStatement = connection.prepareStatement("update nft.nft_user set ? = ? where contract_address = ?");
-        preparedStatement.setString(1, (String) map.get("choice"));
-        preparedStatement.setString(2, (String)map.get("update"));
-        preparedStatement.setString(3, (String)map.get("contractAddress"));
+        PreparedStatement preparedStatement = connection.prepareStatement("update nft.nft_user set "+ map.get("choice") +" = ? where contract_address = ?");
+        preparedStatement.setString(1, (String)map.get("update"));
+        preparedStatement.setString(2, (String)map.get("contractAddress"));
         int result = preparedStatement.executeUpdate();
         ConnectionPool.getInstance().releaseConnection(connection);
         ConnectionPool.close(preparedStatement, null);
@@ -70,7 +69,6 @@ public class UserDAO implements IDao {
         PreparedStatement preparedStatement = connection.prepareStatement("select * from nft.nft_user where name = ? and password = ?");
         preparedStatement.setString(1, ((User) obj).getName());
         preparedStatement.setString(2, ((User) obj).getPassword());
-
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             User user = new User();

@@ -15,6 +15,11 @@ public class Delpoy {
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().createKeyPair();
         String hexPrivateKey = cryptoKeyPair.getHexPrivateKey();
         NftMarket deploy = NftMarket.deploy(client, cryptoKeyPair);
+        CryptoKeyPair keyPair = client.getCryptoSuite().createKeyPair();
+        NftMarket load = NftMarket.load(deploy.getContractAddress(), client, keyPair);
+        TransactionReceipt regiter = load.regiter();
+        String status = regiter.getStatus();
+        System.out.println("status = " + status);
         System.out.println("hexPrivateKey = " + hexPrivateKey);
         System.out.println("合约地址 = " + deploy.getContractAddress());
         

@@ -48,6 +48,6 @@ public class MintService {
         String status = transactionReceipt.getStatus();
         int insert = CastUtil.cast(FactoryDAO.getNftDaoInstance().insert(nft));
         String check = ("0x0");
-        return insert == 0 || !status.equals(check)? 200:500;
+        return insert != 0 || status.equals(check)? 200:500;
     }
 }

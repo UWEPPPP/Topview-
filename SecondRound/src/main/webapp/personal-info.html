@@ -48,7 +48,6 @@
     $.getJSON("/login", function(data) {
       $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
       $("#name").text(data.name);
-      $("#new-name").val(data.name);  // 将当前姓名填入输入框
       $("#balance").text("余额：" + data.balance); // 显示余额
     });
 
@@ -56,12 +55,18 @@
     $("#update-name-form").submit(function(event) {
       event.preventDefault();  // 阻止默认提交
       let newName = $("#new-name").val();
-      $.post("/update-name", { name: newName }, function(response) {
-        $("#name").text(newName);
-        alert("姓名已更新！");
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
-        alert("更新失败，请稍后再试！");
+      $.ajax({
+        type: "GET",
+        url: "/info",
+        data: { name: newName },
+        success: function(response) {
+          $("#name").text(newName);
+          alert("姓名已更新！");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+          alert("更新失败，请稍后再试！");
+        }
       });
     });
 
@@ -73,14 +78,17 @@
       formData.append("avatar", newAvatar);
       $.ajax({
         type: "POST",
-        url: "/update-avatar",
+        url: "/info",
         data: formData,
         processData: false,
         contentType: false,
-        success: function(response) {
-          $("#avatar").attr("src", response.avatar_url);
+        success:  $.getJSON("/login", function(data) {
+          $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+          $("#name").text(data.name);
+          $("#balance").text("余额：" + data.balance); // 显示余额
           alert("头像已更新！");
-        },
+        }),
+
         error: function(jqXHR, textStatus, errorThrown) {
           console.error(errorThrown);
           alert("更新失败，请稍后再试！");

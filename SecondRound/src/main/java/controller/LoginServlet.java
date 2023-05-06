@@ -46,13 +46,13 @@ public class LoginServlet extends HttpServlet {
         if (username == null || username.trim(  ).isEmpty() ||
                 password == null || password.trim().isEmpty()
                 ) {
-            resp.sendRedirect("login.html?登录失败");
+            resp.sendRedirect("login.html?fail");
         }else {
             LoginService loginService = FactoryService.getLoginService();
             try {
                 User login = loginService.login(username, password);
                 if(login==null){
-                    resp.sendRedirect("login.html?登录失败");
+                    resp.sendRedirect("login.html?fail");
                 }else {
                     req.getSession().setAttribute("user",login);
                     resp.sendRedirect("personal-info.html");

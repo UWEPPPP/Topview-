@@ -74,10 +74,8 @@
     $(document).ready(function() {
         $("#form").submit(function(event) {
             event.preventDefault();
-
             // 获取表单数据
             let formData = new FormData(this);
-
             // 发送POST请求
             $.ajax({
                 url: '/mint',
@@ -88,11 +86,11 @@
                 success: function(response) {
                     console.log(response);
                     // 处理请求成功的结果
-                    console.log("success");
+                    alert("操作成功！");
                 },
                 error: function(error) {
                     console.error(error);
-                    // 处理请求失败的结果
+                    alert("操作失败！");
                 }
             });
         });

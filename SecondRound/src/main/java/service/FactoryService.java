@@ -20,6 +20,21 @@ public class FactoryService {
     public static InfoService getInfoService(){
         return InfoService.getInstance();
     }
+    public static DisplayService getDisplayService(){
+        return DisplayService.getInstance();
+    }
+    public static TraceService getTraceService(){
+        return TraceService.getInstance();
+    }
+    public static PurchaseService getPurchaseService(){
+        return PurchaseService.getInstance();
+    }
+    public static TransferService getTransferService(){
+        return TransferService.getInstance();
+    }
+    public static SearchService getSearchService(){
+        return SearchService.getInstance();
+    }
 
 
 }

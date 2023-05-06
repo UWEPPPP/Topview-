@@ -2,6 +2,7 @@ package service;
 
 import dao.FactoryDAO;
 import dao.UserDAO;
+import entity.po.User;
 import org.apache.commons.io.IOUtils;
 import util.Ipfs;
 
@@ -28,7 +29,7 @@ public class InfoService {
         return InfoServiceHolder.INSTANCE;
     }
 
-    public int changeInfo(String newName, Part avatar, String contractAddress) throws IOException, SQLException, ClassNotFoundException {
+    public String changeInfo(String newName, Part avatar, String contractAddress) throws IOException, SQLException, ClassNotFoundException {
         Map<String,Object> map = new HashMap<>(3);
         String update;
         if(newName!=null){
@@ -44,8 +45,9 @@ public class InfoService {
         map.put("contractAddress",contractAddress);
         int result =(int) FactoryDAO.getUserDaoInstance().update(map);
         if(result==0){
-            return 500;
+            return null;
         }
-        return 200;
+        return update;
     }
+
 }
