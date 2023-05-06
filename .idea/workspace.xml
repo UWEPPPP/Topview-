@@ -9,35 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="fix:实现修改个人信息">
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="fix:实现购买">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/NftDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/NftDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/t.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/NftMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/MyToken.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/MyToken.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/purchase.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/search.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/js/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/js/display.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/purchase.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,6 +261,7 @@
       <workItem from="1683342925539" duration="1073000" />
       <workItem from="1683349894974" duration="3981000" />
       <workItem from="1683361610398" duration="18055000" />
+      <workItem from="1683383912348" duration="2235000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -340,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683195914882</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix:实现购买">
+      <created>1683383935685</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683383935686</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,6 +363,7 @@
     <MESSAGE value="fix:修复登录部分bug" />
     <MESSAGE value="fix:实现基本的7个页面（前端）" />
     <MESSAGE value="fix:实现修改个人信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix:实现修改个人信息" />
+    <MESSAGE value="fix:实现购买" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix:实现购买" />
   </component>
 </project>

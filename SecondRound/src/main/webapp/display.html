@@ -39,12 +39,10 @@
             buyBtn.on("click", function() {
               const id =nft.tokenId;
              const price= nft.price;
-             alert("id:"+id+"price:"+price)
               $.ajax({
                 url: "/purchase",
                 type: "POST",
                 data: {id:id,price:price},
-                dataType: "json",
                 success: function(data) {
                   alert("购买成功！");
                   location.reload(); // 刷新页面以更新余额和藏品信息
@@ -89,7 +87,6 @@
     <li><a href="casting.html">铸造藏品</a></li>
     <li><a href="#">展示藏品</a></li>
     <li><a href="search.html">搜索藏品</a></li>
-    <li><a href="purchase.html">购买藏品</a></li>
     <li><a href="transfer.html">转移藏品</a></li>
     <li><a href="trace.html">追溯藏品</a></li>
   </ul>

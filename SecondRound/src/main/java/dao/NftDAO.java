@@ -52,7 +52,7 @@ public class NftDAO implements  IDao{
     @Override
     public Object update(Object...obj) throws ClassNotFoundException, SQLException {
         Connection connection = ConnectionPool.getInstance().getConnection();
-        String sql = "update nft.nfts set is_sold = true,owner = ? where id = ?";
+        String sql = "update nft.nfts set is_sold = true,owner = ? where nftId = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, (String) obj[0]);
         preparedStatement.setInt(2, (Integer) obj[1]);
@@ -68,6 +68,10 @@ public class NftDAO implements  IDao{
         String sql = "select * from nft.nfts where  is_sold = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setBoolean(1, false);
+        return selectSame(connection, preparedStatement);
+    }
+
+    private List<Nft> selectSame(Connection connection, PreparedStatement preparedStatement) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Nft> nftList = new ArrayList<>();
         while (resultSet.next()) {
@@ -84,15 +88,7 @@ public class NftDAO implements  IDao{
         String sql = "select * from nft.nfts where  owner = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, owner);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<Nft> nftList = new ArrayList<>();
-        while (resultSet.next()) {
-            Nft nft = selectForNft(resultSet);
-            nftList.add(nft);
-        }
-        ConnectionPool.getInstance().releaseConnection(connection);
-        ConnectionPool.close(preparedStatement, resultSet);
-        return nftList;
+        return selectSame(connection, preparedStatement);
     }
 
     private Nft selectForNft(ResultSet resultSet) throws SQLException {

@@ -33,8 +33,15 @@ public class PurchaseServlet extends HttpServlet {
         String price = req.getParameter("price");
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         try {
-           int status = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price),user.getContractAddress());
-             resp.setStatus(status);
+            int status = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContractAddress());
+            if (status == 200) {
+                int balance = Integer.parseInt(user.getBalance()) - Integer.parseInt(price);
+                user.setBalance(String.valueOf(balance));
+                req.getSession().setAttribute("user", user);
+                resp.sendRedirect("personal-info.html");
+            } else {
+                resp.sendRedirect("purchase.html?fail");
+            }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

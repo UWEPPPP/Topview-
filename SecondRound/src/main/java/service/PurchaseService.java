@@ -31,6 +31,6 @@ public class PurchaseService {
         String status = transactionReceipt.getStatus();
         String check = "0x0";
         int result = CastUtil.cast(FactoryDAO.getNftDaoInstance().update(owner,id));
-        return check.equals(status)|| result != 0?200:500;
+        return check.equals(status)&& result != 0?200:500;
     }
 }
