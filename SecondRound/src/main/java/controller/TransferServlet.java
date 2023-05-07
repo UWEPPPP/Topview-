@@ -47,8 +47,8 @@ public class TransferServlet extends HttpServlet {
         System.out.println(recipientAddress);
         System.out.println(collectionItem);
         try {
-            FactoryService.getTransferService().transfer(recipientAddress, collectionItem, contractAddress);
-            resp.setStatus(200);
+            int transfer = FactoryService.getTransferService().transfer(recipientAddress, collectionItem, contractAddress);
+            resp.setStatus(transfer);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

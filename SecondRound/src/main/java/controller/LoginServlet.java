@@ -51,11 +51,12 @@ public class LoginServlet extends HttpServlet {
         }else {
             LoginService loginService = FactoryService.getLoginService();
             try {
-                User login = loginService.login(username, password);
+                Map<String, Object> login = loginService.login(username, password);
                 if(login==null){
                     resp.sendRedirect("login.html?fail");
                 }else {
-                    req.getSession().setAttribute("user",login);
+                    req.getSession().setAttribute("user",login.get("user"));
+                    req.getSession().setAttribute("nftMarket",login.get("nftMarket"));
                     resp.sendRedirect("personal-info.html");
                 }
             } catch (SQLException | ClassNotFoundException | ContractException e) {

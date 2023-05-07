@@ -30,13 +30,17 @@ public class TransferService {
         List<Nft> list = FactoryDAO.getNftDaoInstance().selectByCid(cid);
         Nft nft = list.get(0);
         NftMarket nftMarket = Contract.getNftMarket();
-        TransactionReceipt transactionReceipt = nftMarket.safeTransferFrom(from, to, nft.getTokenId(), BigInteger.valueOf(1), "".getBytes());
+        TransactionReceipt transactionReceipt = nftMarket.safeTransferFrom(from, to, nft.getTokenId(), BigInteger.valueOf(1), "0x".getBytes());
         String status = transactionReceipt.getStatus();
         String check = "0x0";
         if (status.equals(check)) {
-            FactoryDAO.getNftDaoInstance().update(to, nft.getTokenId().intValue());
-            return 200;
+            int update = (int)FactoryDAO.getNftDaoInstance().update(to, nft.getTokenId().intValue());
+            if(update!=0){
+                return 200;
+            }
+            System.out.println("update error");
         }
+        System.out.println("transfer error");
         return 500;
     }
 }
