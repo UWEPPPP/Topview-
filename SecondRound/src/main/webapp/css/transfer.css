@@ -1,144 +1,174 @@
-/* 设置全局文本颜色和字体 */
+/* 基本样式 */
 body {
-    color: #333;
     font-family: Arial, sans-serif;
-}
-
-/* 设置页眉样式 */
-header {
-    background-color: #333;
-    padding: 20px 0;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 2em;
-    color: #fff;
-    margin: 0;
-}
-
-/* 设置导航菜单样式 */
-nav {
-    background-color: #333;
-}
-
-ul {
-    list-style: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
-li {
-    float: left;
-}
-
-a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-a:hover {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-}
-
-/* 设置转增藏品表单样式 */
-#transfer {
-    margin: 20px auto;
-    width: 50%;
-}
-
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-form div {
-    margin-bottom: 10px;
-}
-
-label {
-    display: inline-block;
-    width: 100px;
-    font-weight: bold;
-}
-
-input[type="text"], select {
-    padding: 5px;
-    width: 200px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-}
+/* 顶部用户信息区域 */
 header {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #f8f8f8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.avatar-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin-bottom: 20px;
 }
 
 .avatar {
-    max-height: 200px;
-    max-width: 200px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    margin-right: 20px;
 }
-h1 {
-    margin: 0;
-    font-size: 32px;
-    color: #111111;
-}
-p{
-    font-size: 20px;
-    color: #111111;
-}
-.avatar-edit-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+
 .name {
-    font-size: 28px;
+    font-size: 24px;
+    margin: 0;
+}
+
+.balance {
+    font-size: 16px;
+    margin: 0;
+    color: #666;
+}
+
+/* 导航栏 */
+nav {
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
-button[type="submit"]:hover {
-    background-color: #3e8e41;
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
-.name, .balance {
-    color: #333 !important;
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+    background-color: #0062cc;
+}
+
+nav a.active {
+    background-color: #fff;
+    color: #007bff;
+}
+
+/* 转增藏品表单区域 */
+#transfer {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#transfer h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+#user-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.user {
+    width: 200px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.user img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.user h3 {
+    font-size: 24px;
+    margin: 20px;
+}
+
+.user p {
+    font-size: 16px;
+    margin: 0 20px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.transfer-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.transfer-button:hover {
+    background-color: #0062cc;
+}
+
+#transfer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#transfer-form div {
+    margin-bottom: 20px;
+}
+
+#transfer-form label {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#transfer-form input[type="text"],
+#transfer-form select {
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    max-width: 100%;
+    margin: 0;
+}
+
+#transfer-form button[type="submit"] {
+    font-size: 20px;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+#transfer-form button[type="submit"]:hover {
+    background-color: #0062cc;
 }

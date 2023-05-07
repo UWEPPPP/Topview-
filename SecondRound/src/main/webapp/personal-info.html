@@ -108,27 +108,47 @@
       });
     });
 
-    // 获取我的NFT列表
-    $.getJSON("/display", function(datas) {
-      const data = JSON.parse(JSON.stringify(datas));
-      if (data.length > 0) {
-        for (let i = 0; i < data.length; i++) {
-          let nft = data[i];
-          let nftCard = `
+      // 获取我的NFT列表
+      $.getJSON("/display", function(datas) {
+        const data = JSON.parse(JSON.stringify(datas));
+        if (data.length > 0) {
+          for (let i = 0; i < data.length; i++) {
+            let nft = data[i];
+            let nftCard = `
             <div class="nft-card">
               <img src="https://ipfs.io/ipfs/${nft.show}" alt="${nft.name}" width="100px">
-              <h3>${nft.name}</h3>
-              <p>${nft.description}</p>
+              <h3>名字 ${nft.name}</h3>
+              <p>描述 ${nft.description}</p>
+              <p>"cid ${nft.ipfsCid}</p>
               <p class="price">价格：${nft.price} ETH</p>
+              <div class="button-group">
+                <button onclick="toggleNftStatus('${nft.ipfsCid}', true)">上架</button>
+                <button onclick="toggleNftStatus('${nft.ipfsCid}', false)">下架</button>
+              </div>
             </div>
           `;
-          $("#nftContainer").append(nftCard);
+            $("#nftContainer").append(nftCard);
+          }
+        } else {
+          $("#nftContainer").html("<p>您还没有任何NFT。</p>");
         }
-      } else {
-        $("#nftContainer").html("<p>您还没有任何NFT。</p>");
+      });
+  });
+  function toggleNftStatus(nftId, isOnSale) {
+    $.ajax({
+      type: "POST",
+      url: "/upAndDown",
+      data: { cid: nftId, onSale: isOnSale },
+      success: function(response) {
+        alert("操作成功！")
+        location.reload(); // 刷新页面
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+        alert("操作失败，请稍后再试！");
       }
     });
-  });
+  }
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class SearchService {
             break;
             case "caster":list=FactoryDAO.getNftDaoInstance().selectByOwner(text);
             break;
-            case "cid":list=FactoryDAO.getNftDaoInstance().selectByCid(text);
+            case "cid":list=FactoryDAO.getNftDaoInstance().selectByCidWhichNotSold(text);
             break;
             default: return null;
         }

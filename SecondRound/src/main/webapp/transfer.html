@@ -24,18 +24,18 @@
 </nav>
 <section id="transfer">
     <h2>转增藏品</h2>
-    <form>
+    <div id="user-list">
+        <!-- 其他用户列表将在此处显示 -->
+    </div>
+    <form id="transfer-form">
+        <input type="hidden" id="recipient-address" name="recipient-address">
         <div>
             <label for="recipient">接收者：</label>
             <input type="text" id="recipient" name="recipient">
         </div>
         <div>
-            <label for="collection-item">藏品：</label>
-            <select id="collection-item" name="collection-item">
-                <option value="1">藏品1</option>
-                <option value="2">藏品2</option>
-                <option value="3">藏品3</option>
-            </select>
+            <label for="collection-item">藏品CID：</label>
+            <input type="text" id="collection-item" name="collection-item">
         </div>
         <button type="submit">转增</button>
     </form>
@@ -54,8 +54,53 @@
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
             $("#balance").text("余额：" + data.balance); // 显示余额
         });
+
+        // 获取其他用户信息
+        $.getJSON("/transfer", function(users) {
+            users.forEach(function(user) {
+                var userDiv = $("<div>").addClass("user");
+                $("<img>").attr("src", "https://ipfs.io/ipfs/" + user.profile).appendTo(userDiv);
+                $("<h3>").text(user.name).appendTo(userDiv);
+                $("<p>").text(user.contractAddress).appendTo(userDiv);
+                $("<button>").text("选择该用户").addClass("transfer-button").attr("data-address", user.contractAddress).appendTo(userDiv);
+                $("#user-list").append(userDiv);
+            });
+        });
+
+        // 转增按钮点击事件
+        $("#user-list").on("click", ".transfer-button", function() {
+            var address = $(this).attr("data-address");
+            $("#recipient-address").val(address);
+            $("#recipient").val($(this).siblings("h3").text());
+        });
+
+        // 表单提交事件
+        $("#transfer-form").on("submit", function(event) {
+            event.preventDefault();
+            var recipientAddress = $("#recipient-address").val();
+            var collectionItem = $("#collection-item").val();
+            if (!recipientAddress || !collectionItem) {
+                alert("请填写完整信息！");
+                return;
+            }
+            var formData = {
+                recipientAddress: recipientAddress,
+                collectionItem: collectionItem
+            };
+            $.ajax({
+                type: "POST",
+                url: "/transfer",
+                data: formData,
+                success: function(response) {
+                    alert("转增成功！");
+                    // 在此处添加其他处理逻辑，例如更新页面内容
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("转增失败，请检查输入数据并重试。");
+                }
+            });
+        });
     });
-    // 你的 JavaScript 代码
 </script>
 </body>
 </html>

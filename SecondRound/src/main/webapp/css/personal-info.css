@@ -124,7 +124,16 @@ nav a:hover {
     font-size: 16px;
     cursor: pointer;
 }
-
+#nftContainer {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+.nft-card {
+    word-wrap: break-word;
+    /* 其他样式 */
+}
 .info-container {
     text-align: center;
 }

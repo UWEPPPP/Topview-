@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,17 +72,35 @@ public class UserDAO implements IDao {
         preparedStatement.setString(2, ((User) obj).getPassword());
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            User user = new User();
-            user.setName(resultSet.getString("name"));
-            user.setProfile(resultSet.getString("profile"));
-            user.setContractAddress(resultSet.getString("contract_address"));
-            user.setPrivateKey(resultSet.getString("private_key"));
-            user.setPassword(resultSet.getString("password"));
+            User user = loadUser(resultSet);
             ConnectionPool.getInstance().releaseConnection(connection);
             ConnectionPool.close(preparedStatement, resultSet);
             return user;
         }else {
             return null;
         }
+    }
+    public List<User> selectToTransfer(String owner) throws ClassNotFoundException, SQLException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from nft.nft_user where contract_address != ?");
+        preparedStatement.setString(1, owner);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<User> userList = new ArrayList<>();
+        while (resultSet.next()) {
+            userList.add(loadUser(resultSet));
+        }
+        ConnectionPool.getInstance().releaseConnection(connection);
+        ConnectionPool.close(preparedStatement, resultSet);
+        return userList;
+    }
+
+    private User loadUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setName(resultSet.getString("name"));
+        user.setProfile(resultSet.getString("profile"));
+        user.setContractAddress(resultSet.getString("contract_address"));
+        user.setPrivateKey(resultSet.getString("private_key"));
+        user.setPassword(resultSet.getString("password"));
+        return user;
     }
 }

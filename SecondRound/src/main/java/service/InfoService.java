@@ -4,6 +4,7 @@ import dao.FactoryDAO;
 import dao.UserDAO;
 import entity.po.User;
 import org.apache.commons.io.IOUtils;
+import util.CastUtil;
 import util.Ipfs;
 
 import javax.servlet.http.Part;
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 信息服务
@@ -48,6 +50,15 @@ public class InfoService {
             return null;
         }
         return update;
+    }
+
+    public int upAndDown(String cid,String choice) throws SQLException, ClassNotFoundException {
+        boolean result= Objects.equals(choice, "false");
+        int size= CastUtil.cast(FactoryDAO.getNftDaoInstance().updateUpAndDown(cid,result));
+        if(size==0){
+            return 500;
+        }
+        return 200;
     }
 
 }
