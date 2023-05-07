@@ -16,7 +16,7 @@ public class Nft {
   private String owner;
   private String description;
     private BigInteger tokenId;
-
+  private String show;
     public String getName() {
         return name;
     }
@@ -72,5 +72,13 @@ public class Nft {
 
     public BigInteger getTokenId() {
         return tokenId;
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
     }
 }

@@ -38,14 +38,15 @@ public class MintService {
     public int mint(Nft nft, Part file) throws IOException, SQLException, ClassNotFoundException {
         InputStream inputStream = file.getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
+        String upload = Ipfs.upload(byteArray);
         inputStream.close();
         Map<String,Object> map = new HashMap<>(3);
         map.put("name",nft.getName());
         map.put("description",nft.getDescription());
-        map.put("data",byteArray);
+        map.put("data",upload);
         String jsonString = JSON.toJSONString(map);
         String hash = Ipfs.upload(jsonString.getBytes());
-        nft.setIpfsCid(Ipfs.upload(byteArray));
+        nft.setIpfsCid(hash);
         NftMarket nftMarket = Contract.getNftMarket();
         TransactionReceipt transactionReceipt = nftMarket.issueNft(hash);
         Tuple1<BigInteger> issueNftOutput = nftMarket.getIssueNftOutput(transactionReceipt);

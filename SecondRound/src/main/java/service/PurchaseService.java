@@ -2,6 +2,7 @@ package service;
 
 import dao.FactoryDAO;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
 import util.CastUtil;
 import util.Contract;
@@ -25,12 +26,12 @@ public class PurchaseService {
     public static PurchaseService getInstance() {
         return PurchaseServiceHolder.INSTANCE;
     }
-    public int buy(int id, int price, String owner) throws SQLException, ClassNotFoundException {
+    public int buy(int id, int price, String owner) throws SQLException, ClassNotFoundException, ContractException {
         NftMarket nftMarket = Contract.getNftMarket();
         TransactionReceipt transactionReceipt = nftMarket.buyNft(BigInteger.valueOf(id), BigInteger.valueOf(price));
         String status = transactionReceipt.getStatus();
         String check = "0x0";
         int result = CastUtil.cast(FactoryDAO.getNftDaoInstance().update(owner,id));
-        return check.equals(status)&& result != 0?200:500;
+        return nftMarket.getBalance().intValue();
     }
 }

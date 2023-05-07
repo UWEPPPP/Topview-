@@ -1,6 +1,7 @@
 package controller;
 
 import entity.po.User;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.FactoryService;
 import util.CastUtil;
 
@@ -33,16 +34,15 @@ public class PurchaseServlet extends HttpServlet {
         String price = req.getParameter("price");
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         try {
-            int status = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContractAddress());
-            if (status == 200) {
-                int balance = Integer.parseInt(user.getBalance()) - Integer.parseInt(price);
+            int balance = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContractAddress());
+            if (balance !=Integer.parseInt(user.getBalance())) {
                 user.setBalance(String.valueOf(balance));
                 req.getSession().setAttribute("user", user);
-                resp.sendRedirect("personal-info.html");
+                resp.setStatus(200);
             } else {
-                resp.sendRedirect("purchase.html?fail");
+                resp.setStatus(500);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | ContractException e) {
             throw new RuntimeException(e);
         }
     }

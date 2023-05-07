@@ -3,9 +3,11 @@ package service;
 import dao.FactoryDAO;
 import dao.UserDAO;
 import entity.po.User;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import util.Contract;
 import util.CryptoUtil;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 
 /**
@@ -24,7 +26,7 @@ public class LoginService {
         return LoginServiceHolder.INSTANCE;
     }
 
-    public User login(String name, String password) throws SQLException, ClassNotFoundException {
+    public User login(String name, String password) throws SQLException, ClassNotFoundException, ContractException {
         UserDAO userDaoInstance = FactoryDAO.getUserDaoInstance();
         User user = new User();
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
@@ -37,6 +39,8 @@ public class LoginService {
             return null;
         }else {
             Contract.setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivateKey()));
+            BigInteger balance = Contract.getNftMarket().getBalance();
+            select.setBalance(balance.toString());
             return  select;
         }
 

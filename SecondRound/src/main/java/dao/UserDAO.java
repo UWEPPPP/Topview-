@@ -31,13 +31,12 @@ public class UserDAO implements IDao {
     public Object insert(Object obj) throws SQLException, ClassNotFoundException {
         User user = (User) obj;
         Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into nft.nft_user(name, profile, contract_address, private_key, balance, password) values(?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)");
         preparedStatement.setString(1, user.getName());
         preparedStatement.setString(2, user.getProfile());
         preparedStatement.setString(3, user.getContractAddress());
         preparedStatement.setString(4, user.getPrivateKey());
-        preparedStatement.setInt(5, Integer.parseInt(user.getBalance()));
-        preparedStatement.setString(6, user.getPassword());
+        preparedStatement.setString(5, user.getPassword());
         int result = preparedStatement.executeUpdate();
         ConnectionPool.getInstance().releaseConnection(connection);
         ConnectionPool.close(preparedStatement, null);
@@ -76,7 +75,6 @@ public class UserDAO implements IDao {
             user.setProfile(resultSet.getString("profile"));
             user.setContractAddress(resultSet.getString("contract_address"));
             user.setPrivateKey(resultSet.getString("private_key"));
-            user.setBalance(resultSet.getString("balance"));
             user.setPassword(resultSet.getString("password"));
             ConnectionPool.getInstance().releaseConnection(connection);
             ConnectionPool.close(preparedStatement, resultSet);

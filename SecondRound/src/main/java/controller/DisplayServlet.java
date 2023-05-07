@@ -41,9 +41,7 @@ public class DisplayServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(display);
-        System.out.println(jsonString);
+        String jsonString = JSON.toJSONString(display);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         resp.getWriter().write(jsonString);

@@ -3,6 +3,7 @@ package controller;
 
 import com.alibaba.fastjson.JSON;
 import entity.po.User;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.FactoryService;
 import service.LoginService;
 
@@ -57,7 +58,7 @@ public class LoginServlet extends HttpServlet {
                     req.getSession().setAttribute("user",login);
                     resp.sendRedirect("personal-info.html");
                 }
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException | ContractException e) {
                 throw new RuntimeException(e);
             }
 

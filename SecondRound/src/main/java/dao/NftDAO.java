@@ -91,7 +91,7 @@ public class NftDAO implements  IDao{
         return selectSame(connection, preparedStatement);
     }
 
-    private Nft selectForNft(ResultSet resultSet) throws SQLException {
+    public Nft selectForNft(ResultSet resultSet) throws SQLException {
         Nft nft = new Nft();
         nft.setName(resultSet.getString("name"));
         nft.setIpfsCid(resultSet.getString("ipfs_cid"));
@@ -101,5 +101,29 @@ public class NftDAO implements  IDao{
         nft.setDescription(resultSet.getString("description"));
         nft.setTokenId(resultSet.getBigDecimal("nftId").toBigInteger());
         return nft;
+    }
+
+    public List<Nft> selectByCid(String cid) throws ClassNotFoundException, SQLException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        String sql = "select * from nft.nfts where  ipfs_cid = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, cid);
+        return selectSame(connection, preparedStatement);
+    }
+
+    public   List<Nft> selectByName (String name) throws ClassNotFoundException, SQLException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        String sql = "select * from nft.nfts where  name like ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "%" + name + "%");
+        return selectSame(connection, preparedStatement);
+    }
+
+    public List<Nft> selectByOwner (String owner) throws ClassNotFoundException, SQLException {
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        String sql = "select * from nft.nfts where  owner = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, owner);
+        return selectSame(connection, preparedStatement);
     }
 }

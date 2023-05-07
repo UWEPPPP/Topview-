@@ -107,7 +107,15 @@ header {
     object-fit: cover;
     border-radius: 50%;
 }
-
+h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #111111;
+}
+p{
+    font-size: 20px;
+    color: #111111;
+}
 .avatar-edit-btn {
     position: absolute;
     bottom: 0;
@@ -124,4 +132,7 @@ header {
 }
 #trace {
     text-align: center;
+}
+.name, .balance {
+    color: #333 !important;
 }

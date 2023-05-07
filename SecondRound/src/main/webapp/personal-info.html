@@ -9,7 +9,7 @@
 <body>
 <header>
   <div class="info-container">
-    <img src="" alt="头像" id="avatar" class="avatar" >
+    <img src="" alt="头像" id="avatar" class="avatar"  >
     <h1 class="name" id="name"></h1>
     <p class="balance" id="balance"></p>
   </div>
@@ -20,7 +20,7 @@
     <li><a href="#">个人信息</a></li>
     <li><a href="casting.html">铸造藏品</a></li>
     <li><a href="display.html">展示藏品</a></li>
-    <li><a href="search.html">搜索藏品</a></li>
+
     <li><a href="transfer.html">转增藏品</a></li>
     <li><a href="trace.html">追溯藏品</a></li>
   </ul>
@@ -116,7 +116,7 @@
           let nft = data[i];
           let nftCard = `
             <div class="nft-card">
-              <img src="https://ipfs.io/ipfs/${nft.ipfsCid}" alt="${nft.name}" width="100px">
+              <img src="https://ipfs.io/ipfs/${nft.show}" alt="${nft.name}" width="100px">
               <h3>${nft.name}</h3>
               <p>${nft.description}</p>
               <p class="price">价格：${nft.price} ETH</p>

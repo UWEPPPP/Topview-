@@ -7,7 +7,7 @@ body {
 
 header {
     background-color: #5F9EA0;
-    color: #FFFFFF;
+    color: #5F9EA0;
     padding: 10px;
 }
 
@@ -42,6 +42,11 @@ nav a.active {
 h1 {
     margin: 0;
     font-size: 32px;
+    color: #111111;
+}
+p{
+    font-size: 20px;
+    color: #111111;
 }
 
 #purchase {
@@ -161,4 +166,7 @@ footer {
 }
 .nft-item button:hover {
     background-color: #3e8e41;
+}
+.name, .balance {
+    color: #333 !important;
 }
