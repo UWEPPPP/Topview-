@@ -7,8 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple1;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import service.wrapper.NftMarket;
-import util.CastUtil;
-import util.Ipfs;
+import util.IpfsUtil;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
@@ -37,21 +36,21 @@ public class MintService {
     public int mint(Nft nft, Part file,NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException {
         InputStream inputStream = file.getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
-        String upload = Ipfs.upload(byteArray);
+        String upload = IpfsUtil.upload(byteArray);
         inputStream.close();
         Map<String,Object> map = new HashMap<>(3);
         map.put("name",nft.getName());
         map.put("description",nft.getDescription());
         map.put("data",upload);
         String jsonString = JSON.toJSONString(map);
-        String hash = Ipfs.upload(jsonString.getBytes());
-        nft.setIpfsCid(hash);
+        String hash = IpfsUtil.upload(jsonString.getBytes());
+        nft.setIpfs_cid(hash);
         TransactionReceipt transactionReceipt = nftMarket.issueNft(hash);
         Tuple1<BigInteger> issueNftOutput = nftMarket.getIssueNftOutput(transactionReceipt);
-        nft.setTokenId(issueNftOutput.getValue1());
+        nft.setNftId(issueNftOutput.getValue1().intValue());
         String status = transactionReceipt.getStatus();
         String sql ="insert into nft.nfts(name, ipfs_cid, price, type, owner, description,is_sold,nftId) values(?,?,?,?,?,?,false,?)";
-        int insert = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{nft.getName(), nft.getIpfsCid(), nft.getPrice(), nft.getType(), nft.getOwner(), nft.getDescription(),nft.getTokenId()});
+        int insert = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{nft.getName(), nft.getIpfs_cid(), nft.getPrice(), nft.getType(), nft.getOwner(), nft.getDescription(),nft.getNftId()});
         String check = ("0x0");
         return insert != 0 || status.equals(check)? 200:500;
     }

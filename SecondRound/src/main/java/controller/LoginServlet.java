@@ -26,7 +26,7 @@ import java.util.Map;
 @MultipartConfig
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         String profile = user.getProfile();
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
                     req.getSession().setAttribute("nftMarket",login.get("nftMarket"));
                     resp.sendRedirect("personal-info.html");
                 }
-            } catch (SQLException | ClassNotFoundException | ContractException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 

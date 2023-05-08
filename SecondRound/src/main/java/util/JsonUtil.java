@@ -4,15 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import entity.po.Nft;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public class Json {
-    public static List<Nft> analysisJson(List<Nft> list) throws SQLException, ClassNotFoundException {
+public class JsonUtil {
+    public static List<Nft> analysisJson(List<Nft> list) {
         for (int i = 0; i < list.size(); i++) {
             Nft nft = list.get(i);
-            String ipfsCid = nft.getIpfsCid();
-            byte[] download = Ipfs.download(ipfsCid);
+            String ipfsCid = nft.getIpfs_cid();
+            byte[] download = IpfsUtil.download(ipfsCid);
             String jsonString = new String(download);
             // 解析JSON字符串
             JSONObject jsonObject = JSON.parseObject(jsonString);

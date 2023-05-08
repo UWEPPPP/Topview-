@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             int register = registerService.register(username, password, avatarPart);
             response.setStatus(register);
-        } catch (ContractException | SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

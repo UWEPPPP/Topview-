@@ -7,7 +7,6 @@ import org.fisco.bcos.sdk.model.TransactionReceipt;
 import service.wrapper.NftMarket;
 
 import java.math.BigInteger;
-import java.sql.SQLException;
 import java.util.List;
 
 public class TransferService {
@@ -33,7 +32,7 @@ public class TransferService {
         String sql="select * from nft.nfts where ipfs_cid = ?";
         List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{cid}, Nft.class);
         Nft nft = list.get(0);
-        TransactionReceipt transactionReceipt = nftMarket.safeTransferFrom(from, to, nft.getTokenId(), BigInteger.valueOf(1), "0x".getBytes());
+        TransactionReceipt transactionReceipt = nftMarket.safeTransferFrom(from, to, BigInteger.valueOf(nft.getNftId()), BigInteger.valueOf(1), "0x".getBytes());
         String status = transactionReceipt.getStatus();
         String check = "0x0";
         if (status.equals(check)) {

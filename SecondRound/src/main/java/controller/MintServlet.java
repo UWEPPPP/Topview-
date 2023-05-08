@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 /**
  * @author LiuJiaHui
@@ -47,12 +46,12 @@ public class MintServlet extends HttpServlet {
         }
         User user = CastUtil.cast( req.getSession().getAttribute("user"));
         NftMarket market= CastUtil.cast(req.getSession().getAttribute("nftMarket"));
-        String contractAddress = user.getContractAddress();
+        String contractAddress = user.getContract_address();
         Nft nft = new Nft();
         nft.setName(name);
         nft.setDescription(description);
         nft.setType(type);
-        nft.setPrice(price);
+        nft.setPrice(Integer.parseInt(price));
         nft.setOwner(contractAddress);
         MintService mintService = FactoryService.getMintService();
         try {

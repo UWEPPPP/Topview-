@@ -26,7 +26,7 @@ public class UpAndDownNftServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String cid = req.getParameter("cid");
         String onSale = req.getParameter("onSale");
         try {

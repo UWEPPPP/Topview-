@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * 信息servlet
@@ -24,7 +23,7 @@ import java.util.Map;
 @MultipartConfig
 public class InfoServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String parameter = req.getParameter("name");
         System.out.println(parameter);
         User user = (User) req.getSession().getAttribute("user");
@@ -33,7 +32,7 @@ public class InfoServlet extends HttpServlet {
             return;
         }
         try {
-            String name = FactoryService.getInfoService().changeInfo(parameter, null, user.getContractAddress());
+            String name = FactoryService.getInfoService().changeInfo(parameter, null, user.getContract_address());
             user.setName(name);
             req.getSession().setAttribute("user",user);
         } catch (SQLException | ClassNotFoundException e) {
@@ -51,7 +50,7 @@ public class InfoServlet extends HttpServlet {
                 return;
         }
         try {
-            String profile = FactoryService.getInfoService().changeInfo(null, part, user.getContractAddress());
+            String profile = FactoryService.getInfoService().changeInfo(null, part, user.getContract_address());
             user.setProfile(profile);
             req.getSession().setAttribute("user",user);
             resp.setStatus((200));

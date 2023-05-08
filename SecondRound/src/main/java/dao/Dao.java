@@ -1,6 +1,5 @@
 package dao;
 
-import util.CastUtil;
 import util.ConnectionPool;
 import util.DbTool;
 
@@ -9,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -49,7 +47,7 @@ public class Dao implements IDao{
             preparedStatement.setObject(i+1,objects[i]);
         }
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         while (resultSet.next()){
             T object= DbTool.getObject(resultSet,tClass);
             list.add(object);

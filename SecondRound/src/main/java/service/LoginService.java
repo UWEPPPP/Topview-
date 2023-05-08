@@ -39,7 +39,7 @@ public class LoginService {
         if (select==null) {
             return null;
         }else {
-            NftMarket nftMarket = setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivateKey()));
+            NftMarket nftMarket = setNftMarket(CryptoUtil.decryptHexPrivateKey(select.getPrivate_key()));
             BigInteger balance = nftMarket.getBalance();
             select.setBalance(balance.toString());
             Map<String,Object> map=new HashMap<>(2);

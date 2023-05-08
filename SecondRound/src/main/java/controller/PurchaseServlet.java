@@ -30,13 +30,13 @@ public class PurchaseServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
         String price = req.getParameter("price");
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         NftMarket market= CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         try {
-            int balance = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContractAddress(),market);
+            int balance = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContract_address(),market);
             if (balance !=Integer.parseInt(user.getBalance())) {
                 user.setBalance(String.valueOf(balance));
                 req.getSession().setAttribute("user", user);

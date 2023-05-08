@@ -44,7 +44,7 @@ public class SearchServlet extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("application/json");
             resp.getWriter().write(jsonString);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

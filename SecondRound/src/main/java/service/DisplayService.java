@@ -2,12 +2,10 @@ package service;
 
 import dao.FactoryDao;
 import entity.po.Nft;
-import util.CastUtil;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import static util.Json.analysisJson;
+import static util.JsonUtil.analysisJson;
 
 public class DisplayService {
     private DisplayService() {
@@ -24,7 +22,7 @@ public class DisplayService {
 
     public List<Nft> display() throws Exception {
         String sql = "select * from nft.nfts where is_sold = false";
-        List<Nft> list = FactoryDao.getDao().select(sql, null, Nft.class);
+        List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{}, Nft.class);
         if (list.size() == 0) {
             return null;
         }

@@ -4,12 +4,11 @@ import dao.FactoryDao;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
 import util.CastUtil;
 import util.Contract;
 import util.CryptoUtil;
-import util.Ipfs;
+import util.IpfsUtil;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class RegisterService {
     public static RegisterService getInstance() {
         return RegisterServiceInstance.INSTANCE;
     }
-    public int register(String username, String password, Part avatarPart) throws IOException, ContractException, SQLException, ClassNotFoundException {
+    public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
         String hexPrivateKey = keyPair.getHexPrivateKey();
@@ -43,7 +42,7 @@ public class RegisterService {
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
         String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
-        String upload = Ipfs.upload(byteArray);
+        String upload = IpfsUtil.upload(byteArray);
         String sql="insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
         int insert = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
         NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));

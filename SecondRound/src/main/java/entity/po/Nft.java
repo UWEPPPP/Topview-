@@ -8,15 +8,18 @@ import java.math.BigInteger;
  * @author 刘家辉
  * @date 2023/04/29
  */
+@SuppressWarnings("all")
 public class Nft {
+    private int id;
   private String name;
-  private String ipfsCid;
-  private String price;
+  private String ipfs_cid;
+  private int price;
   private String type;
   private String owner;
   private String description;
-    private BigInteger tokenId;
+  private int nftId;
   private String show;
+  private Boolean is_sold;
     public String getName() {
         return name;
     }
@@ -26,11 +29,11 @@ public class Nft {
     }
 
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -58,20 +61,20 @@ public class Nft {
         this.description = description;
     }
 
-    public String getIpfsCid() {
-        return ipfsCid;
+    public String getIpfs_cid() {
+        return ipfs_cid;
     }
 
-    public void setIpfsCid(String ipfsCid) {
-        this.ipfsCid = ipfsCid;
+    public void setIpfs_cid(String ipfs_cid) {
+        this.ipfs_cid = ipfs_cid;
     }
 
-    public void setTokenId(BigInteger tokenId) {
-        this.tokenId = tokenId;
+    public void setNftId(int nftId) {
+        this.nftId = nftId;
     }
 
-    public BigInteger getTokenId() {
-        return tokenId;
+    public int getNftId() {
+        return nftId;
     }
 
     public String getShow() {
@@ -80,5 +83,21 @@ public class Nft {
 
     public void setShow(String show) {
         this.show = show;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Boolean getIs_sold() {
+        return is_sold;
+    }
+
+    public void setIs_sold(Boolean is_sold) {
+        this.is_sold = is_sold;
     }
 }

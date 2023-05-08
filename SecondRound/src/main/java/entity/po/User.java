@@ -1,11 +1,12 @@
 package entity.po;
-
+@SuppressWarnings("all")
 public class User {
+    private int id;
     private String name;
     private String password;
     private String profile;
-    private String contractAddress;
-    private String privateKey;
+    private String contract_address;
+    private String private_key;
     private String balance;
 
     public String getName() {
@@ -32,20 +33,20 @@ public class User {
         this.profile = profile;
     }
 
-    public String getContractAddress() {
-        return contractAddress;
+    public String getContract_address() {
+        return contract_address;
     }
 
-    public void setContractAddress(String contractAddress) {
-        this.contractAddress = contractAddress;
+    public void setContract_address(String contractAddress) {
+        this.contract_address = contractAddress;
     }
 
-    public String getPrivateKey() {
-        return privateKey;
+    public String getPrivate_key() {
+        return private_key;
     }
 
-    public void setPrivateKey(String privateKey) {
-        this.privateKey = privateKey;
+    public void setPrivate_key(String private_key) {
+        this.private_key = private_key;
     }
 
     public String getBalance() {
@@ -54,5 +55,13 @@ public class User {
 
     public void setBalance(String balance) {
         this.balance = balance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

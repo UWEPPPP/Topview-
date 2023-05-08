@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author 刘家辉
  * @date 2023/04/26
  */
-public class Ipfs {
+public class IpfsUtil {
     public static final IPFS IPFS =new IPFS("/ip4/127.0.0.1/tcp/5001");
 
     public static String upload( byte[] data) throws IOException {

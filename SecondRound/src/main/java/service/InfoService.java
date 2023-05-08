@@ -2,15 +2,12 @@ package service;
 
 import dao.FactoryDao;
 import org.apache.commons.io.IOUtils;
-import util.CastUtil;
-import util.Ipfs;
+import util.IpfsUtil;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -38,7 +35,7 @@ public class InfoService {
         }else {
             InputStream inputStream = avatar.getInputStream();
             byte[] byteArray = IOUtils.toByteArray(inputStream);
-            update = Ipfs.upload(byteArray);
+            update = IpfsUtil.upload(byteArray);
             choice="profile";
         }
         String sql= "update nft.nft_user set "+ choice +" = ? where contract_address = ?";

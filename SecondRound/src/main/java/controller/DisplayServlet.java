@@ -1,7 +1,6 @@
 package controller;
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
 import entity.po.Nft;
 import entity.po.User;
 import service.FactoryService;
@@ -35,10 +34,10 @@ public class DisplayServlet extends HttpServlet {
             if(choice!=null) {
                 display = FactoryService.getDisplayService().display();
             }else {
-                display = FactoryService.getDisplayService().displayByUser(user.getContractAddress());
+                display = FactoryService.getDisplayService().displayByUser(user.getContract_address());
             }
             System.out.println(display+"????");
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         String jsonString = JSON.toJSONString(display);
