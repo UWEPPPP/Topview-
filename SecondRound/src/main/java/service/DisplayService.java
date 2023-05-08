@@ -1,12 +1,8 @@
 package service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
-import dao.FactoryDAO;
+import dao.FactoryDao;
 import entity.po.Nft;
 import util.CastUtil;
-import util.Ipfs;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,15 +22,17 @@ public class DisplayService {
         return DisplayServiceHolder.INSTANCE;
     }
 
-    public List<Nft> display() throws SQLException, ClassNotFoundException {
-        List<Nft> list = CastUtil.cast(FactoryDAO.getNftDaoInstance().select(""));
+    public List<Nft> display() throws Exception {
+        String sql = "select * from nft.nfts where is_sold = false";
+        List<Nft> list = FactoryDao.getDao().select(sql, null, Nft.class);
         if (list.size() == 0) {
             return null;
         }
         return analysisJson(list);
     }
-    public List<Nft> displayByUser(String owner) throws SQLException, ClassNotFoundException {
-        List<Nft> list = CastUtil.cast(FactoryDAO.getNftDaoInstance().selectByUser(owner));
+    public List<Nft> displayByUser(String owner) throws Exception {
+        String sql = "select * from nft.nfts where owner = ?";
+        List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{owner}, Nft.class);
         if (list.size() == 0) {
             return null;
         }

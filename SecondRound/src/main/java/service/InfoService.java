@@ -1,8 +1,6 @@
 package service;
 
-import dao.FactoryDAO;
-import dao.UserDAO;
-import entity.po.User;
+import dao.FactoryDao;
 import org.apache.commons.io.IOUtils;
 import util.CastUtil;
 import util.Ipfs;
@@ -32,20 +30,19 @@ public class InfoService {
     }
 
     public String changeInfo(String newName, Part avatar, String contractAddress) throws IOException, SQLException, ClassNotFoundException {
-        Map<String,Object> map = new HashMap<>(3);
         String update;
+        String choice;
         if(newName!=null){
-           map.put("choice","name");
+           choice="name";
            update=newName;
         }else {
             InputStream inputStream = avatar.getInputStream();
             byte[] byteArray = IOUtils.toByteArray(inputStream);
             update = Ipfs.upload(byteArray);
-            map.put("choice","profile");
+            choice="profile";
         }
-        map.put("update",update);
-        map.put("contractAddress",contractAddress);
-        int result =(int) FactoryDAO.getUserDaoInstance().update(map);
+        String sql= "update nft.nft_user set "+ choice +" = ? where contract_address = ?";
+        int result = FactoryDao.getDao().insertOrUpdateOrDelete(sql,new Object[]{update,contractAddress});
         if(result==0){
             return null;
         }
@@ -54,7 +51,8 @@ public class InfoService {
 
     public int upAndDown(String cid,String choice) throws SQLException, ClassNotFoundException {
         boolean result= Objects.equals(choice, "false");
-        int size= CastUtil.cast(FactoryDAO.getNftDaoInstance().updateUpAndDown(cid,result));
+        String sql= "update nft.nfts set is_sold = ? where cid = ?";
+        int size= FactoryDao.getDao().insertOrUpdateOrDelete(sql,new Object[]{false,cid});
         if(size==0){
             return 500;
         }

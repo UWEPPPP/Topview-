@@ -1,16 +1,14 @@
 package service;
 
-import dao.FactoryDAO;
-import dao.UserDAO;
+import dao.FactoryDao;
+import dao.IDao;
 import entity.po.User;
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
-import util.Contract;
 import util.CryptoUtil;
 
 import java.math.BigInteger;
-import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static util.Contract.setNftMarket;
@@ -31,15 +29,13 @@ public class LoginService {
         return LoginServiceHolder.INSTANCE;
     }
 
-    public Map<String,Object> login(String name, String password) throws SQLException, ClassNotFoundException, ContractException {
-        UserDAO userDaoInstance = FactoryDAO.getUserDaoInstance();
-        User user = new User();
+    public Map<String,Object> login(String name, String password) throws Exception {
+        IDao iDao = FactoryDao.getDao();
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
         String encryptPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
-        user.setName(name);
-        user.setPassword(encryptPassword);
-        System.out.println(name+" "+encryptPassword);
-        User select = userDaoInstance.select(user);
+        String sql ="select * from nft.nft_user where name = ? and password = ?";
+        List<User> list = iDao.select(sql, new Object[]{name, encryptPassword}, User.class);
+        User select = list.get(0);
         if (select==null) {
             return null;
         }else {

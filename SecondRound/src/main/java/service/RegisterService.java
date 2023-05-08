@@ -1,8 +1,6 @@
 package service;
 
-import dao.FactoryDAO;
-import dao.UserDAO;
-import entity.po.User;
+import dao.FactoryDao;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
@@ -17,6 +15,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * 注册服务
@@ -34,7 +33,8 @@ public class RegisterService {
         return RegisterServiceInstance.INSTANCE;
     }
     public int register(String username, String password, Part avatarPart) throws IOException, ContractException, SQLException, ClassNotFoundException {
-        CryptoKeyPair keyPair = Contract.setNftMarket();
+        Map<String, Object> map = Contract.setNftMarket();
+        CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
         String hexPrivateKey = keyPair.getHexPrivateKey();
         // 保存用户头像到服务器
         InputStream inputStream = avatarPart.getInputStream();
@@ -44,16 +44,9 @@ public class RegisterService {
         String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String upload = Ipfs.upload(byteArray);
-        User user = new User();
-        user.setName(username);
-        user.setPassword(userPassword);
-        user.setProfile(upload);
-        user.setContractAddress(keyPair.getAddress());
-        user.setPrivateKey(privateKey);
-        user.setBalance(String.valueOf(1000));
-        UserDAO userDaoInstance = FactoryDAO.getUserDaoInstance();
-        int insert = CastUtil.cast(userDaoInstance.insert(user));
-        NftMarket nftMarket = Contract.getNftMarket();
+        String sql="insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
+        int insert = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
+        NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));
         TransactionReceipt register = nftMarket.regiter();
         String status = register.getStatus();
         String check= "0x0";

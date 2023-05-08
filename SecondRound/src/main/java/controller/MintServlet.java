@@ -4,6 +4,8 @@ import entity.po.Nft;
 import entity.po.User;
 import service.FactoryService;
 import service.MintService;
+import service.wrapper.NftMarket;
+import util.CastUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  * @author LiuJiaHui
@@ -42,7 +45,8 @@ public class MintServlet extends HttpServlet {
             resp.sendRedirect("mint.html?铸造失败");
             return;
         }
-        User user = (User) req.getSession().getAttribute("user");
+        User user = CastUtil.cast( req.getSession().getAttribute("user"));
+        NftMarket market= CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         String contractAddress = user.getContractAddress();
         Nft nft = new Nft();
         nft.setName(name);
@@ -52,7 +56,7 @@ public class MintServlet extends HttpServlet {
         nft.setOwner(contractAddress);
         MintService mintService = FactoryService.getMintService();
         try {
-            int result = mintService.mint(nft, file);
+            int result = mintService.mint(nft, file,market);
             resp.setStatus(result);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

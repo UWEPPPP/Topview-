@@ -1,11 +1,10 @@
 package service;
 
-import dao.FactoryDAO;
+import dao.FactoryDao;
 import entity.po.Nft;
 import entity.po.User;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import service.wrapper.NftMarket;
-import util.Contract;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -22,19 +21,24 @@ public class TransferService {
         return TransferServiceHolder.INSTANCE;
     }
 
-    public void transfer(String from, String to, int tokenId) {}
-    public List<User> getTransferList(String owner) throws SQLException, ClassNotFoundException {
-        return FactoryDAO.getUserDaoInstance().selectToTransfer(owner);
+    public List<User> getTransferList(String owner) throws Exception {
+        String sql="select * from nft.nfts where owner != ?";
+       List<User> list = FactoryDao.getDao().select(sql,new Object[]{owner},User.class);
+         if(list.size()==0){
+              return null;
+         }
+            return list;
     }
-    public int transfer(String to, String cid, String from) throws SQLException, ClassNotFoundException {
-        List<Nft> list = FactoryDAO.getNftDaoInstance().selectByCid(cid);
+    public int transfer(String to, String cid, String from,NftMarket nftMarket) throws Exception {
+        String sql="select * from nft.nfts where ipfs_cid = ?";
+        List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{cid}, Nft.class);
         Nft nft = list.get(0);
-        NftMarket nftMarket = Contract.getNftMarket();
         TransactionReceipt transactionReceipt = nftMarket.safeTransferFrom(from, to, nft.getTokenId(), BigInteger.valueOf(1), "0x".getBytes());
         String status = transactionReceipt.getStatus();
         String check = "0x0";
         if (status.equals(check)) {
-            int update = (int)FactoryDAO.getNftDaoInstance().update(to, nft.getTokenId().intValue());
+            String sql1 = "update nft.nfts set owner = ? where ipfs_cid = ?";
+            int update = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{to, cid});
             if(update!=0){
                 return 200;
             }

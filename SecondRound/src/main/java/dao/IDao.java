@@ -1,10 +1,34 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
+/**
+ * idao
+ *
+ * @author 刘家辉
+ * @date 2023/05/08
+ */
 public interface IDao {
-    public Object insert(Object obj) throws SQLException, ClassNotFoundException;
-    public Object delete(Object obj);
-    public Object update(Object...obj) throws ClassNotFoundException, SQLException;
-    public Object select(Object obj) throws SQLException, ClassNotFoundException;
+    /**
+     * 插入或更新或删除
+     *
+     * @param obj obj
+     * @return int
+     * @throws SQLException           sqlexception异常
+     * @throws ClassNotFoundException 类没有发现异常
+     */
+    public int insertOrUpdateOrDelete(String sql,Object[] objects) throws SQLException, ClassNotFoundException;
+
+    /**
+     * 选择更多
+     *
+     * @param sql     sql
+     * @param objects 对象
+     * @param tClass  t类
+     * @return {@link List}<{@link T}>
+     * @throws SQLException           sqlexception异常
+     * @throws ClassNotFoundException 类没有发现异常
+     */
+    public <T>List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception;
 }
