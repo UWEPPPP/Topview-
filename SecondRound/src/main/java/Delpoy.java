@@ -5,6 +5,9 @@ import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
+import service.wrapper.NftStorage;
+import service.wrapper.Proxy;
+import service.wrapper.Verifier;
 
 public class Delpoy {
     public static void main(String[] args) throws ContractException {
@@ -12,14 +15,16 @@ public class Delpoy {
         Client client = sdk.getClient(1);
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().createKeyPair();
         String hexPrivateKey = cryptoKeyPair.getHexPrivateKey();
-        NftMarket deploy = NftMarket.deploy(client, cryptoKeyPair);
-        CryptoKeyPair keyPair = client.getCryptoSuite().createKeyPair();
-        NftMarket load = NftMarket.load(deploy.getContractAddress(), client, keyPair);
-        TransactionReceipt regiter = load.regiter();
-        String status = regiter.getStatus();
-        System.out.println("status = " + status);
-        System.out.println("hexPrivateKey = " + hexPrivateKey);
-        System.out.println("合约地址 = " + deploy.getContractAddress());
-        
+        Verifier deploy = Verifier.deploy(client, cryptoKeyPair);
+        NftStorage deploy1 = NftStorage.deploy(client, cryptoKeyPair, deploy.getContractAddress());
+        NftMarket deploy2 = NftMarket.deploy(client, cryptoKeyPair, deploy1.getContractAddress(), deploy.getContractAddress());
+        Proxy deploy3 = Proxy.deploy(client, cryptoKeyPair, deploy1.getContractAddress(), deploy.getContractAddress(), deploy2.getContractAddress());
+        deploy.setLogic(deploy3.getContractAddress());
+        deploy.setStor(deploy1.getContractAddress());
+        System.out.println("Private key: " + hexPrivateKey);
+        System.out.println("Storage address: " + deploy1.getContractAddress());
+        System.out.println("Market address: " + deploy2.getContractAddress());
+        System.out.println("Verifier address: " + deploy.getContractAddress());
+        System.out.println("Proxy address: " + deploy3.getContractAddress());
     }
 }

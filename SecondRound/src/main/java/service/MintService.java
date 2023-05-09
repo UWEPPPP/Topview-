@@ -6,7 +6,6 @@ import entity.po.Nft;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple1;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import service.wrapper.NftMarket;
 import util.IpfsUtil;
 
 import javax.servlet.http.Part;

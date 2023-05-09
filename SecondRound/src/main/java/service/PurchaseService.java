@@ -3,7 +3,6 @@ package service;
 import dao.FactoryDao;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
-import service.wrapper.NftMarket;
 
 import java.math.BigInteger;
 import java.sql.SQLException;

@@ -4,7 +4,6 @@ import org.fisco.bcos.sdk.BcosSDK;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.CryptoSuite;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
-import service.wrapper.NftMarket;
 
 import java.util.HashMap;
 import java.util.Map;

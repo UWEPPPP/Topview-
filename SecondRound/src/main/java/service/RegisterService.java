@@ -4,7 +4,6 @@ import dao.FactoryDao;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import service.wrapper.NftMarket;
 import util.CastUtil;
 import util.Contract;
 import util.CryptoUtil;

@@ -13,74 +13,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="refactor:实现crud的封装">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/NftStorage.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/DisplayServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/InfoServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/LoginServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/SearchServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/Proxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/Verifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/InfoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/InfoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/MintServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/PurchaseServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/SearchServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/SearchServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TransferServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TransferServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/UpAndDownNftServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/UpAndDownNftServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/Nft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/entity/po/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/DisplayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/InfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/InfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/MintService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/PurchaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/SearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/TransferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/TransferService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Ipfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/IpfsUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/JsonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/.deps/remix-tests/remix_accounts.sol" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/.deps/remix-tests/remix_tests.sol" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/Address.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/Address.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/Context.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/Context.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Contract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/ERC1155.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/ERC1155.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/ERC165.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/ERC165.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/IERC1155.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/IERC1155.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/IERC1155MetadataURI.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/IERC1155MetadataURI.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/IERC1155Receiver.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/IERC1155Receiver.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/IERC165.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/openzeppelin/IERC165.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/MyToken.sol" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/Address.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/Address_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/Context.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/Context_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/ERC1155.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/ERC1155_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/ERC165.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/ERC165_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155MetadataURI.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155MetadataURI_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155Receiver.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155Receiver_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC1155_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC165.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/IERC165_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/NftMarket.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/NftMarket_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/010c4a80e48743e22ec7e56f0d20a7c4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/2bec953a085811aac749eb19efd910d3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/60d060a3b2a123c7e5d7021fa8b9fb48.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/76b8a24403e78e6c0fcfd86774a12fb1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/83219a43a9248b692da42966387e0b1b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/f47c2441a06c31c7f4dc11c95b93ed44.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/contract/Task/artifacts/build-info/f60699a86b565480f0b4bbffa02033e0.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,46 +90,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "junit.framework.TestCase",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "dev",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_directory_selection": "D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/test/java/service",
-    "last_opened_file_path": "D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/java/service/wrapper",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "service.view.auto.scroll.to.source": "true",
-    "settings.editor.selected.configurable": "configurable.group.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/test/java/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/main/java/service/wrapper&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound\src\main\java\service\wrapper" />
@@ -422,6 +370,8 @@
       <workItem from="1683383912348" duration="2235000" />
       <workItem from="1683428885853" duration="27944000" />
       <workItem from="1683520676879" duration="12871000" />
+      <workItem from="1683553434116" duration="548000" />
+      <workItem from="1683650772113" duration="455000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
