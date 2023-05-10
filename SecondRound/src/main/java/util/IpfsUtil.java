@@ -16,15 +16,15 @@ import java.io.IOException;
  * @date 2023/04/26
  */
 public class IpfsUtil {
-    public static final IPFS IPFS =new IPFS("/ip4/127.0.0.1/tcp/5001");
+    public static final IPFS IPFS = new IPFS("/ip4/127.0.0.1/tcp/5001");
 
-    public static String upload( byte[] data) throws IOException {
+    public static String upload(byte[] data) throws IOException {
         NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(data);
         MerkleNode addResult = IPFS.add(file).get(0);
         return addResult.hash.toString();
     }
 
-    public static byte[] download( String hash) {
+    public static byte[] download(String hash) {
         byte[] data = null;
         try {
             data = IPFS.cat(Multihash.fromBase58(hash));
@@ -34,7 +34,7 @@ public class IpfsUtil {
         return data;
     }
 
-    public static void download( String hash, String destFile) {
+    public static void download(String hash, String destFile) {
         byte[] data = null;
         try {
             data = IPFS.cat(Multihash.fromBase58(hash));

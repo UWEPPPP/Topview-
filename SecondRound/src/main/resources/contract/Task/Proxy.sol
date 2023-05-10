@@ -14,19 +14,19 @@ contract Proxy {
     uint256 private tokenId = 1;
     address private admin;
 
-    constructor (address ntro,address veri,address imple)public{
-        nstorage=NftStorage(ntro);
-        verifier=Verifier(veri);
-        _implementation=imple;
-        admin=msg.sender;
+    constructor (address ntro, address veri, address imple) public {
+        nstorage = NftStorage(ntro);
+        verifier = Verifier(veri);
+        _implementation = imple;
+        admin = msg.sender;
     }
 
     modifier onlyAdmin(){
-        require(msg.sender==admin,"no right");
+        require(msg.sender == admin, "no right");
         _;
     }
 
-    function upgrade(address newCont) external onlyAdmin  {
+    function upgrade(address newCont) external onlyAdmin {
         _implementation = newCont;
     }
 

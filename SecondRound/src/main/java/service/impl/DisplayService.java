@@ -1,25 +1,22 @@
-package service;
+package service.impl;
 
-import dao.FactoryDao;
 import entity.po.Nft;
+import factory.FactoryDao;
+import service.IDisplayService;
 
 import java.util.List;
 
 import static util.JsonUtil.analysisJson;
 
-public class DisplayService {
+public class DisplayService implements IDisplayService {
     private DisplayService() {
     }
 
-
-    public static class DisplayServiceHolder {
-        private static final DisplayService INSTANCE = new DisplayService();
-    }
-
-    public static DisplayService getInstance() {
+    public static IDisplayService getInstance() {
         return DisplayServiceHolder.INSTANCE;
     }
 
+    @Override
     public List<Nft> display() throws Exception {
         String sql = "select * from nft.nfts where is_sold = false";
         List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{}, Nft.class);
@@ -28,6 +25,8 @@ public class DisplayService {
         }
         return analysisJson(list);
     }
+
+    @Override
     public List<Nft> displayByUser(String owner) throws Exception {
         String sql = "select * from nft.nfts where owner = ?";
         List<Nft> list = FactoryDao.getDao().select(sql, new Object[]{owner}, Nft.class);
@@ -35,6 +34,10 @@ public class DisplayService {
             return null;
         }
         return analysisJson(list);
+    }
+
+    public static class DisplayServiceHolder {
+        private static final IDisplayService INSTANCE = new DisplayService();
     }
 
 

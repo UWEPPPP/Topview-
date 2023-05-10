@@ -1,4 +1,5 @@
 package entity.po;
+
 @SuppressWarnings("all")
 public class User {
     private int id;

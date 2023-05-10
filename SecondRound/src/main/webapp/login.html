@@ -2,24 +2,24 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="css/login.css" rel="stylesheet">
     <title>NFT 登录页面</title>
 </head>
 <body>
 <main>
     <section class="login-container">
         <h1>NFT 登录页面</h1>
-        <form action="/login" method="post" enctype="multipart/form-data">
+        <form action="/login" enctype="multipart/form-data" method="post">
             <div class="input-container">
                 <label for="username">用户名</label>
-                <input type="text" id="username" name="username" placeholder="请输入我的用户名">
+                <input id="username" name="username" placeholder="请输入我的用户名" type="text">
             </div>
             <div class="input-container">
                 <label for="password">密码</label>
-                <input type="password" id="password" name="password" placeholder="请输入您的密码">
+                <input id="password" name="password" placeholder="请输入您的密码" type="password">
             </div>
-            <button type="submit">登录  </button>
+            <button type="submit">登录</button>
         </form>
         <div class="register-link">
             还没有账号？<a href="register.html">点此注册</a>

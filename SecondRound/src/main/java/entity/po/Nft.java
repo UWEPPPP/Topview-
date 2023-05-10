@@ -1,7 +1,5 @@
 package entity.po;
 
-import java.math.BigInteger;
-
 /**
  * 非功能性测试
  *
@@ -11,15 +9,16 @@ import java.math.BigInteger;
 @SuppressWarnings("all")
 public class Nft {
     private int id;
-  private String name;
-  private String ipfs_cid;
-  private int price;
-  private String type;
-  private String owner;
-  private String description;
-  private int nftId;
-  private String show;
-  private Boolean is_sold;
+    private String name;
+    private String ipfs_cid;
+    private int price;
+    private String type;
+    private String owner;
+    private String description;
+    private int nftId;
+    private String show;
+    private Boolean is_sold;
+
     public String getName() {
         return name;
     }
@@ -69,12 +68,12 @@ public class Nft {
         this.ipfs_cid = ipfs_cid;
     }
 
-    public void setNftId(int nftId) {
-        this.nftId = nftId;
-    }
-
     public int getNftId() {
         return nftId;
+    }
+
+    public void setNftId(int nftId) {
+        this.nftId = nftId;
     }
 
     public String getShow() {
@@ -100,4 +99,5 @@ public class Nft {
     public void setIs_sold(Boolean is_sold) {
         this.is_sold = is_sold;
     }
+
 }

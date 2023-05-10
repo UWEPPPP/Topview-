@@ -10,6 +10,22 @@ header {
     text-align: center;
 }
 
+#search {
+    width: 600px;
+    margin: 50px auto;
+}
+
+#lifecycleTable {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#lifecycleTable th, #lifecycleTable td {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-align: center;
+}
+
 nav {
     background-color: #ddd;
     padding: 10px;
@@ -84,6 +100,7 @@ footer {
     padding: 10px;
     text-align: center;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -92,6 +109,7 @@ header {
     background-color: #f8f8f8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .avatar-container {
     position: relative;
     width: 200px;
@@ -107,15 +125,18 @@ header {
     object-fit: cover;
     border-radius: 50%;
 }
+
 h1 {
     margin: 0;
     font-size: 32px;
     color: #111111;
 }
-p{
+
+p {
     font-size: 20px;
     color: #111111;
 }
+
 .avatar-edit-btn {
     position: absolute;
     bottom: 0;
@@ -126,13 +147,16 @@ p{
     font-size: 16px;
     cursor: pointer;
 }
+
 .name {
     font-size: 28px;
     margin-bottom: 20px;
 }
+
 #trace {
     text-align: center;
 }
+
 .name, .balance {
     color: #333 !important;
 }

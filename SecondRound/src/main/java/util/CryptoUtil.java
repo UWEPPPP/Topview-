@@ -17,8 +17,8 @@ import java.security.NoSuchAlgorithmException;
  * @date 2023/03/25
  */
 public class CryptoUtil {
+    private static final String path = "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt";
     private static SecretKey key;
-    private static final String path="D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt";
 
     public static SecretKey generateSecretKey(String password) {
         if (key != null) {

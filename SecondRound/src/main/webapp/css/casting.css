@@ -3,23 +3,28 @@ body {
     margin: 0;
     padding: 0;
 }
+
 h1 {
     margin: 0;
     font-size: 32px;
     color: #111111;
 }
-p{
+
+p {
     font-size: 20px;
     color: #111111;
 }
+
 header {
     background-color: #333;
     color: #5F9EA0;
     padding: 10px;
 }
+
 .name, .balance {
     color: #333 !important;
 }
+
 nav {
     background-color: #eee;
     padding: 10px;
@@ -76,6 +81,7 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -84,6 +90,7 @@ header {
     background-color: #f8f8f8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .avatar-container {
     position: relative;
     width: 200px;
@@ -110,10 +117,12 @@ header {
     font-size: 16px;
     cursor: pointer;
 }
+
 .name {
     font-size: 28px;
     margin-bottom: 20px;
 }
+
 footer {
     background-color: #333;
     color: #fff;

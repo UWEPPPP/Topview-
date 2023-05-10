@@ -1,8 +1,5 @@
 package service.wrapper;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import org.fisco.bcos.sdk.abi.FunctionReturnDecoder;
 import org.fisco.bcos.sdk.abi.TypeReference;
 import org.fisco.bcos.sdk.abi.datatypes.Address;
@@ -18,6 +15,10 @@ import org.fisco.bcos.sdk.model.CryptoType;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.model.callback.TransactionCallback;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @SuppressWarnings("all")
 public class Verifier extends Contract {
@@ -55,37 +56,49 @@ public class Verifier extends Contract {
         return (cryptoSuite.getCryptoTypeConfig() == CryptoType.ECDSA_TYPE ? BINARY : SM_BINARY);
     }
 
+    public static Verifier load(String contractAddress, Client client, CryptoKeyPair credential) {
+        return new Verifier(contractAddress, client, credential);
+    }
+
+    public static Verifier deploy(Client client, CryptoKeyPair credential) throws ContractException {
+        return deploy(Verifier.class, client, credential, getBinary(client.getCryptoSuite()), "");
+    }
+
     public Boolean is_logic(String addr) throws ContractException {
-        final Function function = new Function(FUNC_IS_LOGIC, 
+        final Function function = new Function(FUNC_IS_LOGIC,
                 Arrays.<Type>asList(new Address(addr)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallWithSingleValueReturn(function, Boolean.class);
     }
 
     public Boolean is_logic_Admin(String addr) throws ContractException {
-        final Function function = new Function(FUNC_IS_LOGIC_ADMIN, 
+        final Function function = new Function(FUNC_IS_LOGIC_ADMIN,
                 Arrays.<Type>asList(new Address(addr)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallWithSingleValueReturn(function, Boolean.class);
     }
 
     public Boolean is_regist(String addr) throws ContractException {
-        final Function function = new Function(FUNC_IS_REGIST, 
+        final Function function = new Function(FUNC_IS_REGIST,
                 Arrays.<Type>asList(new Address(addr)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallWithSingleValueReturn(function, Boolean.class);
     }
 
     public Boolean is_stora(String addr) throws ContractException {
-        final Function function = new Function(FUNC_IS_STORA, 
+        final Function function = new Function(FUNC_IS_STORA,
                 Arrays.<Type>asList(new Address(addr)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {
+                }));
         return executeCallWithSingleValueReturn(function, Boolean.class);
     }
 
     public TransactionReceipt regist(String addr) {
         final Function function = new Function(
-                FUNC_REGIST, 
+                FUNC_REGIST,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return executeTransaction(function);
@@ -93,7 +106,7 @@ public class Verifier extends Contract {
 
     public byte[] regist(String addr, TransactionCallback callback) {
         final Function function = new Function(
-                FUNC_REGIST, 
+                FUNC_REGIST,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return asyncExecuteTransaction(function, callback);
@@ -101,7 +114,7 @@ public class Verifier extends Contract {
 
     public String getSignedTransactionForRegist(String addr) {
         final Function function = new Function(
-                FUNC_REGIST, 
+                FUNC_REGIST,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return createSignedTransaction(function);
@@ -109,19 +122,20 @@ public class Verifier extends Contract {
 
     public Tuple1<String> getRegistInput(TransactionReceipt transactionReceipt) {
         String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_REGIST, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        final Function function = new Function(FUNC_REGIST,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
         List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
         return new Tuple1<String>(
 
                 (String) results.get(0).getValue()
-                );
+        );
     }
 
     public TransactionReceipt setLogic(String addr) {
         final Function function = new Function(
-                FUNC_SETLOGIC, 
+                FUNC_SETLOGIC,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return executeTransaction(function);
@@ -129,7 +143,7 @@ public class Verifier extends Contract {
 
     public byte[] setLogic(String addr, TransactionCallback callback) {
         final Function function = new Function(
-                FUNC_SETLOGIC, 
+                FUNC_SETLOGIC,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return asyncExecuteTransaction(function, callback);
@@ -137,7 +151,7 @@ public class Verifier extends Contract {
 
     public String getSignedTransactionForSetLogic(String addr) {
         final Function function = new Function(
-                FUNC_SETLOGIC, 
+                FUNC_SETLOGIC,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return createSignedTransaction(function);
@@ -145,19 +159,20 @@ public class Verifier extends Contract {
 
     public Tuple1<String> getSetLogicInput(TransactionReceipt transactionReceipt) {
         String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_SETLOGIC, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        final Function function = new Function(FUNC_SETLOGIC,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
         List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
         return new Tuple1<String>(
 
                 (String) results.get(0).getValue()
-                );
+        );
     }
 
     public TransactionReceipt setStor(String addr) {
         final Function function = new Function(
-                FUNC_SETSTOR, 
+                FUNC_SETSTOR,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return executeTransaction(function);
@@ -165,7 +180,7 @@ public class Verifier extends Contract {
 
     public byte[] setStor(String addr, TransactionCallback callback) {
         final Function function = new Function(
-                FUNC_SETSTOR, 
+                FUNC_SETSTOR,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return asyncExecuteTransaction(function, callback);
@@ -173,7 +188,7 @@ public class Verifier extends Contract {
 
     public String getSignedTransactionForSetStor(String addr) {
         final Function function = new Function(
-                FUNC_SETSTOR, 
+                FUNC_SETSTOR,
                 Arrays.<Type>asList(new Address(addr)),
                 Collections.<TypeReference<?>>emptyList());
         return createSignedTransaction(function);
@@ -181,21 +196,14 @@ public class Verifier extends Contract {
 
     public Tuple1<String> getSetStorInput(TransactionReceipt transactionReceipt) {
         String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_SETSTOR, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        final Function function = new Function(FUNC_SETSTOR,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
         List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
         return new Tuple1<String>(
 
                 (String) results.get(0).getValue()
-                );
-    }
-
-    public static Verifier load(String contractAddress, Client client, CryptoKeyPair credential) {
-        return new Verifier(contractAddress, client, credential);
-    }
-
-    public static Verifier deploy(Client client, CryptoKeyPair credential) throws ContractException {
-        return deploy(Verifier.class, client, credential, getBinary(client.getCryptoSuite()), "");
+        );
     }
 }

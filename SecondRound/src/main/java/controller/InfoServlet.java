@@ -1,7 +1,7 @@
 package controller;
 
 import entity.po.User;
-import service.FactoryService;
+import factory.FactoryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -27,14 +27,14 @@ public class InfoServlet extends HttpServlet {
         String parameter = req.getParameter("name");
         System.out.println(parameter);
         User user = (User) req.getSession().getAttribute("user");
-        if(parameter==null){
+        if (parameter == null) {
             resp.setStatus(500);
             return;
         }
         try {
             String name = FactoryService.getInfoService().changeInfo(parameter, null, user.getContract_address());
             user.setName(name);
-            req.getSession().setAttribute("user",user);
+            req.getSession().setAttribute("user", user);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -43,16 +43,16 @@ public class InfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Part part= req.getPart("avatar");
+        Part part = req.getPart("avatar");
         User user = (User) req.getSession().getAttribute("user");
         if (part == null) {
-                resp.setStatus(500);
-                return;
+            resp.setStatus(500);
+            return;
         }
         try {
             String profile = FactoryService.getInfoService().changeInfo(null, part, user.getContract_address());
             user.setProfile(profile);
-            req.getSession().setAttribute("user",user);
+            req.getSession().setAttribute("user", user);
             resp.setStatus((200));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

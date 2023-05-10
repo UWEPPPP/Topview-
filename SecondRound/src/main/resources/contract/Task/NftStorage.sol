@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
+
 import "Task/Verifier.sol";
 
 contract NftStorage {
@@ -48,11 +49,11 @@ contract NftStorage {
 
     mapping(uint256 => Auction) public tokenAuction;
 
-    function setAuction(uint256 id, Auction memory auc) external  onlyLogic{
-        tokenAuction[id]=auc;
+    function setAuction(uint256 id, Auction memory auc) external onlyLogic {
+        tokenAuction[id] = auc;
     }
 
-    function getAuction(uint256 id) external view returns(Auction memory){
+    function getAuction(uint256 id) external view returns (Auction memory){
         return tokenAuction[id];
     }
 

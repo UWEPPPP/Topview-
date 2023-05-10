@@ -19,7 +19,7 @@ public interface IDao {
      * @throws SQLException           sqlexception异常
      * @throws ClassNotFoundException 类没有发现异常
      */
-    public int insertOrUpdateOrDelete(String sql,Object[] objects) throws SQLException, ClassNotFoundException;
+    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, ClassNotFoundException;
 
     /**
      * 选择
@@ -31,5 +31,5 @@ public interface IDao {
      * @return {@link List}<{@link T}>
      * @throws Exception 异常
      */
-    public <T>List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception;
+    public <T> List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception;
 }

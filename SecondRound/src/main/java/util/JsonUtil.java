@@ -6,6 +6,12 @@ import entity.po.Nft;
 
 import java.util.List;
 
+/**
+ * json跑龙套
+ *
+ * @author 刘家辉
+ * @date 2023/05/10
+ */
 public class JsonUtil {
     public static List<Nft> analysisJson(List<Nft> list) {
         for (int i = 0; i < list.size(); i++) {

@@ -3,6 +3,7 @@
 
 pragma solidity ^0.6.1;
 pragma experimental ABIEncoderV2;
+
 import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
@@ -32,7 +33,7 @@ contract MyToken is Context, ERC165, IERC1155, IERC1155MetadataURI {
     }
 
     modifier onlyAdmin(){
-        require(verifier.is_logic_Admin(_msgSender())== true,"No right");
+        require(verifier.is_logic_Admin(_msgSender()) == true, "No right");
         _;
     }
 
@@ -46,10 +47,10 @@ contract MyToken is Context, ERC165, IERC1155, IERC1155MetadataURI {
         return balanceOf(_msgSender(), 0);
     }
 
-    function issueNft(string memory token_url,uint256 price) external returns (uint256) {
+    function issueNft(string memory token_url, uint256 price) external returns (uint256) {
         uint256 id = tokenId;
         _mint(_msgSender(), tokenId, 1, "");
-        _setURI(tokenId,price, token_url, _msgSender());
+        _setURI(tokenId, price, token_url, _msgSender());
         nstorage.setLifes(
             id,
             NftStorage.ItemLife(now, _msgSender(), "initial mint")
@@ -60,7 +61,7 @@ contract MyToken is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
     function buyNft(uint256 id) external {
         NftStorage.Token memory tok = nstorage.getTokens(id);
-        require(tok.could_sold,"Dont sell");
+        require(tok.could_sold, "Dont sell");
         safeTransferFrom(_msgSender(), tok.owner, 0, tok.price, "");
         safeTransferFrom(tok.owner, _msgSender(), id, 1, "");
         tok.owner = _msgSender();
@@ -84,34 +85,34 @@ contract MyToken is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
     function upOrDown(uint256 id, bool choice) external {
         NftStorage.Token memory tok = nstorage.getTokens(id);
-        require(tok.owner == _msgSender(),"No right");
+        require(tok.owner == _msgSender(), "No right");
         tok.could_sold = choice;
         nstorage.setTokens(id, tok);
     }
 
-    function auctionBegin(uint256 id) external  {
+    function auctionBegin(uint256 id) external {
         require(nstorage.getTokens(id).owner == _msgSender(), "no right");
-        nstorage.setAuction(id,NftStorage.Auction(now,now + 10 days,_msgSender(),0,_msgSender()));
+        nstorage.setAuction(id, NftStorage.Auction(now, now + 10 days, _msgSender(), 0, _msgSender()));
     }
 
-    function auctionNft(uint256 id,uint256 amount) external{
-        NftStorage.Auction memory auc= nstorage.getAuction(id);
-        require(now< auc.endTime,"Had ended");
-        require(amount> auc.highestBid,"Must Higher");
-        auc.highestBid=amount;
-        auc.highestBidder=_msgSender();
-        nstorage.setAuction(id,auc);
+    function auctionNft(uint256 id, uint256 amount) external {
+        NftStorage.Auction memory auc = nstorage.getAuction(id);
+        require(now < auc.endTime, "Had ended");
+        require(amount > auc.highestBid, "Must Higher");
+        auc.highestBid = amount;
+        auc.highestBidder = _msgSender();
+        nstorage.setAuction(id, auc);
     }
 
     function auctionEnd(uint256 id) external onlyAdmin {
-        NftStorage.Auction memory auc= nstorage.getAuction(id);
-        address own=  auc.owner;
-        address buy= auc.highestBidder;
+        NftStorage.Auction memory auc = nstorage.getAuction(id);
+        address own = auc.owner;
+        address buy = auc.highestBidder;
         safeTransferFrom(buy, own, 0, auc.highestBid, "");
         safeTransferFrom(own, buy, id, 1, "");
-        NftStorage.Token memory tok= nstorage.getTokens(id);
-        tok.owner= buy;
-        nstorage.setTokens(id,tok);
+        NftStorage.Token memory tok = nstorage.getTokens(id);
+        tok.owner = buy;
+        nstorage.setTokens(id, tok);
     }
 
     function getNftLife(uint256 id)
@@ -321,7 +322,7 @@ contract MyToken is Context, ERC165, IERC1155, IERC1155MetadataURI {
         string memory newuri,
         address owner
     ) internal virtual {
-        nstorage.setTokens(id, NftStorage.Token(newuri,price, owner, false));
+        nstorage.setTokens(id, NftStorage.Token(newuri, price, owner, false));
     }
 
     function _mint(

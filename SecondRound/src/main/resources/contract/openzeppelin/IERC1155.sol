@@ -61,9 +61,9 @@ interface IERC1155 is IERC165 {
      * - `accounts` and `ids` must have the same length.
      */
     function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
-        external
-        view
-        returns (uint256[] memory);
+    external
+    view
+    returns (uint256[] memory);
 
     /**
      * @dev Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`,

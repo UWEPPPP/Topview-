@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>转增藏品 - 藏品管理系统</title>
-    <link rel="stylesheet" href="css/transfer.css">
+    <link href="css/transfer.css" rel="stylesheet">
 </head>
 <body>
 <header>
     <div class="info-container">
-        <img src="" alt="头像" id="avatar" class="avatar">
+        <img alt="头像" class="avatar" id="avatar" src="">
         <h1 class="name" id="name"></h1>
         <p class="balance" id="balance"></p>
     </div>
@@ -18,7 +18,7 @@
         <li><a href="personal-info.html">个人信息</a></li>
         <li><a href="casting.html">铸造藏品</a></li>
         <li><a href="display.html">展示藏品</a></li>
-        <li><a href="#" class="active">转增藏品</a></li>
+        <li><a class="active" href="#">转增藏品</a></li>
         <li><a href="trace.html">追溯藏品</a></li>
     </ul>
 </nav>
@@ -28,14 +28,14 @@
         <!-- 其他用户列表将在此处显示 -->
     </div>
     <form id="transfer-form">
-        <input type="hidden" id="recipient-address" name="recipient-address">
+        <input id="recipient-address" name="recipient-address" type="hidden">
         <div>
             <label for="recipient">接收者：</label>
-            <input type="text" id="recipient" name="recipient">
+            <input id="recipient" name="recipient" type="text">
         </div>
         <div>
             <label for="collection-item">藏品CID：</label>
-            <input type="text" id="collection-item" name="collection-item">
+            <input id="collection-item" name="collection-item" type="text">
         </div>
         <button type="submit">转增</button>
     </form>
@@ -46,9 +46,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         // 获取个人信息
-        $.getJSON("/login", function(data) {
+        $.getJSON("/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -56,26 +56,26 @@
         });
 
         // 获取其他用户信息
-        $.getJSON("/transfer", function(users) {
-            users.forEach(function(user) {
+        $.getJSON("/transfer", function (users) {
+            users.forEach(function (user) {
                 var userDiv = $("<div>").addClass("user");
                 $("<img>").attr("src", "https://ipfs.io/ipfs/" + user.profile).appendTo(userDiv);
                 $("<h3>").text(user.name).appendTo(userDiv);
-                $("<p>").text(user.contractAddress).appendTo(userDiv);
-                $("<button>").text("选择该用户").addClass("transfer-button").attr("data-address", user.contractAddress).appendTo(userDiv);
+                $("<p>").text(user.contract_address).appendTo(userDiv);
+                $("<button>").text("选择该用户").addClass("transfer-button").attr("data-address", user.contract_address).appendTo(userDiv);
                 $("#user-list").append(userDiv);
             });
         });
 
         // 转增按钮点击事件
-        $("#user-list").on("click", ".transfer-button", function() {
+        $("#user-list").on("click", ".transfer-button", function () {
             var address = $(this).attr("data-address");
             $("#recipient-address").val(address);
             $("#recipient").val($(this).siblings("h3").text());
         });
 
         // 表单提交事件
-        $("#transfer-form").on("submit", function(event) {
+        $("#transfer-form").on("submit", function (event) {
             event.preventDefault();
             var recipientAddress = $("#recipient-address").val();
             var collectionItem = $("#collection-item").val();
@@ -91,11 +91,11 @@
                 type: "POST",
                 url: "/transfer",
                 data: formData,
-                success: function(response) {
+                success: function (response) {
                     alert("转增成功！");
                     // 在此处添加其他处理逻辑，例如更新页面内容
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     alert("转增失败，请检查输入数据并重试。");
                 }
             });

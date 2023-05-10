@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <meta charset="UTF-8">
-  <title>注册新账户</title>
-  <link rel="stylesheet" href="css/register.css">
+    <meta charset="UTF-8">
+    <title>注册新账户</title>
+    <link href="css/register.css" rel="stylesheet">
 </head>
 <body>
 <h1>注册新账户</h1>
-<form action="/register" method="post" enctype="multipart/form-data">
-  <label for="username">用户名：</label>
-  <input type="text" id="username" name="username" required>
+<form action="/register" enctype="multipart/form-data" method="post">
+    <label for="username">用户名：</label>
+    <input id="username" name="username" required type="text">
 
-  <label for="password">密码：</label>
-  <input type="password" id="password" name="password" required>
+    <label for="password">密码：</label>
+    <input id="password" name="password" required type="password">
 
-  <label for="avatar">头像：</label>
-  <input type="file" id="avatar" name="avatar" accept="image/*">
+    <label for="avatar">头像：</label>
+    <input accept="image/*" id="avatar" name="avatar" type="file">
 
-  <input type="submit" value="注册">
+    <input type="submit" value="注册">
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('form').submit(function(event) {
-      event.preventDefault();
-      $.ajax({
-        url: '/register',
-        method: 'POST',
-        data: new FormData(this),
-        processData: false,
-        contentType: false,
-        success: function(data, textStatus, jqXHR) {
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '/register',
+                method: 'POST',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (data, textStatus, jqXHR) {
 
-          if (jqXHR.status === 200) {
-            alert('注册成功')
-            window.location.href = '/login.html';
-          } else {
-            console.error('未知错误');
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          if (jqXHR.status === 500) {
-            window.location.href = '/register.html';
-          } else {
-            console.error('注册失败');
-          }
-        }
-      });
+                    if (jqXHR.status === 200) {
+                        alert('注册成功')
+                        window.location.href = '/login.html';
+                    } else {
+                        console.error('未知错误');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status === 500) {
+                        window.location.href = '/register.html';
+                    } else {
+                        console.error('注册失败');
+                    }
+                }
+            });
+        });
     });
-  });
 </script>
 </body>
 </html>

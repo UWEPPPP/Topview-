@@ -1,8 +1,9 @@
 package controller;
 
 import entity.po.User;
+import factory.FactoryService;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
-import service.FactoryService;
+import service.wrapper.NftMarket;
 import util.CastUtil;
 
 import javax.servlet.ServletException;
@@ -31,12 +32,11 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
-        String price = req.getParameter("price");
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
-        NftMarket market= CastUtil.cast(req.getSession().getAttribute("nftMarket"));
+        NftMarket market = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         try {
-            int balance = FactoryService.getPurchaseService().buy(Integer.parseInt(id), Integer.parseInt(price), user.getContract_address(),market);
-            if (balance !=Integer.parseInt(user.getBalance())) {
+            int balance = FactoryService.getPurchaseService().buy(Integer.parseInt(id), user.getContract_address(), market);
+            if (balance != Integer.parseInt(user.getBalance())) {
                 user.setBalance(String.valueOf(balance));
                 req.getSession().setAttribute("user", user);
                 resp.setStatus(200);

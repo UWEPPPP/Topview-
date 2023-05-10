@@ -1,9 +1,11 @@
-package service;
+package service.impl;
 
-import dao.FactoryDao;
+import factory.FactoryDao;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
+import service.IRegisterService;
+import service.wrapper.NftMarket;
 import util.CastUtil;
 import util.Contract;
 import util.CryptoUtil;
@@ -21,15 +23,15 @@ import java.util.Map;
  * @author 刘家辉
  * &#064;date  2023/04/28
  */
-public class RegisterService {
+public class RegisterService implements IRegisterService {
     private RegisterService() {
     }
-    public static class  RegisterServiceInstance {
-       public static final RegisterService INSTANCE = new RegisterService();
-    }
-    public static RegisterService getInstance() {
+
+    public static IRegisterService getInstance() {
         return RegisterServiceInstance.INSTANCE;
     }
+
+    @Override
     public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
@@ -42,16 +44,19 @@ public class RegisterService {
         String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String upload = IpfsUtil.upload(byteArray);
-        String sql="insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
+        String sql = "insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
         int insert = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
         NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));
         TransactionReceipt register = nftMarket.regiter();
         String status = register.getStatus();
-        String check= "0x0";
-        if (!check.equals(status)||insert==0) {
-           return 500;
-        }else {
+        if (!Contract.checkStatus.equals(status) || insert == 0) {
+            return 500;
+        } else {
             return 200;
         }
+    }
+
+    public static class RegisterServiceInstance {
+        public static final IRegisterService INSTANCE = new RegisterService();
     }
 }

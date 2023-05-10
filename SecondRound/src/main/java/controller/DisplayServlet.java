@@ -3,7 +3,7 @@ package controller;
 import com.alibaba.fastjson.JSON;
 import entity.po.Nft;
 import entity.po.User;
-import service.FactoryService;
+import factory.FactoryService;
 import util.CastUtil;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -31,12 +30,12 @@ public class DisplayServlet extends HttpServlet {
         String choice = req.getParameter("choice");
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         try {
-            if(choice!=null) {
+            if (choice != null) {
                 display = FactoryService.getDisplayService().display();
-            }else {
+            } else {
                 display = FactoryService.getDisplayService().displayByUser(user.getContract_address());
             }
-            System.out.println(display+"????");
+            System.out.println(display + "????");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -2,7 +2,8 @@ package controller;
 
 import com.alibaba.fastjson.JSON;
 import entity.po.User;
-import service.FactoryService;
+import factory.FactoryService;
+import service.wrapper.NftMarket;
 import util.CastUtil;
 
 import javax.servlet.annotation.MultipartConfig;
@@ -40,12 +41,12 @@ public class TransferServlet extends HttpServlet {
         String recipientAddress = req.getParameter("recipientAddress");
         String collectionItem = req.getParameter("collectionItem");
         User user = (User) req.getSession().getAttribute("user");
-        NftMarket market=CastUtil.cast(req.getSession().getAttribute("nftMarket"));
+        NftMarket market = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         String contractAddress = user.getContract_address();
         System.out.println(recipientAddress);
         System.out.println(collectionItem);
         try {
-            int transfer = FactoryService.getTransferService().transfer(recipientAddress, collectionItem, contractAddress,market);
+            int transfer = FactoryService.getTransferService().transfer(recipientAddress, collectionItem, contractAddress, market);
             resp.setStatus(transfer);
         } catch (Exception e) {
             throw new RuntimeException(e);

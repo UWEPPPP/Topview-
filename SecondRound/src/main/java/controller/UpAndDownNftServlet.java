@@ -1,6 +1,6 @@
 package controller;
 
-import service.FactoryService;
+import factory.FactoryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

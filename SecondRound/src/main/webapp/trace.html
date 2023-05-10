@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>追溯藏品 - 藏品管理系统</title>
-    <link rel="stylesheet" href="css/trace.css">
+    <link href="css/trace.css" rel="stylesheet">
 </head>
 <body>
 <header>
     <div class="info-container">
-        <img src="" alt="头像" id="avatar" class="avatar">
+        <img alt="头像" class="avatar" id="avatar" src="">
         <h1 class="name" id="name"></h1>
         <p class="balance" id="balance"></p>
     </div>
+    <h1>追溯藏品生命周期</h1>
+    <section id="search">
+        <label for="cid">请输入CID:</label>
+        <input id="cid" name="cid" type="text">
+        <button id="searchBtn">查询</button>
+    </section>
+
 </header>
 <nav>
     <ul>
@@ -20,31 +27,60 @@
         <li><a href="display.html">展示藏品</a></li>
 
         <li><a href="transfer.html">转增藏品</a></li>
-        <li><a href="#" class="active">追溯藏品</a></li>
+        <li><a class="active" href="#">追溯藏品</a></li>
     </ul>
 </nav>
-<section id="trace">
-    <h2>追溯藏品</h2>
-    <form>
-        <div>
-            <label for="trace-id">唯一标识：</label>
-            <input type="text" id="trace-id" name="trace-id">
-        </div>
-        <button type="submit">追溯</button>
-    </form>
+<section id="lifecycle">
+    <table id="lifecycleTable">
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>拥有者地址</th>
+            <th>状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </section>
 <footer>
     <p>版权所有 &copy; 2023 藏品管理系统</p>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         // 获取个人信息
-        $.getJSON("/login", function(data) {
+        $.getJSON("/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
             $("#balance").text("余额：" + data.balance); // 显示余额
+        });
+    });
+    $(document).ready(function () {
+        $("#searchBtn").on("click", function () {
+            const cid = $("#cid").val();
+            $.ajax({
+                url: "/trace",
+                type: "POST",
+                data: {cid: cid},
+                success: function (data) {
+                    $("#lifecycleTable tbody tr").remove();
+                    const lifecycle = JSON.parse(JSON.stringify(data));
+                    for (let i = 0; i < lifecycle.length; i++) {
+                        const transaction = lifecycle[i];
+                        const row = $("<tr></tr>");
+                        const date = $("<td></td>").text(new Date(transaction.date));
+                        const owner = $("<td></td>").text(transaction.owner);
+                        const status = $("<td></td>").text(transaction.status);
+                        row.append(date, owner, status);
+                        $("#lifecycleTable tbody").append(row);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("查询失败：" + errorThrown);
+                }
+            });
         });
     });
     // 你的 JavaScript 代码

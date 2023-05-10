@@ -1,12 +1,11 @@
 package service;
 
 import org.junit.Test;
+import service.impl.InfoService;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
-
-import static org.junit.Assert.*;
 
 public class InfoServiceTest {
 

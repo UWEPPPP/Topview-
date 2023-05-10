@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>开启拍卖</title>
+    <link href="css/auction-begin.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            // 获取个人信息
+            $.getJSON("/login", function (data) {
+                $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+                $("#name").text(data.name);
+                $("#balance").text("余额：" + data.balance); // 显示余额
+            });
+        });
+
+        $(document).ready(function () {
+            // 处理表单提交事件
+            $("#auctionForm").submit(function (event) {
+                event.preventDefault(); // 阻止表单默认提交行为
+
+                // 获取表单数据
+                const cid = $("#cid").val();
+                const duration = $("#duration").val();
+                const amount = $("#amount").val();
+
+                // 向后台发送请求
+                $.ajax({
+                    url: "/auction",
+                    type: "POST",
+                    data: {
+                        cid: cid,
+                        duration: duration,
+                        amount: amount
+                    },
+                    success: function (data) {
+                        alert("拍卖已开启！");
+                        location.reload(); // 刷新页面以更新余额和拍卖信息
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("开启拍卖失败：" + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        #auctionForm {
+            width: 400px; /* 表单宽400px */
+            margin: 50px auto; /* 上下50px,左右居中 */
+        }
+
+        #auctionForm label {
+            display: inline-block;
+            width: 80px;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        #auctionForm input {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="info-container">
+        <img alt="头像" class="avatar" id="avatar" src="">
+        <h1 class="name" id="name"></h1>
+        <p class="balance" id="balance"></p>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="personal-info.html">个人信息</a></li>
+            <li><a href="casting.html">铸造藏品</a></li>
+            <li><a href="display.html">展示藏品</a></li>
+            <li><a href="transfer.html">转移藏品</a></li>
+            <li><a href="trace.html">追溯藏品</a></li>
+            <li><a href="#">开启拍卖</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="auction">
+    <h2>开启拍卖</h2>
+    <form id="auctionForm">
+        <div>
+            <label for="cid">NFT CID：</label>
+            <input id="cid" name="cid" type="text">
+        </div>
+        <div>
+            <label for="duration">拍卖持续时间（秒）：</label>
+            <input id="duration" max="3600" min="1" name="duration" type="number">
+        </div>
+        <div>
+            <label for="amount">拍卖起始金额：</label>
+            <input id="amount" max="1000000" min="1" name="amount" type="number">
+        </div>
+        <div>
+            <button type="submit">开启拍卖</button>
+        </div>
+    </form>
+</section>
+
+<footer>
+    <p>版权所有 &copy; NFT平台</p>
+</footer>
+
+</body>
+</html>

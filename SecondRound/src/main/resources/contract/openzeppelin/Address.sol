@@ -33,11 +33,11 @@ library Address {
      * constructor.
      * ====
      */
-   function isContract(address account) internal view returns (bool) {
-    uint256 size;
-    assembly { size := extcodesize(account) }
-    return size > 0;
-}
+    function isContract(address account) internal view returns (bool) {
+        uint256 size;
+        assembly {size := extcodesize(account)}
+        return size > 0;
+    }
 
     /**
      * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
@@ -58,7 +58,7 @@ library Address {
     function sendValue(address payable recipient, uint256 amount) internal {
         require(address(this).balance >= amount, "Address: insufficient balance");
 
-        (bool success, ) = recipient.call{value: amount}("");
+        (bool success,) = recipient.call{value: amount}("");
         require(success, "Address: unable to send value, recipient may have reverted");
     }
 

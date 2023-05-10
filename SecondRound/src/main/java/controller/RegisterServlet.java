@@ -1,8 +1,7 @@
 package controller;
 
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
-import service.FactoryService;
-import service.RegisterService;
+import factory.FactoryService;
+import service.IRegisterService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,9 +35,9 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("src/webapp/register.html");
             return;
         }
-        RegisterService registerService = FactoryService.getRegisterService();
+        IRegisterService IRegisterService = FactoryService.getRegisterService();
         try {
-            int register = registerService.register(username, password, avatarPart);
+            int register = IRegisterService.register(username, password, avatarPart);
             response.setStatus(register);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

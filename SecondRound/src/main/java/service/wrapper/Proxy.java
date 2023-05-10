@@ -1,8 +1,5 @@
 package service.wrapper;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import org.fisco.bcos.sdk.abi.FunctionEncoder;
 import org.fisco.bcos.sdk.abi.FunctionReturnDecoder;
 import org.fisco.bcos.sdk.abi.TypeReference;
@@ -18,6 +15,10 @@ import org.fisco.bcos.sdk.model.CryptoType;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import org.fisco.bcos.sdk.model.callback.TransactionCallback;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @SuppressWarnings("all")
 public class Proxy extends Contract {
@@ -45,49 +46,6 @@ public class Proxy extends Contract {
         return (cryptoSuite.getCryptoTypeConfig() == CryptoType.ECDSA_TYPE ? BINARY : SM_BINARY);
     }
 
-    public String _implementation() throws ContractException {
-        final Function function = new Function(FUNC__IMPLEMENTATION, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
-        return executeCallWithSingleValueReturn(function, String.class);
-    }
-
-    public TransactionReceipt upgrade(String newCont) {
-        final Function function = new Function(
-                FUNC_UPGRADE, 
-                Arrays.<Type>asList(new Address(newCont)),
-                Collections.<TypeReference<?>>emptyList());
-        return executeTransaction(function);
-    }
-
-    public byte[] upgrade(String newCont, TransactionCallback callback) {
-        final Function function = new Function(
-                FUNC_UPGRADE, 
-                Arrays.<Type>asList(new Address(newCont)),
-                Collections.<TypeReference<?>>emptyList());
-        return asyncExecuteTransaction(function, callback);
-    }
-
-    public String getSignedTransactionForUpgrade(String newCont) {
-        final Function function = new Function(
-                FUNC_UPGRADE, 
-                Arrays.<Type>asList(new Address(newCont)),
-                Collections.<TypeReference<?>>emptyList());
-        return createSignedTransaction(function);
-    }
-
-    public Tuple1<String> getUpgradeInput(TransactionReceipt transactionReceipt) {
-        String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_UPGRADE, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
-        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
-        return new Tuple1<String>(
-
-                (String) results.get(0).getValue()
-                );
-    }
-
     public static Proxy load(String contractAddress, Client client, CryptoKeyPair credential) {
         return new Proxy(contractAddress, client, credential);
     }
@@ -97,5 +55,50 @@ public class Proxy extends Contract {
                 new Address(veri),
                 new Address(imple)));
         return deploy(Proxy.class, client, credential, getBinary(client.getCryptoSuite()), encodedConstructor);
+    }
+
+    public String _implementation() throws ContractException {
+        final Function function = new Function(FUNC__IMPLEMENTATION,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
+        return executeCallWithSingleValueReturn(function, String.class);
+    }
+
+    public TransactionReceipt upgrade(String newCont) {
+        final Function function = new Function(
+                FUNC_UPGRADE,
+                Arrays.<Type>asList(new Address(newCont)),
+                Collections.<TypeReference<?>>emptyList());
+        return executeTransaction(function);
+    }
+
+    public byte[] upgrade(String newCont, TransactionCallback callback) {
+        final Function function = new Function(
+                FUNC_UPGRADE,
+                Arrays.<Type>asList(new Address(newCont)),
+                Collections.<TypeReference<?>>emptyList());
+        return asyncExecuteTransaction(function, callback);
+    }
+
+    public String getSignedTransactionForUpgrade(String newCont) {
+        final Function function = new Function(
+                FUNC_UPGRADE,
+                Arrays.<Type>asList(new Address(newCont)),
+                Collections.<TypeReference<?>>emptyList());
+        return createSignedTransaction(function);
+    }
+
+    public Tuple1<String> getUpgradeInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_UPGRADE,
+                Arrays.<Type>asList(),
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
+                }));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+        );
     }
 }

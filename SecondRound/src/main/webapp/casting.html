@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>铸造数字藏品页面</title>
-    <link rel="stylesheet" href="css/casting.css">
+    <link href="css/casting.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- 引入jQuery库 -->
 </head>
 <body>
-    <header>
-        <div class="info-container">
-            <img src="" alt="头像" id="avatar" class="avatar">
-            <h1 class="name" id="name"></h1>
-            <p class="balance" id="balance"></p>
-        </div>
-    </header>
+<header>
+    <div class="info-container">
+        <img alt="头像" class="avatar" id="avatar" src="">
+        <h1 class="name" id="name"></h1>
+        <p class="balance" id="balance"></p>
+    </div>
+</header>
 <nav>
     <ul>
         <li><a href="personal-info.html">个人信息</a></li>
@@ -28,10 +28,10 @@
 </nav>
 <section>
     <h2>铸造数字藏品表单</h2>
-    <form id="form" enctype="multipart/form-data">
+    <form enctype="multipart/form-data" id="form">
         <div>
             <label for="name1">藏品名字：</label>
-            <input type="text" id="name1" name="name">
+            <input id="name1" name="name" type="text">
         </div>
         <div>
             <label for="description">藏品描述：</label>
@@ -48,13 +48,13 @@
         </div>
         <div>
             <label for="price">藏品价格：</label>
-            <input type="number" id="price" name="price" step="0.0001">
+            <input id="price" name="price" step="0.0001" type="number">
         </div>
         <div>
             <label for="file">上传文件：</label>
-            <input type="file" id="file" name="file">
+            <input id="file" name="file" type="file">
         </div>
-        <button type="submit" id="submit-btn">提交</button>
+        <button id="submit-btn" type="submit">提交</button>
     </form>
 </section>
 <footer>
@@ -62,17 +62,17 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script CHARSET="x-UTF-16LE-BOM">
-    $(function() {
+    $(function () {
         // 获取个人信息
-        $.getJSON("/login", function(data) {
+        $.getJSON("/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
             $("#balance").text("余额：" + data.balance); // 显示余额
         });
-        });
-    $(document).ready(function() {
-        $("#form").submit(function(event) {
+    });
+    $(document).ready(function () {
+        $("#form").submit(function (event) {
             event.preventDefault();
             // 获取表单数据
             let formData = new FormData(this);
@@ -83,12 +83,12 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
                     // 处理请求成功的结果
                     alert("操作成功！");
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error(error);
                     alert("操作失败！");
                 }

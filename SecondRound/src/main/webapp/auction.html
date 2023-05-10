@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <title>拍卖品展示</title>
+    <link href="css/auction-begin.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="info-container">
+        <img alt="头像" class="avatar" id="avatar" src="">
+        <h1 class="name" id="name"></h1>
+        <p class="balance" id="balance"></p>
+    </div>
+    <button onclick="logout()">退出</button>
+</header>
+<nav class="main-nav">
+    <ul>
+        <li><a href="#">个人信息</a></li>
+        <li><a href="casting.html">铸造藏品</a></li>
+        <li><a href="display.html">展示藏品</a></li>
+        <li><a href="auction-begin.html">拍卖藏品</a></li>
+        <li><a href="auction.html">竞拍藏品</a></li>
+        <li><a href="transfer.html">转增藏品</a></li>
+        <li><a href="trace.html">追溯藏品</a></li>
+    </ul>
+</nav>
+<div id="auctionList"></div>
+
+<script>
+    $(function () {
+        // 获取个人信息
+        $.getJSON("/login", function (data) {
+            $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+            $("#name").text(data.name);
+            $("#new-name").val(data.name);  // 将当前姓名填入输入框
+            $("#balance").text("余额：" + data.balance); // 显示余额
+        });
+    });
+    // 获取拍卖品列表
+    $.post("/displayForAuction", function (data) {
+        for (let i = 0; i < data.length; i++) {
+            let auction = data[i];
+            let html = `
+                    <div class="auction-item">
+                        <img src="https://ipfs.io/ipfs/${auction.show}" width="200">
+                        <p>名称:${auction.name}</p>
+                        <p>最高出价: ${auction.highest_bid} 元</p>
+                        <p>最高出价人:${auction.highest_bidder}</p>
+                        <p>结束时间:${auction.end_time}</p>
+                        <div>
+                            <form onsubmit="return false">
+                                <input name="bidPrice">元
+                                <button type="button" onclick="bid(${auction.nftId}, this.form)">出价</button>
+                            </form>
+                        </div>
+                    </div>
+                `;
+            $("#auctionList").append(html);
+        }
+    });
+
+    // 出价函数
+    function bid(auctionId, form) {
+        let bidPrice = $(form).find("input[name='bidPrice']").val();
+        $.get("/auction", {
+            nftId: auctionId,
+            bidPrice: bidPrice
+        }, function (data) {
+            alert(data.message);
+            location.reload();   // 刷新页面
+        });
+    }
+</script>
+</body>
+</html>
