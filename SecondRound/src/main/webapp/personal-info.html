@@ -116,19 +116,27 @@
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
                     let nft = data[i];
+                    let img;
+                    if (nft.type === 'image') {
+                        img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+                    } else if (nft.type === 'music') {
+                        img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
+                    }else if (nft.type === '3d') {
+                        img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+                    }
                     let nftCard = `
-            <div class="nft-card">
-              <img src="https://ipfs.io/ipfs/${nft.show}" alt="${nft.name}" width="100px">
-              <h3>名字 ${nft.name}</h3>
-              <p>描述 ${nft.description}</p>
-              <p>cid ${nft.ipfs_cid}</p>
-              <p class="price">价格：${nft.price} ETH</p>
-              <div class="button-group">
-                <button onclick="toggleNftStatus('${nft.ipfs_cid}', true)">上架</button>
-                <button onclick="toggleNftStatus('${nft.ipfs_cid}', false)">下架</button>
-              </div>
-            </div>
-          `;
+    <div class="nft-card">
+        ${img.prop('outerHTML')}
+        <h3>名字 ${nft.name}</h3>
+        <p>描述 ${nft.description}</p>
+        <p>cid ${nft.ipfs_cid}</p>
+        <p class="price">价格：${nft.price} ETH</p>
+        <div class="button-group">
+            <button onclick="toggleNftStatus('${nft.ipfs_cid}', true)">上架</button>
+            <button onclick="toggleNftStatus('${nft.ipfs_cid}', false)">下架</button>
+        </div>
+    </div>
+`;
                     $("#nftContainer").append(nftCard);
                 }
             } else {

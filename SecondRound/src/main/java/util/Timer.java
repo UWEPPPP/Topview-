@@ -12,21 +12,7 @@ import java.util.concurrent.*;
  * @date 2023/05/10
  */
 public class Timer {
-    private final ThreadFactory THREAD_FACTORY = new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable runnable) {
-            Thread thread = new Thread(runnable);
-            thread.setName("auction-thread");
-            return thread;
-        }
-    };
-    private final ExecutorService SERVICE = new ThreadPoolExecutor(
-            10, 20,
-            0L, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>(),
-            THREAD_FACTORY,
-            (r, executor) -> System.out.println("线程池已满,拒绝执行")
-    );
+
     private final NftMarket nftMarket = Contract.getAdmin();
 
     private Timer() {
@@ -45,7 +31,7 @@ public class Timer {
                 e.printStackTrace();
             }
         };
-        SERVICE.submit(runnable);
+        ThreadPool.SERVICE.submit(runnable);
     }
 
     public static class TimerHolder {

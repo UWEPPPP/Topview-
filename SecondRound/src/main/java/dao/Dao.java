@@ -26,7 +26,7 @@ public class Dao implements IDao {
     }
 
     @Override
-    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws ClassNotFoundException, SQLException {
+    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws ClassNotFoundException, SQLException, InterruptedException {
         Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {

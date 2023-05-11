@@ -58,9 +58,17 @@
     $.get("/displayForAuction", function (data) {
         for (let i = 0; i < data.length; i++) {
             let auction = data[i];
+            let img;
+            if (auction.type === 'image') {
+                img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + auction.show).attr("width", "100px");
+            } else if (auction.type === 'music') {
+                img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + auction.show + "' type='audio/ogg'></audio>");
+            }else if (auction.type === '3d') {
+                img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + auction.show).attr("width", "100px");
+            }
             let html = `
                         <div class="auction-item">
-                            <img src="https://ipfs.io/ipfs/${auction.show}" width="200">
+                            ${img.prop('outerHTML')}
                             <p>名称:${auction.name}</p>
                             <p>最高出价: ${auction.highest_bid} 元</p>
                             <p>最高出价人:${auction.highest_bidder}</p>

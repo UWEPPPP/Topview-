@@ -19,7 +19,7 @@ public interface IDao {
      * @throws SQLException           sqlexception异常
      * @throws ClassNotFoundException 类没有发现异常
      */
-    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, ClassNotFoundException;
+    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, ClassNotFoundException, InterruptedException;
 
     /**
      * 选择

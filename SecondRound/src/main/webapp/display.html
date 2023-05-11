@@ -18,7 +18,7 @@
         if (nft.type === 'image') {
             img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
         } else if (nft.type === 'music') {
-            img = $("<audio controls='controls' autoplay='autoplay'><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
+            img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
         }else if (nft.type === '3d') {
             img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
         }

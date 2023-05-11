@@ -18,8 +18,11 @@ public class ConnectionPool {
     private final String password;
     private final Integer maxConnections;
     private final Integer initConnections;
-    private Integer allConnections;
+    private Integer currentConnections;
     private BlockingQueue<Connection> connectionPool;
+    private boolean isShrinking = false;
+    private boolean isExpanding = false;
+
 
     private ConnectionPool() throws ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,7 +31,7 @@ public class ConnectionPool {
             properties.load(fre);
             maxConnections = Integer.parseInt(properties.getProperty("maxConnections"));
             initConnections = Integer.parseInt(properties.getProperty("initConnections"));
-            allConnections = initConnections;
+            currentConnections = initConnections;
             url = properties.getProperty("URL");
             username = properties.getProperty("username");
             password = properties.getProperty("password");
@@ -37,6 +40,7 @@ public class ConnectionPool {
                 Connection connection = DriverManager.getConnection(url, username, password);
                 connectionPool.add(connection);
             }
+            startAutoShrinkingThread();
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -63,22 +67,56 @@ public class ConnectionPool {
         }
     }
 
-    public synchronized Connection getConnection() throws SQLException {
-        if (!connectionPool.isEmpty()) {
-            return connectionPool.remove();
-        } else {
-            if (allConnections <= maxConnections) {
+    public synchronized Connection getConnection() throws SQLException, InterruptedException {
+        while (connectionPool.isEmpty()) {
+            if (currentConnections <= maxConnections && !isExpanding) {
+                isExpanding = true;
                 Connection connection = DriverManager.getConnection(url, username, password);
-                allConnections++;
+                currentConnections++;
+                isExpanding = false;
                 return connection;
+            } else {
+                wait();
             }
         }
-        throw new SQLException("Connection limit exceeded");
+        return connectionPool.remove();
+    }
+
+    private synchronized void shrinkPool(int targetSize) throws SQLException {
+        if (targetSize < 0 || targetSize > currentConnections) {
+            throw new SQLException("connections is larger than currentConnections");
+        }
+        int numToClose = currentConnections - targetSize;
+        for (int i = 0; i < numToClose; i++) {
+            Connection connection = connectionPool.remove();
+            connection.close();
+            currentConnections--;
+        }
+    }
+
+    //自动缩容
+    private void startAutoShrinkingThread() {
+        ThreadPool.SERVICE.submit((Runnable) () -> {
+            while (true) {
+                try {
+                    Thread.sleep(60000);
+                    // 每分钟检查一次是否需要缩减连接池大小
+                    if (!isExpanding && !isShrinking && currentConnections > initConnections) {
+                        isShrinking = true;
+                        shrinkPool(initConnections);
+                        isShrinking = false;
+                    }
+                } catch (InterruptedException | SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public synchronized void releaseConnection(Connection connection) throws SQLException {
-        if (connection != null && !connection.isClosed() && connectionPool.size() < maxConnections) {
+        if (connection != null && !connection.isClosed()) {
             connectionPool.add(connection);
+            notifyAll(); // 唤醒等待连接的线程
         } else {
             throw new SQLException("Unable to release connection");
         }

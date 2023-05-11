@@ -12,53 +12,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="refactor:实现crud的封装">
-      <change afterPath="$PROJECT_DIR$/SecondRound/1683806316145.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/Deploy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/node_modules/.package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/node_modules/jQuery/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/node_modules/jQuery/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="feat:实现多媒体藏品">
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ThreadPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/node_modules/.package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/node_modules/jquery/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/node_modules/jquery/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/node_modules/jquery/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/node_modules/jquery/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/Delpoy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/AuctionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/AuctionServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/DisplayServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TraceServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/controller/TraceServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/IAuctionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/IAuctionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/IDisplayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/IDisplayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/IInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/IInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/ITraceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/ITraceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/ITransferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/ITransferService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/AuctionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/AuctionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/DisplayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/DisplayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/InfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/InfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/LoginServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/MintService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/MintServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/PurchaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/PurchaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/RegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/SearchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/TraceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/TraceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/TransferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/impl/TransferServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/service/wrapper/NftMarket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/display.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/trace.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/trace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/transfer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/java/service/DisplayServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/DisplayServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/java/service/InfoServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/InfoServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/java/service/LoginServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/LoginServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/java/service/SearchServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/SearchServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +45,8 @@
         <option value="JUnit4 Test Class" />
         <option value="Solidity Contract" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -120,46 +83,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "junit.framework.TestCase",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "dev",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_directory_selection": "D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/test/java/service",
-    "last_opened_file_path": "D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "service.view.auto.scroll.to.source": "true",
-    "settings.editor.selected.configurable": "configurable.group.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound/src/test/java/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/AE/blockchain-liujiahui-Traceability-SecondRound/SecondRound&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\AE\blockchain-liujiahui-Traceability-SecondRound\SecondRound" />
@@ -410,7 +373,8 @@
       <workItem from="1683707307188" duration="10413000" />
       <workItem from="1683732589523" duration="4647000" />
       <workItem from="1683787826660" duration="8888000" />
-      <workItem from="1683796876266" duration="11476000" />
+      <workItem from="1683796876266" duration="13131000" />
+      <workItem from="1683820946604" duration="3542000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -503,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683526625702</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat:实现多媒体藏品">
+      <created>1683809044358</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1683809044358</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -545,7 +516,8 @@
     <MESSAGE value="feat:实现转增" />
     <MESSAGE value="fixed:修复关于多线程的bug" />
     <MESSAGE value="refactor:实现crud的封装" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor:实现crud的封装" />
+    <MESSAGE value="feat:实现多媒体藏品" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:实现多媒体藏品" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
