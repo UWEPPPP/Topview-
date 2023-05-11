@@ -16,8 +16,8 @@ import java.sql.SQLException;
  * @author 刘家辉
  * @date 2023/05/06
  */
-public class PurchaseService implements IPurchaseService {
-    private PurchaseService() {
+public class PurchaseServiceImpl implements IPurchaseService {
+    private PurchaseServiceImpl() {
     }
 
     public static IPurchaseService getInstance() {
@@ -37,6 +37,6 @@ public class PurchaseService implements IPurchaseService {
     }
 
     public static class PurchaseServiceHolder {
-        private static final IPurchaseService INSTANCE = new PurchaseService();
+        private static final IPurchaseService INSTANCE = new PurchaseServiceImpl();
     }
 }

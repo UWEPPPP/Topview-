@@ -20,8 +20,8 @@ import static util.Contract.setNftMarket;
  * @author 刘家辉
  * {@code @date} 2023/04/29
  */
-public class LoginService implements ILoginService {
-    private LoginService() {
+public class LoginServiceImpl implements ILoginService {
+    private LoginServiceImpl() {
     }
 
     public static ILoginService getInstance() {
@@ -52,6 +52,6 @@ public class LoginService implements ILoginService {
     }
 
     public static class LoginServiceHolder {
-        private static final ILoginService INSTANCE = new LoginService();
+        private static final ILoginService INSTANCE = new LoginServiceImpl();
     }
 }

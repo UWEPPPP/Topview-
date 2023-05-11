@@ -1,8 +1,8 @@
 package util;
 
+import factory.FactoryService;
 import service.wrapper.NftMarket;
 
-import java.math.BigInteger;
 import java.util.concurrent.*;
 
 /**
@@ -40,7 +40,7 @@ public class Timer {
         Runnable runnable = () -> {
             try {
                 Thread.sleep(time * 1000L);
-                nftMarket.auctionEnd(BigInteger.valueOf(id));
+                FactoryService.getAuctionService().auctionEnd(id, nftMarket);
             } catch (Exception e) {
                 e.printStackTrace();
             }

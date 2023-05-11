@@ -23,13 +23,13 @@ import java.sql.SQLException;
 public class AuctionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nfdId = req.getParameter("nfdId");
+        String nfdId = req.getParameter("nftId");
         String bidPrice = req.getParameter("bidPrice");
         NftMarket nftMarket= CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         User user= CastUtil.cast(req.getSession().getAttribute("user"));
         int offer = 0;
         try {
-            offer = FactoryService.getAuctionService().offer(Integer.parseInt(nfdId), Integer.parseInt(bidPrice), user.getContract_address(), nftMarket);
+            offer = FactoryService.getAuctionService().offer(Integer.parseInt(nfdId.trim()), Integer.parseInt(bidPrice.trim()), user.getContract_address(), nftMarket);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

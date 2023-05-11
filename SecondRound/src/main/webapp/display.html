@@ -5,111 +5,121 @@
     <title>展示藏品</title>
     <link href="css/display.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(function () {
-            // 获取个人信息
-            $.getJSON("/login", function (data) {
-                $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
-                $("#name").text(data.name);
-                $("#new-name").val(data.name);  // 将当前姓名填入输入框
-                $("#balance").text("余额：" + data.balance); // 显示余额
+    <script type="module">
+        function show(nft) {
+        const nftContainer = $("#nftContainer");
+        const nftItem = $("<div class='nft-item'></div>");
+        const name = $("<h3></h3>").text(nft.name);
+        const type = $("<p></p>").text("类型:" + nft.type);
+        const price = $("<p></p>").text("价格:" + nft.price);
+        const ipfsCid = $("<p></p>").text("唯一标识:" + nft.ipfs_cid);
+        const owner = $("<p></p>").text("所有者:" + nft.owner);
+        let img;
+        if (nft.type === 'image') {
+            img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+        } else if (nft.type === 'music') {
+            img = $("<audio controls='controls' autoplay='autoplay'><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
+        }else if (nft.type === '3d') {
+            img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+        }
+        const buyBtn = $("<button>购买</button>");
+        nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);
+        nftContainer.append(nftItem);
+
+        buyBtn.on("click", function () {
+            const id = nft.nftId;
+            const price = nft.price;
+            $.ajax({
+                url: "/purchase",
+                type: "POST",
+                data: {id: id, price: price},
+                success: function (data) {
+                    alert("购买成功!");
+                    location.reload(); // 刷新页面以更新余额和藏品信息
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("购买失败:" + errorThrown);
+                }
             });
         });
+    }
 
-        $(document).ready(function () {
-            const nftContainer = $("#nftContainer");
+    $(function () {
+        // 获取个人信息
+        $.getJSON("/login", function (data) {
+            $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+            $("#name").text(data.name);
+            $("#new-name").val(data.name);  // 将当前姓名填入输入框
+            $("#balance").text("余额:" + data.balance); // 显示余额
+        });
+    });
+
+
+    $(document).ready(function () {
+        const nftContainer = $("#nftContainer");
+        $.ajax({
+            url: "/display",
+            type: "GET",
+            data: {choice: choiceType},
+            success: function (data) {
+                const nfts = JSON.parse(JSON.stringify(data));
+                for (let i = 0; i < nfts.length; i++) {
+                    const nft = nfts[i];
+                    show(nft);
+                }
+            }
+        });
+
+        $("#categoryBtn").on("click", function () {
             $.ajax({
                 url: "/display",
                 type: "GET",
-                data: {choice: 1},
+                data: {choice:choiceType() },
                 success: function (data) {
+                    alert("分类展示成功!");
+                    nftContainer.empty();
                     const nfts = JSON.parse(JSON.stringify(data));
                     for (let i = 0; i < nfts.length; i++) {
                         const nft = nfts[i];
-                        const nftItem = $("<div class='nft-item'></div>");
-                        const name = $("<h3></h3>").text(nft.name);
-                        const type = $("<p></p>").text("类型：" + nft.type);
-                        const price = $("<p></p>").text("价格：" + nft.price);
-                        const ipfsCid = $("<p></p>").text("唯一标识：" + nft.ipfs_cid);
-                        const owner = $("<p></p>").text("所有者：" + nft.owner);
-                        const img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
-                        const buyBtn = $("<button>购买</button>");
-                        nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);
-                        nftContainer.append(nftItem);
-
-                        buyBtn.on("click", function () {
-                            const id = nft.tokenId;
-                            const price = nft.price;
-                            $.ajax({
-                                url: "/purchase",
-                                type: "POST",
-                                data: {id: id, price: price},
-                                success: function (data) {
-                                    alert("购买成功！");
-                                    location.reload(); // 刷新页面以更新余额和藏品信息
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    alert("购买失败：" + errorThrown);
-                                }
-                            });
-                        });
-
+                        show(nft);
                     }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("分类展示失败:" + errorThrown);
                 }
             });
+        });
 
-            $("#searchBtn").on("click", function () {
-                const searchType = $("#searchType").val();
-                const searchText = $("#searchText").val();
-                $.ajax({
-                    url: "/search",
-                    type: "POST",
-                    data: {
-                        searchType: searchType,
-                        searchText: searchText
-                    },
-                    success: function (data) {
-                        alert("搜索成功！");
-                        nftContainer.empty();
-                        const nfts = JSON.parse(JSON.stringify(data));
-                        for (let i = 0; i < nfts.length; i++) {
-                            // 同展示藏品逻辑
-                            const nft = nfts[i];
-                            const nftItem = $("<div class='nft-item'></div>");
-                            const name = $("<h3></h3>").text(nft.name);
-                            const type = $("<p></p>").text("类型：" + nft.type);
-                            const price = $("<p></p>").text("价格：" + nft.price);
-                            const ipfsCid = $("<p></p>").text("唯一标识：" + nft.ipfsCid);
-                            const owner = $("<p></p>").text("所有者：" + nft.owner);
-                            const img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
-                            const buyBtn = $("<button>购买</button>");
-                            nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);
-                            nftContainer.append(nftItem);
-
-                            buyBtn.on("click", function () {
-                                const id = nft.tokenId;
-                                const price = nft.price;
-                                $.ajax({
-                                    url: "/purchase",
-                                    type: "POST",
-                                    data: {id: id, price: price},
-                                    success: function (data) {
-                                        alert("购买成功！");
-                                        location.reload(); // 刷新页面以更新余额和藏品信息
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown) {
-                                        alert("购买失败：" + errorThrown);
-                                    }
-                                });
-                            });
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert("搜索失败：" + errorThrown);
+        $("#searchBtn").on("click", function () {
+            const searchType = $("#searchType").val();
+            const searchText = $("#searchText").val();
+            $.ajax({
+                url: "/search",
+                type: "POST",
+                data: {
+                    searchType: searchType,
+                    searchText: searchText
+                },
+                success: function (data) {
+                    alert("搜索成功!");
+                    nftContainer.empty();
+                    const nfts = JSON.parse(JSON.stringify(data));
+                    for (let i = 0; i < nfts.length; i++) {
+                        // 同展示藏品逻辑
+                        const nft = nfts[i];
+                        show(nft);
                     }
-                });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("搜索失败:" + errorThrown);
+                }
             });
         });
+    });
+
+    function choiceType() {
+        return document.getElementById('nftType').value;
+    }
     </script>
     <style>
         #search {
@@ -135,43 +145,37 @@
     </style>
 </head>
 <body>
-
 <header>
-    <div class="info-container">
-        <img alt="头像" class="avatar" id="avatar" src="">
+    <div class="info-container"><img alt="头像" class="avatar" id="avatar" src="">
         <h1 class="name" id="name"></h1>
-        <p class="balance" id="balance"></p>
-    </div>
-
-    <section id="search">
-        <h2>搜索藏品</h2>
-        <label for="searchType"></label><select id="searchType">
+        <p class="balance" id="balance"></p></div>
+    <h2>请选择想要展示的NFT类型</h2> <label for="nftType"> </label><select id="nftType">
+    <option value="image">图片</option>
+    <option value="music">音乐</option>
+    <option value="3d">3d文件</option>
+</select>
+    <button id="categoryBtn">分类展示</button>
+    <section id="search"><h2>搜索藏品</h2> <label for="searchType"></label><select id="searchType">
         <option value="name">藏品名</option>
         <option value="caster">铸造者</option>
         <option value="cid">CID</option>
-    </select>
-        <label for="searchText"></label><input id="searchText" type="text">
+    </select> <label for="searchText"></label><input id="searchText" type="text">
         <button id="searchBtn">搜索</button>
     </section>
 </header>
-
 <nav>
     <ul>
         <li><a href="personal-info.html">个人信息</a></li>
         <li><a href="casting.html">铸造藏品</a></li>
-        <li><a href="#">展示藏品</a></li>
-        <li><a href="transfer.html">转移藏品</a></li>
+        <li><a href="auction-begin.html">拍卖藏品</a></li>
+        <li><a href="auction.html">竞拍藏品</a></li>
+        <li><a href="transfer.html">转增藏品</a></li>
         <li><a href="trace.html">追溯藏品</a></li>
     </ul>
 </nav>
-
-<section id="display">
-    <h2>所有NFT</h2>
-    <div id="nftContainer"></div> <!-- 改为包含多个NFT区域的div元素 -->
+<section id="display"><h2>所有NFT</h2>
+    <div id="nftContainer"></div>
 </section>
-
-<footer>
-    <p>版权所有 &copy; NFT平台</p>
-</footer>
+<footer><p>版权所有 &copy; NFT平台</p></footer>
 </body>
 </html>

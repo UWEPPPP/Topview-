@@ -12,44 +12,44 @@ import service.impl.*;
 public class FactoryService {
     public static IRegisterService getRegisterService() {
         return
-                (IRegisterService) ProxyFactory.createProxy(RegisterService.getInstance());
+                (IRegisterService) ProxyFactory.createProxy(RegisterServiceImpl.getInstance());
     }
 
     public static ILoginService getLoginService() {
-        return (ILoginService) ProxyFactory.createProxy(LoginService.getInstance());
+        return (ILoginService) ProxyFactory.createProxy(LoginServiceImpl.getInstance());
     }
 
     public static IMintService getMintService() {
-        return (IMintService) ProxyFactory.createProxy(MintService.getInstance());
+        return (IMintService) ProxyFactory.createProxy(MintServiceImpl.getInstance());
     }
 
     public static IInfoService getInfoService() {
-        return (IInfoService) ProxyFactory.createProxy(InfoService.getInstance());
+        return (IInfoService) ProxyFactory.createProxy(InfoServiceImpl.getInstance());
     }
 
     public static IDisplayService getDisplayService() {
-        return (IDisplayService) ProxyFactory.createProxy(DisplayService.getInstance());
+        return (IDisplayService) ProxyFactory.createProxy(DisplayServiceImpl.getInstance());
     }
 
     public static ITraceService getTraceService() {
-        return (ITraceService) ProxyFactory.createProxy(TraceService.getInstance());
+        return (ITraceService) ProxyFactory.createProxy(TraceServiceImpl.getInstance());
     }
 
     public static IPurchaseService getPurchaseService() {
         return
-                (IPurchaseService) ProxyFactory.createProxy(PurchaseService.getInstance());
+                (IPurchaseService) ProxyFactory.createProxy(PurchaseServiceImpl.getInstance());
     }
 
     public static ITransferService getTransferService() {
-        return (ITransferService) ProxyFactory.createProxy(TransferService.getInstance());
+        return (ITransferService) ProxyFactory.createProxy(TransferServiceImpl.getInstance());
     }
 
     public static ISearchService getSearchService() {
-        return (ISearchService) ProxyFactory.createProxy(SearchService.getInstance());
+        return (ISearchService) ProxyFactory.createProxy(SearchServiceImpl.getInstance());
     }
 
     public static IAuctionService getAuctionService() {
-        return (IAuctionService) ProxyFactory.createProxy(AuctionService.getInstance() );
+        return (IAuctionService) ProxyFactory.createProxy(AuctionServiceImpl.getInstance() );
     }
 
 }

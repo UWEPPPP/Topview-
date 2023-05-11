@@ -11,8 +11,14 @@ import util.Contract;
 import java.math.BigInteger;
 import java.util.List;
 
-public class TransferService implements ITransferService {
-    private TransferService() {
+/**
+ * 传输服务impl
+ *
+ * @author 刘家辉
+ * @date 2023/05/11
+ */
+public class TransferServiceImpl implements ITransferService {
+    private TransferServiceImpl() {
     }
 
     public static ITransferService getInstance() {
@@ -49,6 +55,6 @@ public class TransferService implements ITransferService {
     }
 
     public static class TransferServiceHolder {
-        private static final ITransferService INSTANCE = new TransferService();
+        private static final ITransferService INSTANCE = new TransferServiceImpl();
     }
 }

@@ -14,8 +14,8 @@ import static util.JsonUtil.analysisJson;
  * @author 刘家辉
  * @date 2023/05/07
  */
-public class SearchService implements ISearchService {
-    private SearchService() {
+public class SearchServiceImpl implements ISearchService {
+    private SearchServiceImpl() {
     }
 
     public static ISearchService getInstance() {
@@ -48,7 +48,7 @@ public class SearchService implements ISearchService {
     }
 
     public static class SearchServiceHolder {
-        private static final ISearchService INSTANCE = new SearchService();
+        private static final ISearchService INSTANCE = new SearchServiceImpl();
     }
 
 

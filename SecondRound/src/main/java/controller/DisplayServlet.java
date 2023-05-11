@@ -31,7 +31,7 @@ public class DisplayServlet extends HttpServlet {
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         try {
             if (choice != null) {
-                display = FactoryService.getDisplayService().display();
+                display = FactoryService.getDisplayService().display(choice);
             } else {
                 display = FactoryService.getDisplayService().displayByUser(user.getContract_address());
             }

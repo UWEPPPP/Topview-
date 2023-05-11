@@ -25,8 +25,8 @@ import java.util.Map;
  * @author 刘家辉
  * @date 2023/04/29
  */
-public class MintService implements IMintService {
-    private MintService() {
+public class MintServiceImpl implements IMintService {
+    private MintServiceImpl() {
     }
 
     public static IMintService getInstance() {
@@ -56,6 +56,6 @@ public class MintService implements IMintService {
     }
 
     public static class MintServiceHolder {
-        private static final IMintService INSTANCE = new MintService();
+        private static final IMintService INSTANCE = new MintServiceImpl();
     }
 }

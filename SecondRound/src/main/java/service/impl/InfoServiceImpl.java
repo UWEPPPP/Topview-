@@ -2,12 +2,15 @@ package service.impl;
 
 import factory.FactoryDao;
 import org.apache.commons.io.IOUtils;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.IInfoService;
+import service.wrapper.NftMarket;
 import util.IpfsUtil;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -17,8 +20,8 @@ import java.util.Objects;
  * @author 刘家辉
  * @date 2023/05/04
  */
-public class InfoService implements IInfoService {
-    private InfoService() {
+public class InfoServiceImpl implements IInfoService {
+    private InfoServiceImpl() {
     }
 
     public static IInfoService getInstance() {
@@ -49,16 +52,21 @@ public class InfoService implements IInfoService {
     @Override
     public int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException {
         boolean result = Objects.equals(choice, "false");
-        String sql = "update nft.nfts set is_sold = ? where cid = ?";
-        int size = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{false, cid});
+        String sql = "update nft.nfts set is_sold = ? where ipfs_cid = ?";
+        int size = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{result, cid});
         if (size == 0) {
             return 500;
         }
         return 200;
     }
 
+    @Override
+    public int changeBalance(NftMarket nftMarket) throws ContractException {
+        return nftMarket.getBalance().intValue();
+    }
+
     public static class InfoServiceHolder {
-        private static final IInfoService INSTANCE = new InfoService();
+        private static final IInfoService INSTANCE = new InfoServiceImpl();
     }
 
 }

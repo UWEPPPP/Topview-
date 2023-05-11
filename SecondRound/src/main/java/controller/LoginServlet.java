@@ -4,7 +4,10 @@ package controller;
 import com.alibaba.fastjson.JSON;
 import entity.po.User;
 import factory.FactoryService;
+import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.ILoginService;
+import service.wrapper.NftMarket;
+import util.CastUtil;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,12 +29,19 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = CastUtil.cast(session.getAttribute("user"));
+        NftMarket nftMarket = CastUtil.cast(session.getAttribute("nftMarket"));
         String profile = user.getProfile();
+        int balance;
+        try {
+             balance = FactoryService.getInfoService().changeBalance(nftMarket);
+        } catch (SQLException | ClassNotFoundException | ContractException e) {
+            throw new RuntimeException(e);
+        }
         Map<String, Object> message = new HashMap<>(2);
         message.put("image", profile);
         message.put("name", user.getName());
-        message.put("balance", user.getBalance());
+        message.put("balance",balance);
         String jsonString = JSON.toJSONString(message);
         resp.setContentType("application/json");
         resp.getWriter().write(jsonString);

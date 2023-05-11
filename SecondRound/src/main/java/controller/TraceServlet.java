@@ -2,7 +2,6 @@ package controller;
 
 import com.alibaba.fastjson.JSON;
 import factory.FactoryService;
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
 import service.wrapper.NftStorage;
 import util.CastUtil;
@@ -26,15 +25,16 @@ public class TraceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
+        String cid = req.getParameter("cid");
         NftMarket nftMarket = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         try {
-            List<NftStorage.ItemLife> life = FactoryService.getTraceService().getLife(Integer.parseInt(id), nftMarket);
+            List<NftStorage.ItemLife> life = FactoryService.getTraceService().getLife(cid, nftMarket);
             String jsonString = JSON.toJSONString(life);
+            System.out.println(jsonString);
             resp.setCharacterEncoding("UTF-8");
             resp.setContentType("application/json");
             resp.getWriter().write(jsonString);
-        } catch (ContractException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

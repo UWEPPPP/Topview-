@@ -24,13 +24,13 @@ import java.util.Map;
  * @author 刘家辉
  * @date 2023/05/10
  */
-public class AuctionService implements IAuctionService {
-    private AuctionService() {
+public class AuctionServiceImpl implements IAuctionService {
+    private AuctionServiceImpl() {
     }
     private static class AuctionServiceHolder{
-        private static final AuctionService INSTANCE = new AuctionService();
+        private static final AuctionServiceImpl INSTANCE = new AuctionServiceImpl();
     }
-    public  static AuctionService getInstance(){
+    public  static AuctionServiceImpl getInstance(){
         return AuctionServiceHolder.INSTANCE;
     }
 
@@ -58,7 +58,7 @@ public class AuctionService implements IAuctionService {
 
     @Override
     public int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException {
-        TransactionReceipt transactionReceipt = nftMarket.auctionNft(id, price);
+        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(id),BigInteger.valueOf( price));
         String status = transactionReceipt.getStatus();
         String sql = " update nft.nft_auction set highest_bid = ?,highest_bidder = ? where nftId = ?";
         int result = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{price,bidder,id});
@@ -88,16 +88,34 @@ public class AuctionService implements IAuctionService {
         String sql = " select * from nft.nfts where ipfs_cid = ?";
         List<Nft> select = FactoryDao.getDao().select(sql, new Object[]{cid}, Nft.class);
         int nftId = select.get(0).getNftId();
-        String sqlToInsert = " insert into nft.nft_auction (token_id,highest_bid,end_time) values (?,?,?)";
+        String sqlToInsert = " insert into nft.nft_auction (nftId,highest_bid,end_time,highest_bidder) values (?,?,?,?)";
         long time = System.currentTimeMillis() + Integer.parseInt(duration) * 1_000L;
-        int result = FactoryDao.getDao().insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time});
-        TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(Long.parseLong(amount)));
+        int result = FactoryDao.getDao().insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time,select.get(0).getOwner()});
+        TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(Long.parseLong(amount)), BigInteger.valueOf(Integer.parseInt(duration) * 1_000L));
         String status = transactionReceipt.getStatus();
         Timer.getInstance().beginAuction(nftId, Integer.parseInt(duration));
         if (status.equals(Contract.checkStatus) && result != 0) {
             return 200;
         }
         return 500;
+    }
+
+    @Override
+    public void auctionEnd(int nftId, NftMarket nftMarket) throws Exception {
+        TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
+        String status = transactionReceipt.getStatus();
+        String sql2 = "select * from nft.nft_auction where nftId = ?";
+        List<Auction> list = FactoryDao.getDao().select(sql2, new Object[]{nftId}, Auction.class);
+        String bidder = list.get(0).getHighest_bidder();
+        String sql = " delete from nft.nft_auction where nftId = ?";
+        int result = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{nftId});
+        String sql1 = " update nft.nfts set owner = ? where nftId = ?";
+        int result1 = FactoryDao.getDao().insertOrUpdateOrDelete(sql1, new Object[]{bidder,nftId});
+        if(status.equals(Contract.checkStatus)&&result!=0&&result1!=0){
+            System.out.println("拍卖结束");
+        }else {
+            System.out.println("拍卖结束异常");
+        }
     }
 
 }

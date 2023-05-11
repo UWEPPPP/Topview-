@@ -23,8 +23,8 @@ import java.util.Map;
  * @author 刘家辉
  * &#064;date  2023/04/28
  */
-public class RegisterService implements IRegisterService {
-    private RegisterService() {
+public class RegisterServiceImpl implements IRegisterService {
+    private RegisterServiceImpl() {
     }
 
     public static IRegisterService getInstance() {
@@ -57,6 +57,6 @@ public class RegisterService implements IRegisterService {
     }
 
     public static class RegisterServiceInstance {
-        public static final IRegisterService INSTANCE = new RegisterService();
+        public static final IRegisterService INSTANCE = new RegisterServiceImpl();
     }
 }
