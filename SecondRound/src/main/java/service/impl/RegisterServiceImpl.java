@@ -32,7 +32,7 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
     @Override
-    public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException {
+    public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
         String hexPrivateKey = keyPair.getHexPrivateKey();

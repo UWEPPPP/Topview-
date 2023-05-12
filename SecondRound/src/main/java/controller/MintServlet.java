@@ -6,6 +6,7 @@ import factory.FactoryService;
 import service.IMintService;
 import service.wrapper.NftMarket;
 import util.CastUtil;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  * @author LiuJiaHui
@@ -41,6 +43,7 @@ public class MintServlet extends HttpServlet {
                 type == null || type.trim().isEmpty() ||
                 price == null || price.trim().isEmpty() ||
                 file == null) {
+            Logger.info("铸造参数异常");
             resp.sendRedirect("mint.html?铸造失败");
             return;
         }
@@ -57,8 +60,8 @@ public class MintServlet extends HttpServlet {
         try {
             int result = IMintService.mint(nft, file, market);
             resp.setStatus(result);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException | InterruptedException e) {
+            Logger.logException(Level.SEVERE,"铸造异常",e);
         }
     }
 }

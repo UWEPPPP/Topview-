@@ -5,6 +5,7 @@ import factory.FactoryService;
 import service.wrapper.NftMarket;
 import service.wrapper.NftStorage;
 import util.CastUtil;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,7 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 
+/**
+ * 跟踪servlet
+ *
+ * @author 刘家辉
+ * @date 2023/05/12
+ */
 @WebServlet("/trace")
 @MultipartConfig
 public class TraceServlet extends HttpServlet {
@@ -26,6 +34,11 @@ public class TraceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String cid = req.getParameter("cid");
+        if (cid == null) {
+            Logger.info("追溯参数异常");
+            resp.setStatus(500);
+            return;
+        }
         NftMarket nftMarket = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         try {
             List<NftStorage.ItemLife> life = FactoryService.getTraceService().getLife(cid, nftMarket);
@@ -35,7 +48,7 @@ public class TraceServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(jsonString);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"获取Nft生命周期失败", e);
         }
     }
 }

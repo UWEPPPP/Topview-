@@ -8,6 +8,7 @@ import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.ILoginService;
 import service.wrapper.NftMarket;
 import util.CastUtil;
+import util.Logger;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * @author LiuJiaHui
@@ -55,6 +57,7 @@ public class LoginServlet extends HttpServlet {
         if (username == null || username.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()
         ) {
+            Logger.info("用户名或密码为空");
             resp.sendRedirect("login.html?fail");
         } else {
             ILoginService ILoginService = FactoryService.getLoginService();
@@ -68,7 +71,7 @@ public class LoginServlet extends HttpServlet {
                     resp.sendRedirect("personal-info.html");
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Logger.logException(Level.WARNING,"登录异常", e);
             }
 
         }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public interface IInfoService {
     String changeInfo(String newName, Part avatar, String contractAddress) throws IOException, SQLException, ClassNotFoundException;
 
-    int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException;
+    int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException, InterruptedException;
 
     /**
      * 改变平衡

@@ -3,6 +3,7 @@ package controller;
 import com.alibaba.fastjson.JSON;
 import entity.po.Nft;
 import factory.FactoryService;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * 搜索servlet
@@ -29,10 +31,10 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(">>>>");
         String type = req.getParameter("searchType");
         String searchText = req.getParameter("searchText");
         if (type == null || searchText == null) {
+            Logger.info("搜索参数异常");
             resp.setStatus(500);
             return;
         }
@@ -44,7 +46,7 @@ public class SearchServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(jsonString);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"搜索失败", e);
         }
     }
 }

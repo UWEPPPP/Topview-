@@ -34,7 +34,7 @@ public interface IAuctionService {
      * @throws SQLException           sqlexception异常
      * @throws ClassNotFoundException 类没有发现异常
      */
-    int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException;
+    int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException;
 
     /**
      * 拍卖开始

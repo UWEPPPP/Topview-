@@ -22,6 +22,6 @@ public class ThreadPool {
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(),
             THREAD_FACTORY,
-            (r, executor) -> System.out.println("线程池已满,拒绝执行")
+            (r, executor) -> Logger.info("线程池已满，拒绝任务")
     );
 }

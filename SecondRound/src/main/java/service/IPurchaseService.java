@@ -6,5 +6,5 @@ import service.wrapper.NftMarket;
 import java.sql.SQLException;
 
 public interface IPurchaseService {
-    int buy(int id, String owner, NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException;
+    int buy(int id, String owner, NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException, InterruptedException;
 }

@@ -34,7 +34,7 @@ public class MintServiceImpl implements IMintService {
     }
 
     @Override
-    public int mint(Nft nft, Part file, NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException {
+    public int mint(Nft nft, Part file, NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
         InputStream inputStream = file.getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
         String upload = IpfsUtil.upload(byteArray);

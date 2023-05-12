@@ -25,7 +25,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
     }
 
     @Override
-    public int buy(int id, String owner, NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException {
+    public int buy(int id, String owner, NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException, InterruptedException {
         TransactionReceipt transactionReceipt = nftMarket.buyNft(BigInteger.valueOf(id));
         String status = transactionReceipt.getStatus();
         String sql = "update nft.nfts set is_sold = false,owner = ? where nftId = ?";

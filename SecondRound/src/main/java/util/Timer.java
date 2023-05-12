@@ -4,6 +4,7 @@ import factory.FactoryService;
 import service.wrapper.NftMarket;
 
 import java.util.concurrent.*;
+import java.util.logging.Level;
 
 /**
  * 计时器
@@ -28,7 +29,7 @@ public class Timer {
                 Thread.sleep(time * 1000L);
                 FactoryService.getAuctionService().auctionEnd(id, nftMarket);
             } catch (Exception e) {
-                e.printStackTrace();
+              Logger.logException(Level.SEVERE, "拍卖结束失败", e);
             }
         };
         ThreadPool.SERVICE.submit(runnable);

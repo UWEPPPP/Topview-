@@ -1,6 +1,7 @@
 package controller;
 
 import factory.FactoryService;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  * 非功能性测试servlet
@@ -29,11 +31,16 @@ public class UpAndDownNftServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String cid = req.getParameter("cid");
         String onSale = req.getParameter("onSale");
+        if (cid == null || onSale == null) {
+            Logger.info("上架/下架参数异常");
+            resp.setStatus(500);
+            return;
+        }
         try {
             int status = FactoryService.getInfoService().upAndDown(cid, onSale);
             resp.setStatus(status);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException | InterruptedException e) {
+            Logger.logException(Level.SEVERE, "上架/下架失败", e);
         }
     }
 }

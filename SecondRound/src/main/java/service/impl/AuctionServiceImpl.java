@@ -57,7 +57,7 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
-    public int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException {
+    public int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException {
         TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(id),BigInteger.valueOf( price));
         String status = transactionReceipt.getStatus();
         String sql = " update nft.nft_auction set highest_bid = ?,highest_bidder = ? where nftId = ?";

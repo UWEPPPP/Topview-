@@ -2,6 +2,7 @@ package controller;
 
 import factory.FactoryService;
 import service.IRegisterService;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  * @author LiuJiaHui
@@ -32,6 +34,7 @@ public class RegisterServlet extends HttpServlet {
         if (username == null || username.trim().isEmpty() ||
                 password == null || password.trim().isEmpty() ||
                 avatarPart == null) {
+            Logger.info("注册参数异常");
             response.sendRedirect("src/webapp/register.html");
             return;
         }
@@ -39,8 +42,8 @@ public class RegisterServlet extends HttpServlet {
         try {
             int register = IRegisterService.register(username, password, avatarPart);
             response.setStatus(register);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException | InterruptedException e) {
+            Logger.logException(Level.SEVERE,"注册失败", e);
         }
     }
 }

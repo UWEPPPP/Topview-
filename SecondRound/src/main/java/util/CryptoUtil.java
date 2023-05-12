@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
 
 /**
  * 加密工具 用于加密私钥
@@ -17,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
  * @date 2023/03/25
  */
 public class CryptoUtil {
-    private static final String path = "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt";
+    private static final String PATH = "D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\password.txt";
     private static SecretKey key;
 
     public static SecretKey generateSecretKey(String password) {
@@ -25,11 +26,11 @@ public class CryptoUtil {
             return key;
         }
         byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-        MessageDigest instance;
+        MessageDigest instance = null;
         try {
             instance = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING, "加密算法不存在", e);
         }
         byte[] digest = instance.digest(passwordBytes);
         key = new SecretKeySpec(digest, "AES");
@@ -44,8 +45,8 @@ public class CryptoUtil {
      * @return {@link String}
      */
     public static String encryptHexPrivateKey(String privateKey) {
-        String result;
-        SecretKey aes = generateSecretKey(readPassword(path));
+        String result = null;
+        SecretKey aes = generateSecretKey(readPassword(PATH));
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, aes);
@@ -53,13 +54,13 @@ public class CryptoUtil {
             result = bytesToHex(encryptedBytes);
         } catch (NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException |
                  InvalidKeyException e) {
-            throw new RuntimeException(e);
+               Logger.logException(Level.WARNING,"加密异常",e);
         }
         return result;
     }
 
     public static String decryptHexPrivateKey(String privateKey) {
-        SecretKey aes = generateSecretKey(readPassword(path));
+        SecretKey aes = generateSecretKey(readPassword(PATH));
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, aes);
@@ -68,8 +69,9 @@ public class CryptoUtil {
             return new String(decrypt, StandardCharsets.UTF_8);
         } catch (NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException |
                  InvalidKeyException e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"解密异常",e);
         }
+        return null;
     }
 
     /**
@@ -116,7 +118,7 @@ public class CryptoUtil {
                 return null;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.logException(Level.WARNING,"读取密码文件失败",e);
             return null;
         }
     }

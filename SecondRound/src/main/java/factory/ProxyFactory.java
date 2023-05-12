@@ -1,29 +1,28 @@
 package factory;
 
 import util.ConnectionPool;
+import util.Logger;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author 刘家辉
  * @date 2023/04/13
  */
 public class ProxyFactory {
-    private static final Logger LOGGER = Logger.getLogger("ProxyFactory");
-
     /**
      * 创建代理
      *
      * @param target 目标
      * @return {@link Object}
      */
-    public static Object serviceProxy(Object target) {
+    public static Object daoProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {
@@ -35,7 +34,7 @@ public class ProxyFactory {
                 connection.commit();
                 return invoke;
             } catch (InvocationTargetException e) {
-                LOGGER.log(Level.INFO, "Dao层抛出异常", e);
+                Logger.logException(Level.WARNING,"Dao层抛出异常", e);
                 connection.rollback();
                 return null;
             } finally {
@@ -43,14 +42,19 @@ public class ProxyFactory {
             }
         });
     }
-    public static Object daoProxy(Object target) {
+    public static Object serviceProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {
             try {
-                return method.invoke(target, args);
+                util.Logger.info("method: " + method.getName() + ", args: " + Arrays.toString(args));
+                // 调用真实对象的方法
+                Object result = method.invoke(target, args);
+                // 记录日志
+                util.Logger.info("method return result: " + result);
+                return result;
             } catch (InvocationTargetException e) {
-                LOGGER.log(Level.INFO, "服务层抛出异常", e);
+                util.Logger.logException(Level.WARNING,"Service层抛出异常", e);
                 return null;
             }
         });

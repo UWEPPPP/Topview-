@@ -42,7 +42,12 @@ public class InfoServiceImpl implements IInfoService {
             choice = "profile";
         }
         String sql = "update nft.nft_user set " + choice + " = ? where contract_address = ?";
-        int result = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{update, contractAddress});
+        int result = 0;
+        try {
+            result = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{update, contractAddress});
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (result == 0) {
             return null;
         }
@@ -50,7 +55,7 @@ public class InfoServiceImpl implements IInfoService {
     }
 
     @Override
-    public int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException {
+    public int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException, InterruptedException {
         boolean result = Objects.equals(choice, "false");
         String sql = "update nft.nfts set is_sold = ? where ipfs_cid = ?";
         int size = FactoryDao.getDao().insertOrUpdateOrDelete(sql, new Object[]{result, cid});

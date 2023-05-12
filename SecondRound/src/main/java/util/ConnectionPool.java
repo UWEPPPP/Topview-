@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
 
 /**
  * @author 刘家辉
@@ -13,11 +14,11 @@ import java.util.concurrent.BlockingQueue;
  */
 public class ConnectionPool {
     private static ConnectionPool instance;
-    private final String url;
-    private final String username;
-    private final String password;
-    private final Integer maxConnections;
-    private final Integer initConnections;
+    private String url;
+    private String username;
+    private String password;
+    private Integer maxConnections;
+    private Integer initConnections;
     private Integer currentConnections;
     private BlockingQueue<Connection> connectionPool;
     private boolean isShrinking = false;
@@ -42,7 +43,7 @@ public class ConnectionPool {
             }
             startAutoShrinkingThread();
         } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"连接池初始化异常",e);
         }
     }
 
@@ -62,8 +63,7 @@ public class ConnectionPool {
                 preparedStatement.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"关闭连接异常",e);
         }
     }
 
@@ -79,12 +79,13 @@ public class ConnectionPool {
                 wait();
             }
         }
+        Logger.info("一个连接被获取");
         return connectionPool.remove();
     }
 
     private synchronized void shrinkPool(int targetSize) throws SQLException {
         if (targetSize < 0 || targetSize > currentConnections) {
-            throw new SQLException("connections is larger than currentConnections");
+            Logger.logException(Level.WARNING,"连接池缩容异常",new Exception());
         }
         int numToClose = currentConnections - targetSize;
         for (int i = 0; i < numToClose; i++) {
@@ -107,7 +108,7 @@ public class ConnectionPool {
                         isShrinking = false;
                     }
                 } catch (InterruptedException | SQLException e) {
-                    e.printStackTrace();
+                   Logger.logException(Level.WARNING,"连接池自动缩容开启异常",e);
                 }
             }
         });
@@ -118,8 +119,9 @@ public class ConnectionPool {
             connectionPool.add(connection);
             notifyAll(); // 唤醒等待连接的线程
         } else {
-            throw new SQLException("Unable to release connection");
+            Logger.logException(Level.WARNING,"释放了一个无效连接",new Exception());
         }
+        Logger.info("一个连接被释放");
     }
 
 

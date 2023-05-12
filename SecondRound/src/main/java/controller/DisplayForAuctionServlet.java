@@ -3,6 +3,7 @@ package controller;
 import com.alibaba.fastjson.JSON;
 import entity.dto.AuctionDto;
 import factory.FactoryService;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * 显示拍卖servlet
@@ -29,7 +31,7 @@ public class DisplayForAuctionServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(jsonString);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Logger.logException(Level.WARNING,"显示拍卖失败", e);
         }
     }
 

@@ -4,6 +4,7 @@ import entity.po.User;
 import factory.FactoryService;
 import service.wrapper.NftMarket;
 import util.CastUtil;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class AuctionServlet extends HttpServlet {
         int offer = 0;
         try {
             offer = FactoryService.getAuctionService().offer(Integer.parseInt(nfdId.trim()), Integer.parseInt(bidPrice.trim()), user.getContract_address(), nftMarket);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         resp.setStatus(offer);
@@ -43,6 +44,7 @@ public class AuctionServlet extends HttpServlet {
         String amount = req.getParameter("amount");
         NftMarket user = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         if (cid == null || duration == null || amount == null) {
+            Logger.info("拍卖参数错误");
             resp.setStatus(500);
         }
         try {

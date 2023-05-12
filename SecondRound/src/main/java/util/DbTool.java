@@ -5,6 +5,12 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
+/**
+ * 数据库工具
+ *
+ * @author 刘家辉
+ * @date 2023/05/12
+ */
 public class DbTool {
 
     /**

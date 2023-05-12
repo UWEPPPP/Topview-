@@ -5,6 +5,7 @@ import factory.FactoryService;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import service.wrapper.NftMarket;
 import util.CastUtil;
+import util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
 /**
  * 购买servlet
@@ -32,6 +34,11 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
+        if(id == null){
+            Logger.info("id获取失败");
+            resp.setStatus(500);
+            return;
+        }
         User user = CastUtil.cast(req.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(req.getSession().getAttribute("nftMarket"));
         try {
@@ -43,8 +50,8 @@ public class PurchaseServlet extends HttpServlet {
             } else {
                 resp.setStatus(500);
             }
-        } catch (SQLException | ClassNotFoundException | ContractException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException | ContractException | InterruptedException e) {
+            Logger.logException(Level.WARNING,"购买失败", e);
         }
     }
 }
