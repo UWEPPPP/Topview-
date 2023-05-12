@@ -13,15 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="feat:实现多媒体藏品">
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ThreadPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/Dao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/dao/IDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/ConnectionPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/util/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/util/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/factory/FactoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/java/factory/ProxyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/java/factory/ProxyFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/styles2.css" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/css/styles2.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,6 +372,7 @@
       <workItem from="1683787826660" duration="8888000" />
       <workItem from="1683796876266" duration="13131000" />
       <workItem from="1683820946604" duration="3542000" />
+      <workItem from="1683871778252" duration="4463000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>

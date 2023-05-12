@@ -1,7 +1,12 @@
 package factory;
 
+import util.ConnectionPool;
+
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +23,27 @@ public class ProxyFactory {
      * @param target 目标
      * @return {@link Object}
      */
-    public static Object createProxy(Object target) {
+    public static Object serviceProxy(Object target) {
+        ClassLoader classLoader = target.getClass().getClassLoader();
+        Class<?>[] interfaces = target.getClass().getInterfaces();
+        return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {
+            Connection connection = null;
+            try {
+                connection = ConnectionPool.getInstance().getConnection();
+                connection.setAutoCommit(false);
+                Object invoke = method.invoke(target, args);
+                connection.commit();
+                return invoke;
+            } catch (InvocationTargetException e) {
+                LOGGER.log(Level.INFO, "Dao层抛出异常", e);
+                connection.rollback();
+                return null;
+            } finally {
+                ConnectionPool.getInstance().releaseConnection(connection);
+            }
+        });
+    }
+    public static Object daoProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {

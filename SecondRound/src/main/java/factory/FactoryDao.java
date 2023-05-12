@@ -11,6 +11,6 @@ import dao.IDao;
  */
 public class FactoryDao {
     public static IDao getDao() {
-        return Dao.getInstance();
+        return (IDao) ProxyFactory.daoProxy(Dao.getInstance());
     }
 }

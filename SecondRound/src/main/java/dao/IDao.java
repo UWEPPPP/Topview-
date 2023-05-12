@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * idao
+ * dao接口
  *
  * @author 刘家辉
  * @date 2023/05/08
@@ -18,6 +18,7 @@ public interface IDao {
      * @return int
      * @throws SQLException           sqlexception异常
      * @throws ClassNotFoundException 类没有发现异常
+     * @throws InterruptedException   中断异常
      */
     public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, ClassNotFoundException, InterruptedException;
 
