@@ -8,6 +8,7 @@ import tv.service.wrapper.NftMarket;
 import tv.service.wrapper.NftStorage;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
+@Service
 public class TraceServiceImpl implements ITraceService {
 
 

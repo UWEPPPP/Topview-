@@ -5,6 +5,7 @@ import tv.factory.Factory;
 import tv.service.IDisplayService;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import static tv.util.JsonUtil.analysisJson;
 
 @Component
 @Scope("singleton")
+@Service
 public class DisplayServiceImpl implements IDisplayService {
 
 

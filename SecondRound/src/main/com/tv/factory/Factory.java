@@ -1,5 +1,6 @@
 package tv.factory;
 
+import tv.aop.ProxyFactory;
 import tv.dao.IDao;
 import tv.service.*;
 import tv.spring.AppConfig;
@@ -25,11 +26,11 @@ public class Factory {
     private  final ApplicationContext APPLICATION_CONTEXT;
     public  IRegisterService getRegisterService() {
         return
-                CastUtil.cast(APPLICATION_CONTEXT.getBean("registerServiceImpl"));
+                CastUtil.cast(ProxyFactory.serviceProxy(APPLICATION_CONTEXT.getBean("registerServiceImpl")));
     }
 
     public  ILoginService getLoginService() {
-        return CastUtil.cast(APPLICATION_CONTEXT.getBean("loginServiceImpl"));
+        return CastUtil.cast( APPLICATION_CONTEXT.getBean("loginServiceImpl"));
     }
 
     public  IMintService getMintService() {

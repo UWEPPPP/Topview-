@@ -9,6 +9,7 @@ import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.Contract;
 import tv.util.JsonUtil;
 import tv.util.Timer;
@@ -28,6 +29,7 @@ import java.util.Map;
  */
 @Component
 @Scope("singleton")
+@Service
 public class AuctionServiceImpl implements IAuctionService {
 
 

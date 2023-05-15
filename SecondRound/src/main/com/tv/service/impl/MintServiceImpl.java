@@ -10,6 +10,7 @@ import tv.service.IMintService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.Contract;
 import tv.util.IpfsUtil;
 
@@ -30,6 +31,7 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
+@Service
 public class MintServiceImpl implements IMintService {
 
     @Override

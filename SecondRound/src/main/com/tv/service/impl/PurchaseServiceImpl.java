@@ -7,6 +7,7 @@ import tv.service.IPurchaseService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.Contract;
 
 import java.math.BigInteger;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 
 @Component
 @Scope("singleton")
+@Service
 public class PurchaseServiceImpl implements IPurchaseService {
 
 

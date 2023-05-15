@@ -14,6 +14,11 @@ import java.util.logging.Level;
  * @date 2023/04/13
  */
 public class ProxyFactory {
+
+
+
+
+
     /**
      * 创建代理
      *
@@ -42,7 +47,7 @@ public class ProxyFactory {
             }
         });
     }
-    public static Object daoProxy(Object target) {
+    public static Object commonProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {

@@ -7,6 +7,7 @@ import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.IpfsUtil;
 
 import javax.servlet.http.Part;
@@ -24,6 +25,7 @@ import java.util.Objects;
 
 @Component
 @Scope("singleton")
+@Service
 public class InfoServiceImpl implements IInfoService {
 
     @Override

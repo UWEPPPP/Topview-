@@ -8,6 +8,7 @@ import tv.service.ITransferService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.Contract;
 
 import java.math.BigInteger;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
+@Service
 public class TransferServiceImpl implements ITransferService {
 
     @Override

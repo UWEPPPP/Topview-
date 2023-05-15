@@ -8,6 +8,7 @@ import tv.service.IRegisterService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.CastUtil;
 import tv.util.Contract;
 import tv.util.CryptoUtil;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
+@Service
 public class RegisterServiceImpl implements IRegisterService {
     @Override
     public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException, InterruptedException {

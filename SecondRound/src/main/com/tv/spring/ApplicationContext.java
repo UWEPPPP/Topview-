@@ -1,5 +1,6 @@
 package tv.spring;
 
+import tv.aop.ProxyFactory;
 import tv.util.CastUtil;
 
 import java.beans.Introspector;
@@ -99,6 +100,11 @@ public class ApplicationContext {
                     field.setAccessible(true);
                     field.set(instance, getBean(field.getName()));
                 }
+            }
+            if(type.isAnnotationPresent(Service.class)){
+                ProxyFactory.serviceProxy(instance);
+            }else {
+                ProxyFactory.commonProxy(instance);
             }
 
 

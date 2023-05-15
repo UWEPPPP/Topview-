@@ -7,6 +7,7 @@ import tv.service.ILoginService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.Component;
 import tv.spring.Scope;
+import tv.spring.Service;
 import tv.util.CryptoUtil;
 
 import java.math.BigInteger;
@@ -25,6 +26,7 @@ import static tv.util.Contract.setNftMarket;
 
 @Component
 @Scope("singleton")
+@Service
 public class LoginServiceImpl implements ILoginService {
 
     @Override
