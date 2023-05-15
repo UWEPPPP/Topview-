@@ -1,7 +1,7 @@
 package service;
 
 import org.junit.Test;
-import service.impl.InfoServiceImpl;
+import tv.service.impl.InfoServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class InfoServiceImplTest {
 
     @Test
     public void changeInfo() throws SQLException, IOException, ClassNotFoundException {
-        String s = InfoServiceImpl.getInstance().changeInfo("allen", null, "0x3193dd99626bea94f2ab81c2cd772a3e38375913");
+        String s = new InfoServiceImpl().changeInfo("allen", null, "0x3193dd99626bea94f2ab81c2cd772a3e38375913");
         assert Objects.equals(s, "allen");
     }
 

@@ -1,14 +1,15 @@
 package service;
 
-import entity.po.Nft;
+import tv.entity.po.Nft;
 import junit.framework.TestCase;
-import service.impl.SearchServiceImpl;
+import tv.service.ISearchService;
+import tv.service.impl.SearchServiceImpl;
 
 import java.util.List;
 
 public class SearchServiceImplTest extends TestCase {
     public void test() {
-        ISearchService ISearchService = SearchServiceImpl.getInstance();
+        ISearchService ISearchService = new SearchServiceImpl();
         List<Nft> search = null;
         try {
             search = ISearchService.search("name", "i");
