@@ -20,7 +20,7 @@ import java.sql.SQLException;
  * @author 刘家辉
  * @date 2023/05/10
  */
-@WebServlet("/auction")
+@WebServlet("/Servlet/auction")
 public class AuctionServlet extends HttpServlet {
 
     @Override

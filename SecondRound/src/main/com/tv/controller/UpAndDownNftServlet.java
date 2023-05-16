@@ -19,7 +19,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/07
  */
-@WebServlet("/upAndDown")
+@WebServlet("/Servlet/upAndDown")
 @MultipartConfig
 public class UpAndDownNftServlet extends HttpServlet {
     @Override

@@ -20,7 +20,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/10
  */
-@WebServlet("/displayForAuction")
+@WebServlet("/Servlet/displayForAuction")
 public class DisplayForAuctionServlet extends HttpServlet {
 
     @Override

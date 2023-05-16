@@ -21,7 +21,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/04/30
  */
-@WebServlet("/info")
+@WebServlet("/Servlet/info")
 @MultipartConfig
 public class InfoServlet extends HttpServlet {
     @Override

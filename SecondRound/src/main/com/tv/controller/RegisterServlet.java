@@ -18,7 +18,7 @@ import java.util.logging.Level;
 /**
  * @author LiuJiaHui
  */
-@WebServlet("/register")
+@WebServlet("/Servlet/register")
 @MultipartConfig
 public class RegisterServlet extends HttpServlet {
 
@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
                 password == null || password.trim().isEmpty() ||
                 avatarPart == null) {
             Logger.info("注册参数异常");
-            response.sendRedirect("src/webapp/register.html");
+            response.sendRedirect("/register.html");
             return;
         }
         IRegisterService IRegisterService = Factory.getInstance().getRegisterService();

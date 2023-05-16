@@ -21,7 +21,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/04
  */
-@WebServlet("/search")
+@WebServlet("/Servlet/search")
 @MultipartConfig
 public class SearchServlet extends HttpServlet {
     @Override

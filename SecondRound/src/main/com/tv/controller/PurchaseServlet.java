@@ -23,7 +23,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/04
  */
-@WebServlet("/purchase")
+@WebServlet("/Servlet/purchase")
 @MultipartConfig
 public class PurchaseServlet extends HttpServlet {
     @Override

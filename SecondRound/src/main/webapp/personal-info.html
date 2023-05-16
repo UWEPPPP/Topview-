@@ -51,7 +51,7 @@
 <script>
     function logout() {
         // 发送GET请求到/logout路径，表示退出登录
-        fetch('/logout').then(function (response) {
+        fetch('/Servlet/logout').then(function (response) {
             // 重定向到登录页面
             window.location.href = '/login.html';
         });
@@ -59,7 +59,7 @@
 
     $(function () {
         // 获取个人信息
-        $.getJSON("/login", function (data) {
+        $.getJSON("/Servlet/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#balance").text("余额：" + data.balance); // 显示余额
@@ -71,7 +71,7 @@
             let newName = $("#new-name").val();
             $.ajax({
                 type: "GET",
-                url: "/info",
+                url: "/Servlet/info",
                 data: {name: newName},
                 success: function (response) {
                     $("#name").text(newName);
@@ -92,7 +92,7 @@
             formData.append("avatar", newAvatar);
             $.ajax({
                 type: "POST",
-                url: "/info",
+                url: "/Servlet/info",
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -111,7 +111,7 @@
         });
 
         // 获取我的NFT列表
-        $.getJSON("/display", function (datas) {
+        $.getJSON("/Servlet/display", function (datas) {
             const data = JSON.parse(JSON.stringify(datas));
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {
@@ -148,7 +148,7 @@
     function toggleNftStatus(nftId, isOnSale) {
         $.ajax({
             type: "POST",
-            url: "/upAndDown",
+            url: "/Servlet/upAndDown",
             data: {cid: nftId, onSale: isOnSale},
             success: function (response) {
                 alert("操作成功！")

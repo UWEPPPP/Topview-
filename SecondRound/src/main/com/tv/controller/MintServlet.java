@@ -22,7 +22,7 @@ import java.util.logging.Level;
 /**
  * @author LiuJiaHui
  */
-@WebServlet("/mint")
+@WebServlet("/Servlet/mint")
 @MultipartConfig
 public class MintServlet extends HttpServlet {
     @Override
@@ -44,7 +44,7 @@ public class MintServlet extends HttpServlet {
                 price == null || price.trim().isEmpty() ||
                 file == null) {
             Logger.info("铸造参数异常");
-            resp.sendRedirect("mint.html?铸造失败");
+            resp.sendRedirect("/mint.html?铸造失败");
             return;
         }
         User user = CastUtil.cast(req.getSession().getAttribute("user"));

@@ -50,7 +50,7 @@
 <script>
     $(function () {
         // 获取个人信息
-        $.getJSON("/login", function (data) {
+        $.getJSON("/Servlet/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -61,7 +61,7 @@
         $("#searchBtn").on("click", function () {
             const cid = $("#cid").val();
             $.ajax({
-                url: "/trace",
+                url: "/Servlet/trace",
                 type: "POST",
                 data: {cid: cid},
                 success: function (data) {

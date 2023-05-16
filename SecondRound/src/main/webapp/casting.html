@@ -62,7 +62,7 @@
 <script CHARSET="x-UTF-16LE-BOM">
     $(function () {
         // 获取个人信息
-        $.getJSON("/login", function (data) {
+        $.getJSON("/Servlet/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -76,7 +76,7 @@
             let formData = new FormData(this);
             // 发送POST请求
             $.ajax({
-                url: '/mint',
+                url: '/Servlet/mint',
                 type: 'POST',
                 data: formData,
                 processData: false,

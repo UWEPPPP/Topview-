@@ -25,7 +25,7 @@ import java.util.logging.Level;
 /**
  * @author LiuJiaHui
  */
-@WebServlet("/login")
+@WebServlet("/Servlet/login")
 @MultipartConfig
 public class LoginServlet extends HttpServlet {
     @Override
@@ -58,17 +58,17 @@ public class LoginServlet extends HttpServlet {
                 password == null || password.trim().isEmpty()
         ) {
             Logger.info("用户名或密码为空");
-            resp.sendRedirect("login.html?fail");
+            resp.sendRedirect("/login.html?fail");
         } else {
-            ILoginService ILoginService = Factory.getInstance().getLoginService();
+            ILoginService service = Factory.getInstance().getLoginService();
             try {
-                Map<String, Object> login = ILoginService.login(username, password);
+                Map<String, Object> login = service.login(username, password);
                 if (login == null) {
-                    resp.sendRedirect("login.html?fail");
+                    resp.sendRedirect("/login.html?fail");
                 } else {
                     req.getSession().setAttribute("user", login.get("user"));
                     req.getSession().setAttribute("nftMarket", login.get("nftMarket"));
-                    resp.sendRedirect("personal-info.html");
+                    resp.sendRedirect("/personal-info.html");
                 }
             } catch (Exception e) {
                 Logger.logException(Level.WARNING,"登录异常", e);

@@ -30,7 +30,7 @@
 <script>
     $(function () {
         // 获取个人信息
-        $.getJSON("/login", function (data) {
+        $.getJSON("/Servlet/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -55,7 +55,7 @@
     }
 
     // 获取拍卖品列表
-    $.get("/displayForAuction", function (data) {
+    $.get("/Servlet/displayForAuction", function (data) {
         for (let i = 0; i < data.length; i++) {
             let auction = data[i];
             let img;
@@ -97,7 +97,7 @@
     // 出价函数
     function bid(auctionId, bidPrice) {
         $.ajax({
-            url: '/auction',
+            url: '/Servlet/auction',
             type: 'GET',
             data: {bidPrice:bidPrice, nftId:auctionId},
             success: function (response) {

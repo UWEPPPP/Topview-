@@ -8,7 +8,7 @@
     <script>
         $(function () {
             // 获取个人信息
-            $.getJSON("/login", function (data) {
+            $.getJSON("/Servlet/login", function (data) {
                 $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
                 $("#name").text(data.name);
                 $("#balance").text("余额：" + data.balance); // 显示余额
@@ -27,7 +27,7 @@
 
                 // 向后台发送请求
                 $.ajax({
-                    url: "/auction",
+                    url: "/Servlet/auction",
                     type: "POST",
                     data: {
                         cid: cid,

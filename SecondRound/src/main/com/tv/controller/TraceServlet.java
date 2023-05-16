@@ -23,7 +23,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/12
  */
-@WebServlet("/trace")
+@WebServlet("/Servlet/trace")
 @MultipartConfig
 public class TraceServlet extends HttpServlet {
     @Override

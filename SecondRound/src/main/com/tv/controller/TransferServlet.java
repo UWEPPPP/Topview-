@@ -21,7 +21,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/04
  */
-@WebServlet("/transfer")
+@WebServlet("/Servlet/transfer")
 @MultipartConfig
 public class TransferServlet extends HttpServlet {
     @Override

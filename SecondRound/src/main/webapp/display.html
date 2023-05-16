@@ -30,7 +30,7 @@
             const id = nft.nftId;
             const price = nft.price;
             $.ajax({
-                url: "/purchase",
+                url: "/Servlet/purchase",
                 type: "POST",
                 data: {id: id, price: price},
                 success: function (data) {
@@ -46,7 +46,7 @@
 
     $(function () {
         // 获取个人信息
-        $.getJSON("/login", function (data) {
+        $.getJSON("/Servlet/login", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -58,7 +58,7 @@
     $(document).ready(function () {
         const nftContainer = $("#nftContainer");
         $.ajax({
-            url: "/display",
+            url: "/Servlet/display",
             type: "GET",
             data: {choice: choiceType},
             success: function (data) {
@@ -72,7 +72,7 @@
 
         $("#categoryBtn").on("click", function () {
             $.ajax({
-                url: "/display",
+                url: "/Servlet/display",
                 type: "GET",
                 data: {choice:choiceType() },
                 success: function (data) {
@@ -94,7 +94,7 @@
             const searchType = $("#searchType").val();
             const searchText = $("#searchText").val();
             $.ajax({
-                url: "/search",
+                url: "/Servlet/search",
                 type: "POST",
                 data: {
                     searchType: searchType,

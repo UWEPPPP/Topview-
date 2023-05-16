@@ -25,7 +25,7 @@
         $('form').submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: '/register',
+                url: '/Servlet/register',
                 method: 'POST',
                 data: new FormData(this),
                 processData: false,

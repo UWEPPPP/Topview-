@@ -23,7 +23,7 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/04
  */
-@WebServlet("/display")
+@WebServlet("/Servlet/display")
 @MultipartConfig
 public class DisplayServlet extends HttpServlet {
 
