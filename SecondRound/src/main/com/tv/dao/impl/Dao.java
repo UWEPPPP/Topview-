@@ -1,8 +1,7 @@
 package tv.dao.impl;
 
 import tv.dao.IDao;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.ConnectionPool;
 import tv.util.DbTool;
 
@@ -22,24 +21,27 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
+@CommonLogger
 public class Dao implements IDao {
+    @AutoWired
+    public ConnectionPool connectionPool;
 
     @Override
     public int insertOrUpdateOrDelete(String sql, Object[] objects) throws ClassNotFoundException, SQLException, InterruptedException {
-        Connection connection = ConnectionPool.getInstance().getConnection();
+        Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
             preparedStatement.setObject(i + 1, objects[i]);
         }
         int result = preparedStatement.executeUpdate();
-        ConnectionPool.getInstance().releaseConnection(connection);
+        connectionPool.releaseConnection(connection);
         ConnectionPool.close(preparedStatement, null);
         return result;
     }
 
     @Override
     public <T> List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception {
-        Connection connection = ConnectionPool.getInstance().getConnection();
+        Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
             preparedStatement.setObject(i + 1, objects[i]);
@@ -50,7 +52,7 @@ public class Dao implements IDao {
             T object = DbTool.getObject(resultSet, tClass);
             list.add(object);
         }
-        ConnectionPool.getInstance().releaseConnection(connection);
+        connectionPool.releaseConnection(connection);
         ConnectionPool.close(preparedStatement, resultSet);
         return list;
     }

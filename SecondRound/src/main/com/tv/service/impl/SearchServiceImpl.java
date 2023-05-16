@@ -1,11 +1,12 @@
 package tv.service.impl;
 
+import tv.dao.IDao;
 import tv.entity.po.Nft;
-import tv.factory.Factory;
 import tv.service.ISearchService;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 
 import java.util.List;
 
@@ -20,9 +21,10 @@ import static tv.util.JsonUtil.analysisJson;
 
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class SearchServiceImpl implements ISearchService {
-
+    @AutoWired
+    public IDao dao;
     @Override
     public List<Nft> search(String type, String text) throws Exception {
         List<Nft> list;
@@ -41,7 +43,7 @@ public class SearchServiceImpl implements ISearchService {
             default:
                 return null;
         }
-        list = Factory.getInstance().iDao().select(sql, new Object[]{text}, Nft.class);
+        list = dao.select(sql, new Object[]{text}, Nft.class);
         if (list.size() == 0) {
             return null;
         }

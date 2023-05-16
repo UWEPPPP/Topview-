@@ -1,15 +1,16 @@
 package tv.service.impl;
 
+import tv.dao.IDao;
 import tv.entity.dto.AuctionDto;
 import tv.entity.po.Auction;
 import tv.entity.po.Nft;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import tv.factory.Factory;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 import tv.util.Contract;
 import tv.util.JsonUtil;
 import tv.util.Timer;
@@ -27,18 +28,21 @@ import java.util.Map;
  * @author 刘家辉
  * @date 2023/05/10
  */
+@ServiceLogger
 @Component
 @Scope("singleton")
-@Service
 public class AuctionServiceImpl implements IAuctionService {
-
+    @AutoWired
+    public IDao dao;
+    @AutoWired
+    public Timer timer;
 
     @Override
     public List<AuctionDto> showAuction() throws Exception {
         String sql = "select * from nft.nft_auction";
-        List<Auction> listA = Factory.getInstance().iDao().select(sql, new Object[]{}, Auction.class);
+        List<Auction> listA = dao.select(sql, new Object[]{}, Auction.class);
         String sql1 = "select * from nft.nfts";
-        List<Nft> list = Factory.getInstance().iDao().select(sql1, new Object[]{}, Nft.class);
+        List<Nft> list = dao.select(sql1, new Object[]{}, Nft.class);
         List<Nft> listB = JsonUtil.analysisJson(list);
         Map<Integer, Auction> mapA = new HashMap<>();
         for (Auction nftA : listA) {
@@ -60,7 +64,7 @@ public class AuctionServiceImpl implements IAuctionService {
         TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(id),BigInteger.valueOf( price));
         String status = transactionReceipt.getStatus();
         String sql = " update nft.nft_auction set highest_bid = ?,highest_bidder = ? where nftId = ?";
-        int result = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{price,bidder,id});
+        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{price,bidder,id});
         if (status.equals(Contract.checkStatus)&&result!=0) {
             return 200;
         } else {
@@ -85,14 +89,14 @@ public class AuctionServiceImpl implements IAuctionService {
     @Override
     public int auctionBegin(String cid, String duration, String amount, NftMarket nftMarket) throws Exception {
         String sql = " select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> select = Factory.getInstance().iDao().select(sql, new Object[]{cid}, Nft.class);
+        List<Nft> select = dao.select(sql, new Object[]{cid}, Nft.class);
         int nftId = select.get(0).getNftId();
         String sqlToInsert = " insert into nft.nft_auction (nftId,highest_bid,end_time,highest_bidder) values (?,?,?,?)";
         long time = System.currentTimeMillis() + Integer.parseInt(duration) * 1_000L;
-        int result = Factory.getInstance().iDao().insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time,select.get(0).getOwner()});
+        int result = dao.insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time,select.get(0).getOwner()});
         TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(Long.parseLong(amount)), BigInteger.valueOf(Integer.parseInt(duration) * 1_000L));
         String status = transactionReceipt.getStatus();
-        Timer.getInstance().beginAuction(nftId, Integer.parseInt(duration));
+        timer.beginAuction(nftId, Integer.parseInt(duration));
         if (status.equals(Contract.checkStatus) && result != 0) {
             return 200;
         }
@@ -104,16 +108,16 @@ public class AuctionServiceImpl implements IAuctionService {
         TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
         String status = transactionReceipt.getStatus();
         String sql2 = "select * from nft.nft_auction where nftId = ?";
-        List<Auction> list = Factory.getInstance().iDao().select(sql2, new Object[]{nftId}, Auction.class);
+        List<Auction> list = dao.select(sql2, new Object[]{nftId}, Auction.class);
         String bidder = list.get(0).getHighest_bidder();
         String sql = " delete from nft.nft_auction where nftId = ?";
-        int result = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{nftId});
+        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{nftId});
         String sql1 = " update nft.nfts set owner = ? where nftId = ?";
-        int result1 = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql1, new Object[]{bidder,nftId});
+        int result1 = dao.insertOrUpdateOrDelete(sql1, new Object[]{bidder,nftId});
         if(status.equals(Contract.checkStatus)&&result!=0&&result1!=0){
-            System.out.println("拍卖结束");
+            tv.util.Logger.info("拍卖结束成功");
         }else {
-            System.out.println("拍卖结束异常");
+            tv.util.Logger.warning("拍卖结束失败");
         }
     }
 

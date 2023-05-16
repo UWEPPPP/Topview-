@@ -26,7 +26,7 @@ public class Factory {
     private  final ApplicationContext APPLICATION_CONTEXT;
     public  IRegisterService getRegisterService() {
         return
-                CastUtil.cast(ProxyFactory.serviceProxy(APPLICATION_CONTEXT.getBean("registerServiceImpl")));
+                CastUtil.cast(APPLICATION_CONTEXT.getBean("registerServiceImpl"));
     }
 
     public  ILoginService getLoginService() {
@@ -66,8 +66,5 @@ public class Factory {
         return CastUtil.cast(APPLICATION_CONTEXT.getBean("auctionServiceImpl"));
     }
 
-    public  IDao iDao() {
-        return CastUtil.cast(APPLICATION_CONTEXT.getBean("dao"));
-    }
 
 }

@@ -1,26 +1,34 @@
 package tv.service.impl;
 
+import tv.dao.IDao;
 import tv.entity.po.Nft;
-import tv.factory.Factory;
 import tv.service.IDisplayService;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 
 import java.util.List;
 
 import static tv.util.JsonUtil.analysisJson;
 
+/**
+ * 显示服务impl
+ *
+ * @author 刘家辉
+ * @date 2023/05/16
+ */
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class DisplayServiceImpl implements IDisplayService {
-
+    @AutoWired
+    public IDao dao;
 
     @Override
     public List<Nft> display(String display) throws Exception {
         String sql = "select * from nft.nfts where is_sold = false and type = ?";
-        List<Nft> list = Factory.getInstance().iDao().select(sql, new Object[]{display}, Nft.class);
+        List<Nft> list = dao.select(sql, new Object[]{display}, Nft.class);
         if (list.size() == 0) {
             return null;
         }
@@ -30,7 +38,7 @@ public class DisplayServiceImpl implements IDisplayService {
     @Override
     public List<Nft> displayByUser(String owner) throws Exception {
         String sql = "select * from nft.nfts where owner = ?";
-        List<Nft> list = Factory.getInstance().iDao().select(sql, new Object[]{owner}, Nft.class);
+        List<Nft> list = dao.select(sql, new Object[]{owner}, Nft.class);
         if (list.size() == 0) {
             return null;
         }

@@ -1,16 +1,17 @@
 package tv.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import tv.dao.IDao;
 import tv.entity.po.Nft;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple1;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import tv.factory.Factory;
 import tv.service.IMintService;
 import tv.service.wrapper.NftMarket;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 import tv.util.Contract;
 import tv.util.IpfsUtil;
 
@@ -31,9 +32,10 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class MintServiceImpl implements IMintService {
-
+    @AutoWired
+    public IDao dao;
     @Override
     public int mint(Nft nft, Part file, NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
         InputStream inputStream = file.getInputStream();
@@ -52,7 +54,7 @@ public class MintServiceImpl implements IMintService {
         nft.setNftId(issueNftOutput.getValue1().intValue());
         String status = transactionReceipt.getStatus();
         String sql = "insert into nft.nfts(name, ipfs_cid, price, type, owner, description,is_sold,nftId) values(?,?,?,?,?,?,false,?)";
-        int insert = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{nft.getName(), nft.getIpfs_cid(), nft.getPrice(), nft.getType(), nft.getOwner(), nft.getDescription(), nft.getNftId()});
+        int insert = dao.insertOrUpdateOrDelete(sql, new Object[]{nft.getName(), nft.getIpfs_cid(), nft.getPrice(), nft.getType(), nft.getOwner(), nft.getDescription(), nft.getNftId()});
         return insert != 0 || status.equals(Contract.checkStatus) ? 200 : 500;
     }
 

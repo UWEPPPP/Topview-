@@ -62,6 +62,7 @@ public class MintServlet extends HttpServlet {
             resp.setStatus(result);
         } catch (SQLException | ClassNotFoundException | InterruptedException e) {
             Logger.logException(Level.SEVERE,"铸造异常",e);
+
         }
     }
 }

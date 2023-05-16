@@ -1,5 +1,8 @@
 package tv.aop;
 
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Scope;
 import tv.util.ConnectionPool;
 import tv.util.Logger;
 
@@ -13,11 +16,11 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/04/13
  */
+@Component
+@Scope("singleton")
 public class ProxyFactory {
-
-
-
-
+    @AutoWired
+    public ConnectionPool connectionPool;
 
     /**
      * 创建代理
@@ -25,14 +28,14 @@ public class ProxyFactory {
      * @param target 目标
      * @return {@link Object}
      */
-    public static Object serviceProxy(Object target) {
+    public Object serviceProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {
             Connection connection = null;
             try {
                 Logger.info("method: " + method.getName() + ", args: " + Arrays.toString(args));
-                connection = ConnectionPool.getInstance().getConnection();
+                connection = connectionPool.getConnection();
                 connection.setAutoCommit(false);
                 Object invoke = method.invoke(target, args);
                 connection.commit();
@@ -43,11 +46,11 @@ public class ProxyFactory {
                 connection.rollback();
                 return null;
             } finally {
-                ConnectionPool.getInstance().releaseConnection(connection);
+                connectionPool.releaseConnection(connection);
             }
         });
     }
-    public static Object commonProxy(Object target) {
+    public Object commonProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {

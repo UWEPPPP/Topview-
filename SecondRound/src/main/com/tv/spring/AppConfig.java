@@ -4,7 +4,7 @@ import tv.spring.Component;
 import tv.spring.ComponentScan;
 import tv.spring.Scope;
 
-@ComponentScan({"tv.spring","tv.service.impl","tv.dao.impl","tv.util"})
+@ComponentScan({"tv.util","tv.aop","tv.dao.impl","tv.service.impl"})
 @Component
 @Scope("singleton")
 public class AppConfig {

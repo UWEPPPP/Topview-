@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class InfoServiceImplTest {
+public class InfoServiceLoggerImplTest {
 
     @Test
     public void getInstance() {

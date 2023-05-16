@@ -2,12 +2,12 @@ package tv.service.impl;
 
 import tv.dao.IDao;
 import tv.entity.po.User;
-import tv.factory.Factory;
 import tv.service.ILoginService;
 import tv.service.wrapper.NftMarket;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 import tv.util.CryptoUtil;
 
 import java.math.BigInteger;
@@ -26,16 +26,16 @@ import static tv.util.Contract.setNftMarket;
 
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class LoginServiceImpl implements ILoginService {
-
+    @AutoWired
+    public IDao dao;
     @Override
     public Map<String, Object> login(String name, String password) throws Exception {
-        IDao iDao = Factory.getInstance().iDao();
         String paddedStr = String.format("%-32s", password).replace(' ', '0');
         String encryptPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String sql = "select * from nft.nft_user where name = ? and password = ?";
-        List<User> list = iDao.select(sql, new Object[]{name, encryptPassword}, User.class);
+        List<User> list = dao.select(sql, new Object[]{name, encryptPassword}, User.class);
         User select = list.get(0);
         System.out.println(list);
         if (select == null) {

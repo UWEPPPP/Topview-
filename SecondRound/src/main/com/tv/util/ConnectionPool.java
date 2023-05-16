@@ -1,5 +1,8 @@
 package tv.util;
 
+import tv.spring.Component;
+import tv.spring.Scope;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -12,8 +15,9 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/04/06
  */
+@Component
+@Scope("singleton")
 public class ConnectionPool {
-    private static ConnectionPool instance;
     private String url;
     private String username;
     private String password;
@@ -25,7 +29,7 @@ public class ConnectionPool {
     private boolean isExpanding = false;
 
 
-    private ConnectionPool() throws ClassNotFoundException {
+    public ConnectionPool() throws ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (FileReader fre = new FileReader("D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\src\\main\\resources\\properties")) {
             Properties properties = new Properties();
@@ -45,13 +49,6 @@ public class ConnectionPool {
         } catch (IOException | SQLException e) {
             Logger.logException(Level.WARNING,"连接池初始化异常",e);
         }
-    }
-
-    public static synchronized ConnectionPool getInstance() throws ClassNotFoundException {
-        if (instance == null) {
-            instance = new ConnectionPool();
-        }
-        return instance;
     }
 
     public static void close(PreparedStatement preparedStatement, ResultSet set) {

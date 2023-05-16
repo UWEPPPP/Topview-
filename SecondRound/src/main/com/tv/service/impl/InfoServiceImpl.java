@@ -2,12 +2,13 @@ package tv.service.impl;
 
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
-import tv.factory.Factory;
+import tv.dao.IDao;
 import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 import tv.util.IpfsUtil;
 
 import javax.servlet.http.Part;
@@ -25,9 +26,10 @@ import java.util.Objects;
 
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class InfoServiceImpl implements IInfoService {
-
+    @AutoWired
+    public IDao dao;
     @Override
     public String changeInfo(String newName, Part avatar, String contractAddress) throws IOException, SQLException, ClassNotFoundException {
         String update;
@@ -44,7 +46,7 @@ public class InfoServiceImpl implements IInfoService {
         String sql = "update nft.nft_user set " + choice + " = ? where contract_address = ?";
         int result = 0;
         try {
-            result = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{update, contractAddress});
+            result = dao.insertOrUpdateOrDelete(sql, new Object[]{update, contractAddress});
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -58,7 +60,7 @@ public class InfoServiceImpl implements IInfoService {
     public int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException, InterruptedException {
         boolean result = Objects.equals(choice, "false");
         String sql = "update nft.nfts set is_sold = ? where ipfs_cid = ?";
-        int size = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{result, cid});
+        int size =dao.insertOrUpdateOrDelete(sql, new Object[]{result, cid});
         if (size == 0) {
             return 500;
         }

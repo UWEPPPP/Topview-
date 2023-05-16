@@ -7,7 +7,7 @@ import tv.service.impl.SearchServiceImpl;
 
 import java.util.List;
 
-public class SearchServiceImplTest extends TestCase {
+public class SearchServiceLoggerImplTest extends TestCase {
     public void test() {
         ISearchService ISearchService = new SearchServiceImpl();
         List<Nft> search = null;

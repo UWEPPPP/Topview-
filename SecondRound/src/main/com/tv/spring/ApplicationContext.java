@@ -2,6 +2,7 @@ package tv.spring;
 
 import tv.aop.ProxyFactory;
 import tv.util.CastUtil;
+import tv.util.Logger;
 
 import java.beans.Introspector;
 import java.io.File;
@@ -78,11 +79,18 @@ public class ApplicationContext {
             }
 
         }
-
+        String[] necessaryBeanNames = {"connectionPool","proxyFactory"};
+         for (String beanName : necessaryBeanNames) {
+             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
+             Object bean = createBean(beanName, beanDefinition);
+             System.out.println(beanName + " " + bean);
+             singletonObjects.put(beanName, bean);
+        }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if (beanDefinition.getScope().equals("singleton")) {
+            if (beanDefinition.getScope().equals("singleton")&&(!beanName.equals("connectionPool"))&&(!beanName.equals("proxyFactory"))) {
                 Object bean = createBean(beanName, beanDefinition);
+                System.out.println(beanName + " " + bean);
                 singletonObjects.put(beanName, bean);
             }
 
@@ -100,12 +108,17 @@ public class ApplicationContext {
                     field.setAccessible(true);
                     field.set(instance, getBean(field.getName()));
                 }
+
             }
-            if(type.isAnnotationPresent(Service.class)){
-                ProxyFactory.serviceProxy(instance);
-            }else {
-                ProxyFactory.commonProxy(instance);
+            if(type.isAnnotationPresent(ServiceLogger.class)){
+                instance=((ProxyFactory)singletonObjects.get("proxyFactory")).serviceProxy(instance);
+                Logger.info("serviceProxy");
+            }else if(type.isAnnotationPresent(CommonLogger.class)){
+                instance=((ProxyFactory)singletonObjects.get("proxyFactory")).commonProxy(instance);
+                Logger.info("commonProxy");
             }
+            System.out.println(type.isAnnotationPresent(ServiceLogger.class));
+
 
 
             return instance;

@@ -3,12 +3,13 @@ package tv.service.impl;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import tv.factory.Factory;
+import tv.dao.IDao;
 import tv.service.IRegisterService;
 import tv.service.wrapper.NftMarket;
+import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
-import tv.spring.Service;
+import tv.spring.ServiceLogger;
 import tv.util.CastUtil;
 import tv.util.Contract;
 import tv.util.CryptoUtil;
@@ -29,8 +30,10 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@Service
+@ServiceLogger
 public class RegisterServiceImpl implements IRegisterService {
+    @AutoWired
+    public IDao dao;
     @Override
     public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
         Map<String, Object> map = Contract.setNftMarket();
@@ -45,7 +48,7 @@ public class RegisterServiceImpl implements IRegisterService {
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String upload = IpfsUtil.upload(byteArray);
         String sql = "insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
-        int insert = Factory.getInstance().iDao().insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
+        int insert = dao.insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
         NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));
         TransactionReceipt register = nftMarket.regiter();
         String status = register.getStatus();

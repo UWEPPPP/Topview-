@@ -2,6 +2,8 @@ package tv.util;
 
 import tv.factory.Factory;
 import tv.service.wrapper.NftMarket;
+import tv.spring.Component;
+import tv.spring.Scope;
 
 import java.util.logging.Level;
 
@@ -11,16 +13,11 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/10
  */
+@Component
+@Scope("singleton")
 public class Timer {
 
     private final NftMarket nftMarket = Contract.getAdmin();
-
-    private Timer() {
-    }
-
-    public static Timer getInstance() {
-        return TimerHolder.TIMER;
-    }
 
     public void beginAuction(int id, int time) {
         Runnable runnable = () -> {
@@ -32,9 +29,5 @@ public class Timer {
             }
         };
         ThreadPool.SERVICE.submit(runnable);
-    }
-
-    public static class TimerHolder {
-        private static final Timer TIMER = new Timer();
     }
 }
