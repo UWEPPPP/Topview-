@@ -1,11 +1,11 @@
 package tv;
 
-import tv.factory.Factory;
+import tv.factory.HandlerFactory;
 import tv.service.IAuctionService;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        IAuctionService auctionService = Factory.getInstance().getAuctionService();
-        System.out.println(auctionService.showAuction());
+      //  IAuctionService auctionService = HandlerFactory.getInstance().getAuctionService();
+      //  System.out.println(auctionService.showAuction());
     }
 }

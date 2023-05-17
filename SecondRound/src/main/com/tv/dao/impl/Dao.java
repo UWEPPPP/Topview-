@@ -1,7 +1,10 @@
 package tv.dao.impl;
 
 import tv.dao.IDao;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.CommonLogger;
+import tv.spring.Component;
+import tv.spring.Scope;
 import tv.util.ConnectionPool;
 import tv.util.DbTool;
 

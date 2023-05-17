@@ -2,8 +2,6 @@ package tv.service;
 
 import tv.entity.dto.AuctionDto;
 import tv.service.wrapper.NftMarket;
-import tv.spring.Component;
-import tv.spring.Scope;
 
 import java.sql.SQLException;
 import java.util.List;

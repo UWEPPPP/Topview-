@@ -79,7 +79,7 @@ public class ApplicationContext {
             }
 
         }
-        String[] necessaryBeanNames = {"connectionPool","proxyFactory"};
+        String[] necessaryBeanNames = {"connectionPool","proxyFactory","dao"};
          for (String beanName : necessaryBeanNames) {
              BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
              Object bean = createBean(beanName, beanDefinition);
@@ -88,7 +88,17 @@ public class ApplicationContext {
         }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if (beanDefinition.getScope().equals("singleton")&&(!beanName.equals("connectionPool"))&&(!beanName.equals("proxyFactory"))) {
+            if (beanDefinition.getScope().equals("singleton")&&beanDefinition.getType().isAnnotationPresent(ServiceLogger.class)&&(!beanName.equals("connectionPool"))&&(!beanName.equals("proxyFactory"))) {
+                Object bean = createBean(beanName, beanDefinition);
+                System.out.println(beanName + " " + bean);
+                singletonObjects.put(beanName, bean);
+            }
+
+        }
+
+        for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
+            BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
+            if (beanDefinition.getScope().equals("singleton")&&!beanDefinition.getType().isAnnotationPresent(ServiceLogger.class)&&(!beanName.equals("connectionPool"))&&(!beanName.equals("proxyFactory"))) {
                 Object bean = createBean(beanName, beanDefinition);
                 System.out.println(beanName + " " + bean);
                 singletonObjects.put(beanName, bean);
@@ -118,9 +128,6 @@ public class ApplicationContext {
                 Logger.info("commonProxy");
             }
             System.out.println(type.isAnnotationPresent(ServiceLogger.class));
-
-
-
             return instance;
         } catch (InstantiationException e) {
             throw new RuntimeException(e);

@@ -5,12 +5,35 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/login.css" rel="stylesheet">
     <title>NFT 登录页面</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault(); // 阻止表单提交
+
+                // 发送异步请求
+                $.ajax({
+                    url: '/Servlet/login',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // 请求成功后自动跳转
+                        window.location.href = 'personal-info.html';
+                    },
+                    error: function(xhr, status, error) {
+                        // 处理请求失败的情况
+                        alert('登录失败：' + error);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <main>
     <section class="login-container">
         <h1>NFT 登录页面</h1>
-        <form action="/Servlet/login" enctype="multipart/form-data" method="post">
+        <form>
             <div class="input-container">
                 <label for="username">用户名</label>
                 <input id="username" name="username" placeholder="请输入我的用户名" type="text">

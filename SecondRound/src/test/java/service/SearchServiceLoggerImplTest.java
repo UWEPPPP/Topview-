@@ -1,7 +1,7 @@
 package service;
 
-import tv.entity.po.Nft;
 import junit.framework.TestCase;
+import tv.entity.po.Nft;
 import tv.service.ISearchService;
 import tv.service.impl.SearchServiceImpl;
 
