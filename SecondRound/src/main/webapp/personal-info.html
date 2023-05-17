@@ -59,7 +59,7 @@
 
     $(function () {
         // 获取个人信息
-        $.getJSON("/Servlet/login", function (data) {
+        $.getJSON("/Servlet/infoShow", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#balance").text("余额：" + data.balance); // 显示余额
@@ -71,7 +71,7 @@
             let newName = $("#new-name").val();
             $.ajax({
                 type: "GET",
-                url: "/Servlet/info",
+                url: "/Servlet/infoChangeName",
                 data: {name: newName},
                 success: function (response) {
                     $("#name").text(newName);
@@ -92,14 +92,15 @@
             formData.append("avatar", newAvatar);
             $.ajax({
                 type: "POST",
-                url: "/Servlet/info",
+                url: "/Servlet/infoChangeAvatar",
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: $.getJSON("/login", function (data) {
-                    $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
-                    $("#name").text(data.name);
-                    $("#balance").text("余额：" + data.balance); // 显示余额
+                    const da = JSON.parse(data);
+                    $("#avatar").attr("src", "https://ipfs.io/ipfs/" + da.image);
+                    $("#name").text(da.name);
+                    $("#balance").text("余额：" + da.balance); // 显示余额
                     alert("头像已更新！");
                 }),
 
@@ -111,7 +112,7 @@
         });
 
         // 获取我的NFT列表
-        $.getJSON("/Servlet/display", function (datas) {
+        $.getJSON("/Servlet/displayNft", function (datas) {
             const data = JSON.parse(JSON.stringify(datas));
             if (data.length > 0) {
                 for (let i = 0; i < data.length; i++) {

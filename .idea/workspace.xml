@@ -12,54 +12,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="improvement：使用了@Autowired进行依赖注入">
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionBeginHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionBidHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionShowHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/DisplayNftHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoChangeNameHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoChangeProfileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoShowHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/MintHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/PurchaseHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/RegisterHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/SearchHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/ServletHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TraceHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TransferHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TransferListHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/UpAndDownHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/exception/InputException.java" afterDir="false" />
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="refactor:将controller层改造为使用请求转发器（80%）">
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/ExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/listener/Listener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/BLCerror.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/Jerror.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/servlet/DispatcherServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/DisplayForAuctionServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/DisplayServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/MintServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/PurchaseServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/RegisterServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/SearchServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TraceServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TransferServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/UpAndDownNftServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/Dao.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/Dao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/factory/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/factory/HandlerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionBeginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionBeginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionBidHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionBidHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/AuctionShowHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionShowHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/DisplayNftHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/DisplayNftHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoChangeNameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeNameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoChangeProfileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeProfileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/InfoShowHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoShowHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/MintHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/MintHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/PurchaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/PurchaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/RegisterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/SearchHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/SearchHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TraceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/TraceHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TransferHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/TransferHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/TransferListHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/TransferListHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/UpAndDownHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/UpAndDownHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/servlet/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/servlet/DispatcherServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/factory/HandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/factory/HandlerFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IAuctionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IAuctionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TraceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TraceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/wrapper/NftMarket.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/wrapper/NftMarket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/java/service/SearchServiceLoggerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/java/service/SearchServiceLoggerImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/tv/service/impl/AuctionServiceLoggerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/tv/service/impl/AuctionServiceLoggerImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/ThreadPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Timer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/trace.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/trace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/transfer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,11 +73,11 @@
         <option value="JUnit5 Test Class" />
         <option value="JUnit3 Test Class" />
         <option value="Solidity Contract" />
-        <option value="HTML File" />
         <option value="JUnit4 Test Class" />
-        <option value="AnnotationType" />
         <option value="Interface" />
+        <option value="AnnotationType" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -462,7 +454,8 @@
       <workItem from="1684239464859" duration="4776000" />
       <workItem from="1684245854783" duration="6051000" />
       <workItem from="1684289822038" duration="202000" />
-      <workItem from="1684290040448" duration="11169000" />
+      <workItem from="1684290040448" duration="11476000" />
+      <workItem from="1684313671524" duration="16192000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -597,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684234775537</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="refactor:将controller层改造为使用请求转发器（80%）">
+      <created>1684304572064</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1684304572064</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +645,8 @@
     <MESSAGE value="improvement:简易实现了spring ioc框架 （需完善）" />
     <MESSAGE value="fixed:将代理与ioc简易结合" />
     <MESSAGE value="improvement：使用了@Autowired进行依赖注入" />
-    <option name="LAST_COMMIT_MESSAGE" value="improvement：使用了@Autowired进行依赖注入" />
+    <MESSAGE value="refactor:将controller层改造为使用请求转发器（80%）" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor:将controller层改造为使用请求转发器（80%）" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/blockchain_liujiahui_Traceability_SecondRound$InfoServiceTest_changeInfo.ic" NAME="InfoServiceTest.changeInfo 覆盖结果" MODIFIED="1683530050813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

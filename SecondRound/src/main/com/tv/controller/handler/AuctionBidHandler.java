@@ -1,12 +1,10 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 import tv.util.exception.InputException;
 
@@ -22,8 +20,8 @@ import java.sql.SQLException;
 
 @Component
 @Scope("singleton")
-@CommonLogger
-public class AuctionBidHandler implements ServletHandler{
+@Controller
+public class AuctionBidHandler implements ServletHandler {
     @AutoWired
     public IAuctionService auctionServiceImpl;
     @Override
@@ -36,6 +34,6 @@ public class AuctionBidHandler implements ServletHandler{
         if (offer == CHECK) {
             throw new InputException("出价失败");
         }
-        return "success";
+        return null;
     }
 }

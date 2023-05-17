@@ -49,7 +49,8 @@
 <script>
     $(function () {
         // 获取个人信息
-        $.getJSON("/Servlet/login", function (data) {
+        $.getJSON("/Servlet/infoShow", function (data) {
+
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -57,7 +58,7 @@
         });
 
         // 获取其他用户信息
-        $.getJSON("/Servlet/transfer", function (users) {
+        $.getJSON("/Servlet/transferList", function (users) {
             users.forEach(function (user) {
                 var userDiv = $("<div>").addClass("user");
                 $("<img>").attr("src", "https://ipfs.io/ipfs/" + user.profile).appendTo(userDiv);

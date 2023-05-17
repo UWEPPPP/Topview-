@@ -1,13 +1,11 @@
-package tv.controller;
+package tv.controller.handler;
 
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +23,7 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@CommonLogger
+@Controller
 public class InfoShowHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;

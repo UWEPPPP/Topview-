@@ -11,9 +11,7 @@ import tv.spring.AutoWired;
 import tv.spring.Component;
 import tv.spring.Scope;
 import tv.spring.ServiceLogger;
-import tv.util.Contract;
-import tv.util.JsonUtil;
-import tv.util.Timer;
+import tv.util.*;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -21,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * 拍卖服务
@@ -34,9 +33,6 @@ import java.util.Map;
 public class AuctionServiceImpl implements IAuctionService {
     @AutoWired
     public IDao dao;
-    @AutoWired
-    public Timer timer;
-
     @Override
     public List<AuctionDto> showAuction() throws Exception {
         String sql = "select * from nft.nft_auction";
@@ -96,7 +92,7 @@ public class AuctionServiceImpl implements IAuctionService {
         int result = dao.insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time,select.get(0).getOwner()});
         TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(Long.parseLong(amount)), BigInteger.valueOf(Integer.parseInt(duration) * 1_000L));
         String status = transactionReceipt.getStatus();
-        timer.beginAuction(nftId, Integer.parseInt(duration));
+        autoCheckEnd(nftId, Integer.parseInt(duration));
         if (status.equals(Contract.checkStatus) && result != 0) {
             return 200;
         }
@@ -120,5 +116,21 @@ public class AuctionServiceImpl implements IAuctionService {
             tv.util.Logger.warning("拍卖结束失败");
         }
     }
+
+    @Override
+    public void autoCheckEnd(int id,int time) throws Exception {
+        NftMarket nftMarket = Contract.getAdmin();
+            Runnable runnable = () -> {
+                try {
+                    Thread.sleep(time * 1000L);
+                    auctionEnd(id, nftMarket);
+                } catch (Exception e) {
+                    Logger.logException(Level.SEVERE, "拍卖结束失败", e);
+                }
+            };
+            ThreadPool.SERVICE.submit(runnable);
+        }
+
+
 
 }

@@ -46,7 +46,7 @@
 
     $(function () {
         // 获取个人信息
-        $.getJSON("/Servlet/login", function (data) {
+        $.getJSON("/Servlet/infoShow", function (data) {
             $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
             $("#name").text(data.name);
             $("#new-name").val(data.name);  // 将当前姓名填入输入框
@@ -58,7 +58,7 @@
     $(document).ready(function () {
         const nftContainer = $("#nftContainer");
         $.ajax({
-            url: "/Servlet/display",
+            url: "/Servlet/displayNft",
             type: "GET",
             data: {choice: choiceType},
             success: function (data) {
@@ -72,7 +72,7 @@
 
         $("#categoryBtn").on("click", function () {
             $.ajax({
-                url: "/Servlet/display",
+                url: "/Servlet/displayNft",
                 type: "GET",
                 data: {choice:choiceType() },
                 success: function (data) {

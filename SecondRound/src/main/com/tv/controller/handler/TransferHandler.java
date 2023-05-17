@@ -1,12 +1,10 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.ITransferService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 import tv.util.exception.InputException;
 
@@ -21,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Scope("singleton")
-@CommonLogger
-public class TransferHandler implements ServletHandler{
+@Controller
+public class TransferHandler implements ServletHandler {
     @AutoWired
     public ITransferService transferServiceImpl;
     @Override
@@ -39,6 +37,6 @@ public class TransferHandler implements ServletHandler{
         if(transfer == CHECK) {
             throw new InputException("转增失败");
         }
-        return "success";
+        return null;
     }
 }

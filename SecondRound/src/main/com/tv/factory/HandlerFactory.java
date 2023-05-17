@@ -1,5 +1,6 @@
 package tv.factory;
 
+import org.bouncycastle.crypto.tls.PRFAlgorithm;
 import tv.spring.AppConfig;
 import tv.spring.ApplicationContext;
 import tv.util.CastUtil;
@@ -12,15 +13,12 @@ import tv.util.CastUtil;
  */
 public class HandlerFactory {
     private HandlerFactory() {
-        APPLICATION_CONTEXT = new ApplicationContext(AppConfig.class);
     }
     public static HandlerFactory getInstance() {
-        return FactoryHolder.INSTANCE;
+        return INSTANCE;
     }
-    private static class FactoryHolder {
-        private static final HandlerFactory INSTANCE = new HandlerFactory();
-    }
-    private  final ApplicationContext APPLICATION_CONTEXT;
+    private static final HandlerFactory INSTANCE = new HandlerFactory();
+    private  final ApplicationContext APPLICATION_CONTEXT= new ApplicationContext(AppConfig.class);
     public <T> T getBean(String beanName) {
         return CastUtil.cast(APPLICATION_CONTEXT.getBean(beanName));
     }

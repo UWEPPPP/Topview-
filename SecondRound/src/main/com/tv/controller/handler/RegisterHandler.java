@@ -1,10 +1,8 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.service.IRegisterService;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.exception.InputException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +17,8 @@ import javax.servlet.http.Part;
 
 @Component
 @Scope("singleton")
-@CommonLogger
-public class RegisterHandler implements ServletHandler{
+@Controller
+public class RegisterHandler implements ServletHandler {
     @AutoWired
     public IRegisterService registerServiceImpl;
     @Override
@@ -40,6 +38,6 @@ public class RegisterHandler implements ServletHandler{
         if (register == CHECK) {
             throw new InputException("注册失败");
         }
-        return "success";
+        return null;
     }
 }

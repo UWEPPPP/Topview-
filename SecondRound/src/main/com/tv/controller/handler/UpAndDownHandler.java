@@ -1,10 +1,8 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.service.IInfoService;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.exception.InputException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Scope("singleton")
-@CommonLogger
+@Controller
 public class UpAndDownHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
@@ -33,6 +31,6 @@ public class UpAndDownHandler implements ServletHandler {
         if(status == CHECK) {
             throw new InputException("上架/下架失败");
         }
-        return "success";
+        return null;
     }
 }

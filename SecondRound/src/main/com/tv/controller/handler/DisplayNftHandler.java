@@ -1,11 +1,9 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IDisplayService;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Scope("singleton")
-@CommonLogger
-public class DisplayNftHandler implements ServletHandler{
+@Controller
+public class DisplayNftHandler implements ServletHandler {
     @AutoWired
     public IDisplayService displayServiceImpl;
     @Override

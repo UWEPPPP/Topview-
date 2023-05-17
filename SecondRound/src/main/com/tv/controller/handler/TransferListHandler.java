@@ -1,11 +1,9 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.ITransferService;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Scope("singleton")
-@CommonLogger
+@Controller
 public class TransferListHandler implements ServletHandler {
     @AutoWired
     public ITransferService transferServiceImpl;

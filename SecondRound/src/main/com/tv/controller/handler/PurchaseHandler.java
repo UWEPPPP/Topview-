@@ -1,13 +1,11 @@
-package tv.controller;
+package tv.controller.handler;
 
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IPurchaseService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 import tv.util.exception.InputException;
 
@@ -22,7 +20,7 @@ import java.sql.SQLException;
  */
 @Component
 @Scope("singleton")
-@CommonLogger
+@Controller
 public class PurchaseHandler implements ServletHandler {
     @AutoWired
     public IPurchaseService purchaseServiceImpl;
@@ -39,7 +37,7 @@ public class PurchaseHandler implements ServletHandler {
         if (balance != Integer.parseInt(user.getBalance())) {
             user.setBalance(String.valueOf(balance));
             request.getSession().setAttribute("user", user);
-            return "success";
+            return null;
         }
         throw new InputException("购买失败");
     }

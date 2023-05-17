@@ -56,4 +56,13 @@ public interface IAuctionService {
      * @throws Exception 异常
      */
     void auctionEnd(int nftId, NftMarket nftMarket) throws Exception;
+
+    /**
+     * 汽车检查结束
+     *
+     * @param id   id
+     * @param time 时间
+     * @throws Exception 异常
+     */
+    void autoCheckEnd(int id,int time) throws Exception;
 }

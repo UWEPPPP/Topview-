@@ -1,13 +1,11 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.Nft;
 import tv.entity.po.User;
 import tv.service.IMintService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 import tv.util.exception.InputException;
 
@@ -25,8 +23,8 @@ import java.sql.SQLException;
  */
 @Component
 @Scope("singleton")
-@CommonLogger
-public class MintHandler implements ServletHandler{
+@Controller
+public class MintHandler implements ServletHandler {
     @AutoWired
     public IMintService mintServiceImpl;
     @Override
@@ -54,9 +52,9 @@ public class MintHandler implements ServletHandler{
         nft.setPrice(Integer.parseInt(price));
         nft.setOwner(contractAddress);
         int result = mintServiceImpl.mint(nft, file, market);
-    //   if( result ==CHECK){
-    //       throw new InputException("铸造失败");
-    //   }
-        return "success";
+       if( result ==CHECK){
+           throw new RuntimeException("铸造失败,内部无报错");
+       }
+        return null;
     }
 }

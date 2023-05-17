@@ -1,11 +1,9 @@
-package tv.controller;
+package tv.controller.handler;
 
+import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IInfoService;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.*;
 import tv.util.CastUtil;
 import tv.util.exception.InputException;
 
@@ -21,7 +19,7 @@ import java.sql.SQLException;
  */
 @Component
 @Scope("singleton")
-@CommonLogger
+@Controller
 public class InfoChangeNameHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
@@ -36,6 +34,6 @@ public class InfoChangeNameHandler implements ServletHandler {
         String name = infoServiceImpl.changeInfo(parameter, null, user.getContract_address());
         user.setName(name);
         request.getSession().setAttribute("user", user);
-        return "success";
+        return null;
     }
 }
