@@ -1,0 +1,2 @@
+本项目为maven项目 使用webapp搭建,使用Tomcat作为服务器,Jdk版本为1.8,合约部署方式为直接使用java包装类部署(更新),
+位于com包,合约地址文件位于resources包
