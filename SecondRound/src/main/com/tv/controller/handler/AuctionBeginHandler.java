@@ -1,11 +1,15 @@
 package tv.controller.handler;
 
 import tv.controller.ServletHandler;
+import tv.entity.bo.AuctionBeginBo;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
+import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,16 +28,11 @@ public class AuctionBeginHandler implements ServletHandler {
     public IAuctionService auctionServiceImpl;
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        String cid = request.getParameter("cid");
-        String duration = request.getParameter("duration");
-        String amount = request.getParameter("amount");
         NftMarket user = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
-        if (cid == null || duration == null || amount == null) {
-            throw new InputException("输入为空");
-        }
-       int status = auctionServiceImpl.auctionBegin(cid, duration, amount, user);
+        AuctionBeginBo bind = DataBinder.bind(AuctionBeginBo.class, request);
+        int status = auctionServiceImpl.auctionBegin(bind, user);
         if (status == CHECK) {
-            throw new InputException("开启拍卖失败");
+            throw new RuntimeException("开启拍卖失败");
         }
         return null;
     }

@@ -2,6 +2,7 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$/SecondRound" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/SecondRound/src/main/com" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SecondRound/src/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/SecondRound/target" />
     </content>

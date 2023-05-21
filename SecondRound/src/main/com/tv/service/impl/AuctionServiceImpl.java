@@ -2,6 +2,8 @@ package tv.service.impl;
 
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import tv.dao.IDao;
+import tv.entity.bo.AuctionBeginBo;
+import tv.entity.bo.AuctionBidBo;
 import tv.entity.dto.AuctionDto;
 import tv.entity.po.Auction;
 import tv.entity.po.Nft;
@@ -56,11 +58,11 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
-    public int offer(int id, int price, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException {
-        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(id),BigInteger.valueOf( price));
+    public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException {
+        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()),BigInteger.valueOf(bo.getBidPrice()));
         String status = transactionReceipt.getStatus();
         String sql = " update nft.nft_auction set highest_bid = ?,highest_bidder = ? where nftId = ?";
-        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{price,bidder,id});
+        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{bo.getBidPrice(),bidder,bo.getNftId()});
         if (status.equals(Contract.checkStatus)&&result!=0) {
             return 200;
         } else {
@@ -83,16 +85,16 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
-    public int auctionBegin(String cid, String duration, String amount, NftMarket nftMarket) throws Exception {
+    public int auctionBegin(AuctionBeginBo auctionBeginBo, NftMarket nftMarket) throws Exception {
         String sql = " select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> select = dao.select(sql, new Object[]{cid}, Nft.class);
+        List<Nft> select = dao.select(sql, new Object[]{auctionBeginBo.getCid()}, Nft.class);
         int nftId = select.get(0).getNftId();
         String sqlToInsert = " insert into nft.nft_auction (nftId,highest_bid,end_time,highest_bidder) values (?,?,?,?)";
-        long time = System.currentTimeMillis() + Integer.parseInt(duration) * 1_000L;
-        int result = dao.insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, amount, time,select.get(0).getOwner()});
-        TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(Long.parseLong(amount)), BigInteger.valueOf(Integer.parseInt(duration) * 1_000L));
+        long time = System.currentTimeMillis() + auctionBeginBo.getDuration() * 1_000L;
+        int result = dao.insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, auctionBeginBo.getAmount(), time,select.get(0).getOwner()});
+        TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(auctionBeginBo.getAmount()), BigInteger.valueOf(auctionBeginBo.getDuration() * 1_000L));
         String status = transactionReceipt.getStatus();
-        autoCheckEnd(nftId, Integer.parseInt(duration));
+        autoCheckEnd(nftId, auctionBeginBo.getDuration());
         if (status.equals(Contract.checkStatus) && result != 0) {
             return 200;
         }
@@ -118,7 +120,7 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
-    public void autoCheckEnd(int id,int time) throws Exception {
+    public void autoCheckEnd(int id,int time) {
         NftMarket nftMarket = Contract.getAdmin();
             Runnable runnable = () -> {
                 try {

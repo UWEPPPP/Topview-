@@ -1,6 +1,7 @@
 package tv.service.impl;
 
 import tv.dao.IDao;
+import tv.entity.bo.LoginBo;
 import tv.entity.po.User;
 import tv.service.ILoginService;
 import tv.service.wrapper.NftMarket;
@@ -31,11 +32,11 @@ public class LoginServiceImpl implements ILoginService {
     @AutoWired
     public IDao dao;
     @Override
-    public Map<String, Object> login(String name, String password) throws Exception {
-        String paddedStr = String.format("%-32s", password).replace(' ', '0');
+    public Map<String, Object> login(LoginBo bo) throws Exception {
+        String paddedStr = String.format("%-32s", bo.getPassword()).replace(' ', '0');
         String encryptPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String sql = "select * from nft.nft_user where name = ? and password = ?";
-        List<User> list = dao.select(sql, new Object[]{name, encryptPassword}, User.class);
+        List<User> list = dao.select(sql, new Object[]{bo.getUsername(), encryptPassword}, User.class);
         User select = list.get(0);
         System.out.println(list);
         if (select == null) {

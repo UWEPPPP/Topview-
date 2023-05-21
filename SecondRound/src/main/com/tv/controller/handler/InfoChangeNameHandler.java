@@ -3,9 +3,11 @@ package tv.controller.handler;
 import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IInfoService;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -25,12 +27,9 @@ public class InfoChangeNameHandler implements ServletHandler {
     public IInfoService infoServiceImpl;
 
     @Override
-    public Object handle(HttpServletRequest request) throws InputException, SQLException, IOException, ClassNotFoundException {
+    public Object handle(HttpServletRequest request) throws SQLException, IOException, ClassNotFoundException {
         String parameter = request.getParameter("name");
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
-        if (parameter == null) {
-            throw new InputException("输入为空");
-        }
         String name = infoServiceImpl.changeInfo(parameter, null, user.getContract_address());
         user.setName(name);
         request.getSession().setAttribute("user", user);

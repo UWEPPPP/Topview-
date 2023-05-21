@@ -2,9 +2,13 @@ package tv.controller.handler;
 
 
 import tv.controller.ServletHandler;
+import tv.entity.bo.LoginBo;
 import tv.service.ILoginService;
-import tv.spring.*;
-import tv.util.exception.InputException;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
+import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -21,17 +25,10 @@ public class LoginHandler implements ServletHandler {
     public ILoginService loginServiceImpl;
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (username == null || username.trim().isEmpty() ||
-                password == null || password.trim().isEmpty()
-        ) {
-            throw new InputException("用户名或密码为空");
-        }
-            Map<String, Object> login = loginServiceImpl.login(username, password);
+        LoginBo bind = DataBinder.bind(LoginBo.class, request);
+        Map<String, Object> login = loginServiceImpl.login(bind);
             if (login == null) {
-                System.out.println("2");
-               throw new InputException("用户名或密码错误");
+               throw new RuntimeException("用户名或密码错误");
             } else {
                 request.getSession().setAttribute("user", login.get("user"));
                 request.getSession().setAttribute("nftMarket", login.get("nftMarket"));

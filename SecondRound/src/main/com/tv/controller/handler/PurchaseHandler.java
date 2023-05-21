@@ -5,9 +5,11 @@ import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IPurchaseService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -26,11 +28,8 @@ public class PurchaseHandler implements ServletHandler {
     public IPurchaseService purchaseServiceImpl;
 
     @Override
-    public Object handle(HttpServletRequest request) throws InputException, ContractException, SQLException, ClassNotFoundException, InterruptedException {
+    public Object handle(HttpServletRequest request) throws ContractException, SQLException, ClassNotFoundException, InterruptedException {
         String id = request.getParameter("id");
-        if (id == null) {
-            throw new InputException("输入为空");
-        }
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         int balance = purchaseServiceImpl.buy(Integer.parseInt(id), user.getContract_address(), market);
@@ -39,6 +38,6 @@ public class PurchaseHandler implements ServletHandler {
             request.getSession().setAttribute("user", user);
             return null;
         }
-        throw new InputException("购买失败");
+        throw new RuntimeException("购买失败");
     }
 }

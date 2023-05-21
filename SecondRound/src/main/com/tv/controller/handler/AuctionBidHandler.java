@@ -1,15 +1,18 @@
 package tv.controller.handler;
 
 import tv.controller.ServletHandler;
+import tv.entity.bo.AuctionBidBo;
 import tv.entity.po.User;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
+import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
 /**
  * 拍卖开始处理程序
@@ -25,14 +28,13 @@ public class AuctionBidHandler implements ServletHandler {
     @AutoWired
     public IAuctionService auctionServiceImpl;
     @Override
-    public Object handle(HttpServletRequest request) throws SQLException, ClassNotFoundException, InterruptedException, InputException {
-        String nfdId = request.getParameter("nftId");
-        String bidPrice = request.getParameter("bidPrice");
+    public Object handle(HttpServletRequest request) throws Exception {
+        AuctionBidBo bind = DataBinder.bind(AuctionBidBo.class, request);
         NftMarket nftMarket= CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         User user= CastUtil.cast(request.getSession().getAttribute("user"));
-        int offer = auctionServiceImpl.offer(Integer.parseInt(nfdId.trim()), Integer.parseInt(bidPrice.trim()), user.getContract_address(), nftMarket);
+        int offer = auctionServiceImpl.offer(bind, user.getContract_address(), nftMarket);
         if (offer == CHECK) {
-            throw new InputException("出价失败");
+            throw new RuntimeException("出价失败");
         }
         return null;
     }

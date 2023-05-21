@@ -2,6 +2,7 @@ package tv.service.impl;
 
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import tv.dao.IDao;
+import tv.entity.bo.TransferBo;
 import tv.entity.po.Nft;
 import tv.entity.po.User;
 import tv.service.ITransferService;
@@ -39,15 +40,15 @@ public class TransferServiceImpl implements ITransferService {
     }
 
     @Override
-    public int transfer(String to, String cid, String from, NftMarket nftMarket) throws Exception {
+    public int transfer(TransferBo bo, String from, NftMarket nftMarket) throws Exception {
         String sql = "select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> list = dao.select(sql, new Object[]{cid}, Nft.class);
+        List<Nft> list = dao.select(sql, new Object[]{bo.getCollectionItem()}, Nft.class);
         Nft nft = list.get(0);
-        TransactionReceipt transactionReceipt = nftMarket.tranferNft(BigInteger.valueOf(nft.getNftId()), to);
+        TransactionReceipt transactionReceipt = nftMarket.tranferNft(BigInteger.valueOf(nft.getNftId()), bo.getRecipientAddress());
         String status = transactionReceipt.getStatus();
         if (status.equals(Contract.checkStatus)) {
             String sql1 = "update nft.nfts set owner = ? where ipfs_cid = ?";
-            int update = dao.insertOrUpdateOrDelete(sql1, new Object[]{to, cid});
+            int update = dao.insertOrUpdateOrDelete(sql1, new Object[]{bo.getRecipientAddress(),bo.getCollectionItem()});
             if (update != 0) {
                 return 200;
             }

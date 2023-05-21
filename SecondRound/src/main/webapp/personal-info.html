@@ -89,7 +89,7 @@
             event.preventDefault();  // 阻止默认提交
             let newAvatar = $("#new-avatar")[0].files[0];
             let formData = new FormData();
-            formData.append("avatar", newAvatar);
+            formData.append("file", newAvatar);
             $.ajax({
                 type: "POST",
                 url: "/Servlet/infoChangeAvatar",

@@ -1,12 +1,16 @@
 package tv.controller.handler;
 
 import tv.controller.ServletHandler;
+import tv.entity.bo.TransferBo;
 import tv.entity.po.User;
 import tv.service.ITransferService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
+import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,17 +29,13 @@ public class TransferHandler implements ServletHandler {
     public ITransferService transferServiceImpl;
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        String recipientAddress = request.getParameter("recipientAddress");
-        String collectionItem = request.getParameter("collectionItem");
-        if(recipientAddress == null || collectionItem == null) {
-            throw new InputException("输入为空");
-        }
+        TransferBo bo= DataBinder.bind(TransferBo.class, request);
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         String contractAddress = user.getContract_address();
-        int transfer = transferServiceImpl.transfer(recipientAddress, collectionItem, contractAddress, market);
+        int transfer = transferServiceImpl.transfer(bo, contractAddress, market);
         if(transfer == CHECK) {
-            throw new InputException("转增失败");
+            throw new RuntimeException("转增失败");
         }
         return null;
     }

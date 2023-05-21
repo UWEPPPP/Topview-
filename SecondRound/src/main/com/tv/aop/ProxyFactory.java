@@ -6,6 +6,7 @@ import tv.spring.Scope;
 import tv.util.ConnectionPool;
 import tv.util.Logger;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import java.util.logging.Level;
 public class ProxyFactory {
     @AutoWired
     public ConnectionPool connectionPool;
+
 
     /**
      * 创建代理

@@ -1,5 +1,6 @@
 package tv.service;
 
+import tv.entity.bo.TransferBo;
 import tv.entity.po.User;
 import tv.service.wrapper.NftMarket;
 
@@ -21,5 +22,5 @@ public interface ITransferService {
      */
     List<User> getTransferList(String owner) throws Exception;
 
-    int transfer(String to, String cid, String from, NftMarket nftMarket) throws Exception;
+    int transfer(TransferBo bo, String from, NftMarket nftMarket) throws Exception;
 }

@@ -1,9 +1,13 @@
 package tv.controller.handler;
 
 import tv.controller.ServletHandler;
+import tv.entity.bo.SearchBo;
 import tv.service.ISearchService;
-import tv.spring.*;
-import tv.util.exception.InputException;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
+import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,11 +26,7 @@ public class SearchHandler implements ServletHandler {
     public ISearchService searchServiceImpl;
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        String type = request.getParameter("searchType");
-        String searchText = request.getParameter("searchText");
-        if (type == null || searchText == null) {
-            throw new InputException("输入为空");
-        }
-        return searchServiceImpl.search(type, searchText);
+        SearchBo bo =DataBinder.bind(SearchBo.class, request);
+        return searchServiceImpl.search(bo);
     }
 }

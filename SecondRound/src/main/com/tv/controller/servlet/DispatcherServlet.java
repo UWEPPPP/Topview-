@@ -1,12 +1,10 @@
 package tv.controller.servlet;
 
 import com.alibaba.fastjson.JSON;
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
-import tv.controller.ExceptionHandler;
+import tv.util.exception.ExceptionHandler;
 import tv.controller.ServletHandler;
 import tv.factory.HandlerFactory;
 import tv.util.Logger;
-import tv.util.exception.InputException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -47,12 +45,6 @@ public class DispatcherServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
             response.getWriter().write(JSON.toJSONString(result));
-        } catch (NullPointerException e){
-            ExceptionHandler.handleNullPointException(e, response);
-        }catch (InputException e) {
-            ExceptionHandler.handleInputException(e, response);
-        }catch (ContractException e) {
-            ExceptionHandler.handleContractException(e, response);
         } catch (Exception e) {
             ExceptionHandler.handleException(e, response);
         }

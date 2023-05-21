@@ -3,6 +3,7 @@ package tv.service.impl;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import tv.dao.IDao;
+import tv.entity.bo.UpAndDownBo;
 import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.AutoWired;
@@ -57,10 +58,10 @@ public class InfoServiceImpl implements IInfoService {
     }
 
     @Override
-    public int upAndDown(String cid, String choice) throws SQLException, ClassNotFoundException, InterruptedException {
-        boolean result = Objects.equals(choice, "false");
+    public int upAndDown(UpAndDownBo bo) throws SQLException, ClassNotFoundException, InterruptedException {
+        boolean result = !bo.getOnSale();
         String sql = "update nft.nfts set is_sold = ? where ipfs_cid = ?";
-        int size =dao.insertOrUpdateOrDelete(sql, new Object[]{result, cid});
+        int size =dao.insertOrUpdateOrDelete(sql, new Object[]{result, bo.getCid()});
         if (size == 0) {
             return 500;
         }

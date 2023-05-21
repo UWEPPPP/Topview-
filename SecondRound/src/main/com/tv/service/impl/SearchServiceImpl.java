@@ -1,6 +1,7 @@
 package tv.service.impl;
 
 import tv.dao.IDao;
+import tv.entity.bo.SearchBo;
 import tv.entity.po.Nft;
 import tv.service.ISearchService;
 import tv.spring.AutoWired;
@@ -26,13 +27,14 @@ public class SearchServiceImpl implements ISearchService {
     @AutoWired
     public IDao dao;
     @Override
-    public List<Nft> search(String type, String text) throws Exception {
+    public List<Nft> search(SearchBo bo) throws Exception {
         List<Nft> list;
         String sql;
-        switch (type) {
+        String text = null;
+        switch (bo.getSearchType()) {
             case "name":
                 sql = "select * from nft.nfts where is_sold = false and  name like ?";
-                text = "%" + text + "%";
+                text = "%" + bo.getSearchText() + "%";
                 break;
             case "caster":
                 sql = "select * from nft.nfts where is_sold = false and  owner = ?";

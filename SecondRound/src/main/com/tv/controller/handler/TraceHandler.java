@@ -3,9 +3,11 @@ package tv.controller.handler;
 import tv.controller.ServletHandler;
 import tv.service.ITraceService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.*;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 import tv.util.CastUtil;
-import tv.util.exception.InputException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,9 +27,6 @@ public class TraceHandler implements ServletHandler {
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         String cid = request.getParameter("cid");
-        if (cid == null) {
-            throw new InputException("cid为空");
-        }
         NftMarket nftMarket = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         return traceServiceImpl.getLife(cid, nftMarket);
     }

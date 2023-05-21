@@ -3,8 +3,10 @@ package tv.controller.handler;
 import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IInfoService;
-import tv.spring.*;
-import tv.util.exception.InputException;
+import tv.spring.AutoWired;
+import tv.spring.Component;
+import tv.spring.Controller;
+import tv.spring.Scope;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +28,10 @@ public class InfoChangeProfileHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
     @Override
-    public Object handle(HttpServletRequest request) throws InputException, ServletException, IOException, SQLException, ClassNotFoundException {
+    public Object handle(HttpServletRequest request) throws ServletException, IOException, SQLException, ClassNotFoundException {
         Part part = request.getPart("avatar");
         User user = (User) request.getSession().getAttribute("user");
-        if (part == null) {
-            throw new InputException("上传文件为空");
-        }
+
         String profile = infoServiceImpl.changeInfo(null, part, user.getContract_address());
         user.setProfile(profile);
         request.getSession().setAttribute("user", user);

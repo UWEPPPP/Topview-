@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
 import tv.dao.IDao;
+import tv.entity.bo.RegisterBo;
 import tv.service.IRegisterService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.AutoWired;
@@ -35,20 +36,19 @@ public class RegisterServiceImpl implements IRegisterService {
     @AutoWired
     public IDao dao;
     @Override
-    public int register(String username, String password, Part avatarPart) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
+    public int register(RegisterBo bo) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
         String hexPrivateKey = keyPair.getHexPrivateKey();
-        // 保存用户头像到服务器
-        InputStream inputStream = avatarPart.getInputStream();
+        InputStream inputStream = bo.getAvatar().getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
         inputStream.close();
-        String paddedStr = String.format("%-32s", password).replace(' ', '0');
+        String paddedStr = String.format("%-32s", bo.getPassword()).replace(' ', '0');
         String privateKey = CryptoUtil.encryptHexPrivateKey(hexPrivateKey);
         String userPassword = CryptoUtil.encryptHexPrivateKey(paddedStr);
         String upload = IpfsUtil.upload(byteArray);
         String sql = "insert into nft.nft_user(name, profile, contract_address, private_key, password) values(?,?,?,?,?)";
-        int insert = dao.insertOrUpdateOrDelete(sql, new Object[]{username, upload, keyPair.getAddress(), privateKey, userPassword});
+        int insert = dao.insertOrUpdateOrDelete(sql, new Object[]{bo.getUsername(), upload, keyPair.getAddress(), privateKey, userPassword});
         NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));
         TransactionReceipt register = nftMarket.regiter();
         String status = register.getStatus();
