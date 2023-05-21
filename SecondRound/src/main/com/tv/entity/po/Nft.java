@@ -1,7 +1,7 @@
 package tv.entity.po;
 
 /**
- * 非功能性测试
+ * nft
  *
  * @author 刘家辉
  * @date 2023/04/29

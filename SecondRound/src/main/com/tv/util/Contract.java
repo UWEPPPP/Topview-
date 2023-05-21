@@ -10,6 +10,12 @@ import javax.servlet.http.Part;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 合约工具类
+ *
+ * @author 刘家辉
+ * @date 2023/05/21
+ */
 public class Contract {
     private static final BcosSDK SDK = BcosSDK.build("D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\config-example.toml");
     private static final Client CLIENT = SDK.getClient(1);

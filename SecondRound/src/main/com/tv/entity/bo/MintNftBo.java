@@ -3,7 +3,7 @@ package tv.entity.bo;
 import javax.servlet.http.Part;
 
 /**
- * 薄荷薄非功能性测试
+ * 铸造nft
  *
  * @author 刘家辉
  * @date 2023/05/21

@@ -5,10 +5,10 @@ import tv.entity.bo.LoginBo;
 import tv.entity.po.User;
 import tv.service.ILoginService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.spring.ServiceLogger;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.spring.annotate.ServiceLogger;
 import tv.util.CryptoUtil;
 
 import java.math.BigInteger;

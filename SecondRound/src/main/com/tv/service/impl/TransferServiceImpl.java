@@ -7,10 +7,10 @@ import tv.entity.po.Nft;
 import tv.entity.po.User;
 import tv.service.ITransferService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.spring.ServiceLogger;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.spring.annotate.ServiceLogger;
 import tv.util.Contract;
 
 import java.math.BigInteger;
@@ -42,13 +42,13 @@ public class TransferServiceImpl implements ITransferService {
     @Override
     public int transfer(TransferBo bo, String from, NftMarket nftMarket) throws Exception {
         String sql = "select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> list = dao.select(sql, new Object[]{bo.getCollectionItem()}, Nft.class);
+        List<Nft> list = dao.select(sql, new Object[]{bo.getCid()}, Nft.class);
         Nft nft = list.get(0);
         TransactionReceipt transactionReceipt = nftMarket.tranferNft(BigInteger.valueOf(nft.getNftId()), bo.getRecipientAddress());
         String status = transactionReceipt.getStatus();
         if (status.equals(Contract.checkStatus)) {
             String sql1 = "update nft.nfts set owner = ? where ipfs_cid = ?";
-            int update = dao.insertOrUpdateOrDelete(sql1, new Object[]{bo.getRecipientAddress(),bo.getCollectionItem()});
+            int update = dao.insertOrUpdateOrDelete(sql1, new Object[]{bo.getRecipientAddress(),bo.getCid()});
             if (update != 0) {
                 return 200;
             }

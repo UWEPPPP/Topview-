@@ -1,7 +1,9 @@
-package tv.util;
+package tv.dao;
 
-import tv.spring.Component;
-import tv.spring.Scope;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.util.Logger;
+import tv.util.ThreadPool;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.logging.Level;
 
 /**
+ * 连接池
  * @author 刘家辉
  * @date 2023/04/06
  */

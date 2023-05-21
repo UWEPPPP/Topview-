@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- *
+ *拍卖服务
  * @author 刘家辉
  * @date 2023/05/11
  */
@@ -18,7 +18,7 @@ public interface IAuctionService {
 
 
     /**
-     * 展示拍卖
+     * 展示拍卖品
      *
      * @return {@link List}<{@link AuctionDto}>
      * @throws Exception 异常
@@ -26,7 +26,7 @@ public interface IAuctionService {
     List<AuctionDto> showAuction() throws Exception;
 
     /**
-     * 提供
+     * 出价
      *
      * @param bidder    投标人
      * @param nftMarket 非功能性测试市场
@@ -58,11 +58,10 @@ public interface IAuctionService {
     void auctionEnd(int nftId, NftMarket nftMarket) throws Exception;
 
     /**
-     * 汽车检查结束
+     * 自动检查拍卖结束
      *
      * @param id   id
      * @param time 时间
-     * @throws Exception 异常
      */
-    void autoCheckEnd(int id,int time) throws Exception;
+    void autoCheckEnd(int id,int time);
 }

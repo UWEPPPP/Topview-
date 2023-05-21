@@ -4,10 +4,10 @@ package tv.controller.handler;
 import tv.controller.ServletHandler;
 import tv.entity.bo.LoginBo;
 import tv.service.ILoginService;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Controller;
-import tv.spring.Scope;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Controller;
+import tv.spring.annotate.Scope;
 import tv.util.DataBinder;
 
 import javax.servlet.http.HttpServletRequest;

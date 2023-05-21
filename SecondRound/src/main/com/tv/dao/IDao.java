@@ -17,10 +17,9 @@ public interface IDao {
      * @param objects 对象
      * @return int
      * @throws SQLException           sqlexception异常
-     * @throws ClassNotFoundException 类没有发现异常
      * @throws InterruptedException   中断异常
      */
-    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, ClassNotFoundException, InterruptedException;
+    int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, InterruptedException;
 
     /**
      * 选择
@@ -32,5 +31,5 @@ public interface IDao {
      * @return {@link List}<{@link T}>
      * @throws Exception 异常
      */
-    public <T> List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception;
+    <T> List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception;
 }

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * iinfo服务
+ * 个人信息修改查看服务
  *
  * @author 刘家辉
  * @date 2023/05/17
@@ -32,8 +32,7 @@ public interface IInfoService {
      * 向上和向下
      * 上架和下架
      *
-     * @param cid    cid
-     * @param choice 选择
+     * @param bo 薄
      * @return int
      * @throws SQLException           sqlexception异常
      * @throws ClassNotFoundException 类没有发现异常
@@ -44,9 +43,9 @@ public interface IInfoService {
     /**
      * 改变平衡
      *
+     * @param nftMarket 非功能性测试市场
      * @return int
-     * @throws SQLException           sqlexception异常
-     * @throws ClassNotFoundException 类没有发现异常
+     * @throws ContractException      合同例外
      */
-    int changeBalance(NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException;
+    int changeBalance(NftMarket nftMarket) throws ContractException;
 }

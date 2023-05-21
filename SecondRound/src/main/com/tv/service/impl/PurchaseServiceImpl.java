@@ -5,10 +5,10 @@ import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import tv.dao.IDao;
 import tv.service.IPurchaseService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.spring.ServiceLogger;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.spring.annotate.ServiceLogger;
 import tv.util.Contract;
 
 import java.math.BigInteger;

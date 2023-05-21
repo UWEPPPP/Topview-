@@ -6,7 +6,7 @@ import tv.spring.ApplicationContext;
 import tv.util.CastUtil;
 
 /**
- * 工厂
+ * 用于从容器中取出对象
  *
  * @author 刘家辉
  * @date 2023/05/04

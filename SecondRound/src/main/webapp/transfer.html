@@ -35,8 +35,8 @@
             <input id="recipient" name="recipient" type="text">
         </div>
         <div>
-            <label for="collection-item">藏品CID：</label>
-            <input id="collection-item" name="collection-item" type="text">
+            <label for="cid">藏品CID：</label>
+            <input id="cid" name="cid" type="text">
         </div>
         <button type="submit">转增</button>
     </form>
@@ -80,14 +80,14 @@
         $("#transfer-form").on("submit", function (event) {
             event.preventDefault();
             var recipientAddress = $("#recipient-address").val();
-            var collectionItem = $("#collection-item").val();
-            if (!recipientAddress || !collectionItem) {
+            var cid = $("#cid").val();
+            if (!recipientAddress || !cid) {
                 alert("请填写完整信息！");
                 return;
             }
             var formData = {
                 recipientAddress: recipientAddress,
-                collectionItem: collectionItem
+                cid: cid
             };
             $.ajax({
                 type: "POST",

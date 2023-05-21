@@ -3,7 +3,7 @@ package tv.entity.bo;
 import javax.servlet.http.Part;
 
 /**
- * 登记薄
+ * 注册
  *
  * @author 刘家辉
  * @date 2023/05/21

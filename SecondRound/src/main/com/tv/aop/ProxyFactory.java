@@ -1,12 +1,11 @@
 package tv.aop;
 
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.util.ConnectionPool;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.dao.ConnectionPool;
 import tv.util.Logger;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -14,6 +13,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 
 /**
+ * 代理工厂
  * @author 刘家辉
  * @date 2023/04/13
  */

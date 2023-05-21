@@ -1,5 +1,11 @@
 package tv.entity.bo;
 
+/**
+ * 查找
+ *
+ * @author 刘家辉
+ * @date 2023/05/21
+ */
 public class SearchBo {
     private String searchType;
     private String searchText;

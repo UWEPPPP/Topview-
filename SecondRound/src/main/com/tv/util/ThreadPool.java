@@ -9,13 +9,10 @@ import java.util.concurrent.*;
  * @date 2023/05/12
  */
 public class ThreadPool {
-    private static final ThreadFactory THREAD_FACTORY = new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable runnable) {
-            Thread thread = new Thread(runnable);
-            thread.setName("auction-thread");
-            return thread;
-        }
+    private static final ThreadFactory THREAD_FACTORY = runnable -> {
+        Thread thread = new Thread(runnable);
+        thread.setName("auction-thread");
+        return thread;
     };
     public static final ExecutorService SERVICE = new ThreadPoolExecutor(
             10, 30,

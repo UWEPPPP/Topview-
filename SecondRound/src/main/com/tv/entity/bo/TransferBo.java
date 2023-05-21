@@ -1,8 +1,14 @@
 package tv.entity.bo;
 
+/**
+ * 转增
+ *
+ * @author 刘家辉
+ * @date 2023/05/21
+ */
 public class TransferBo {
     private String recipientAddress;
-    private String collectionItem;
+    private String cid;
 
     public String getRecipientAddress() {
         return recipientAddress;
@@ -12,11 +18,11 @@ public class TransferBo {
         this.recipientAddress = recipientAddress;
     }
 
-    public String getCollectionItem() {
-        return collectionItem;
+    public String getCid() {
+        return cid;
     }
 
-    public void setCollectionItem(String collectionItem) {
-        this.collectionItem = collectionItem;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 }

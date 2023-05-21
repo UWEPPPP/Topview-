@@ -1,5 +1,11 @@
 package tv.spring;
 
+/**
+ * bean定义
+ *
+ * @author 刘家辉
+ * @date 2023/05/21
+ */
 public class BeanDefinition {
     private Class type;
 private String scope;

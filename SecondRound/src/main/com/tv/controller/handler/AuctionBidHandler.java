@@ -5,10 +5,10 @@ import tv.entity.bo.AuctionBidBo;
 import tv.entity.po.User;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Controller;
-import tv.spring.Scope;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Controller;
+import tv.spring.annotate.Scope;
 import tv.util.CastUtil;
 import tv.util.DataBinder;
 

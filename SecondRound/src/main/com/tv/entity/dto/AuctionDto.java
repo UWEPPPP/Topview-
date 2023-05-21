@@ -1,7 +1,7 @@
 package tv.entity.dto;
 
 /**
- * 拍卖dto
+ * 显示正在拍卖的物品
  *
  * @author 刘家辉
  * @date 2023/05/10

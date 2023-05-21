@@ -32,6 +32,7 @@ public class CryptoUtil {
         } catch (NoSuchAlgorithmException e) {
             Logger.logException(Level.WARNING, "加密算法不存在", e);
         }
+        assert instance != null;
         byte[] digest = instance.digest(passwordBytes);
         key = new SecretKeySpec(digest, "AES");
         return key;

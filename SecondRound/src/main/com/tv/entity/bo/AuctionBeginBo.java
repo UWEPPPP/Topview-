@@ -1,7 +1,7 @@
 package tv.entity.bo;
 
 /**
- * 拍卖开始bo
+ * 开始拍卖
  *
  * @author 刘家辉
  * @date 2023/05/21

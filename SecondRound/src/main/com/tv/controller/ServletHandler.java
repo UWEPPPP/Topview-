@@ -3,13 +3,13 @@ package tv.controller;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * servlet处理程序
+ * 处理器
  *
  * @author 刘家辉
  * @date 2023/05/17
  */
 public interface ServletHandler {
-    static int CHECK = 500;
+    int CHECK = 500;
 
     /**
      * 处理

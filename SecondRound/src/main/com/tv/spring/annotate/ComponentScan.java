@@ -1,4 +1,4 @@
-package tv.spring;
+package tv.spring.annotate;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
  * @author 刘家辉
  * @date 2023/05/15
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AutoWired {
+public @interface ComponentScan {
 
-    String value() default "";
+    String[] value() default "";
 }

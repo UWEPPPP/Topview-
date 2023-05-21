@@ -3,7 +3,10 @@ package tv.controller.handler;
 import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.ITransferService;
-import tv.spring.*;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Controller;
+import tv.spring.annotate.Scope;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;

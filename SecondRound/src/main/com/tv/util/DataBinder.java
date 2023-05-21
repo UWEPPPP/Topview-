@@ -5,7 +5,7 @@ import javax.servlet.http.Part;
 import java.lang.reflect.Field;
 
 /**
- * 数据绑定
+ * 数据绑定，自动转换类型
  *
  * @author 刘家辉
  * @date 2023/05/21
@@ -48,8 +48,7 @@ public class DataBinder {
         } else if (type == String.class) {
             return value;
         } else  {
-            // 其他类型需要手动进行转换
-            throw new IllegalArgumentException("Unsupported type: " + type.getName());
+            throw new IllegalArgumentException("不支持的类型: " + type.getName());
         }
     }
 }

@@ -13,9 +13,8 @@ public interface BeanPostProcessor {
      * @param bean     豆
      * @param beanName bean名字
      * @return {@link Object}
-     * @throws Exception 异常
      */
-    Object postProcessBeforeInitialization(Object bean, String beanName) throws Exception;
+    Object postProcessBeforeInitialization(Object bean, String beanName);
 
     /**
      * 发布过程初始化后
@@ -23,7 +22,6 @@ public interface BeanPostProcessor {
      * @param bean     豆
      * @param beanName bean名字
      * @return {@link Object}
-     * @throws Exception 异常
      */
-    Object postProcessAfterInitialization(Object bean, String beanName) throws Exception;
+    Object postProcessAfterInitialization(Object bean, String beanName);
 }

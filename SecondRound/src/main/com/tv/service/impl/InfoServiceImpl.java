@@ -6,17 +6,16 @@ import tv.dao.IDao;
 import tv.entity.bo.UpAndDownBo;
 import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.AutoWired;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.spring.ServiceLogger;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.spring.annotate.ServiceLogger;
 import tv.util.IpfsUtil;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Objects;
 
 /**
  * 信息服务
@@ -45,7 +44,7 @@ public class InfoServiceImpl implements IInfoService {
             choice = "profile";
         }
         String sql = "update nft.nft_user set " + choice + " = ? where contract_address = ?";
-        int result = 0;
+        int result;
         try {
             result = dao.insertOrUpdateOrDelete(sql, new Object[]{update, contractAddress});
         } catch (InterruptedException e) {

@@ -1,11 +1,11 @@
 package tv.dao.impl;
 
 import tv.dao.IDao;
-import tv.spring.AutoWired;
-import tv.spring.CommonLogger;
-import tv.spring.Component;
-import tv.spring.Scope;
-import tv.util.ConnectionPool;
+import tv.spring.annotate.AutoWired;
+import tv.spring.annotate.CommonLogger;
+import tv.spring.annotate.Component;
+import tv.spring.annotate.Scope;
+import tv.dao.ConnectionPool;
 import tv.util.DbTool;
 
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class Dao implements IDao {
     public ConnectionPool connectionPool;
 
     @Override
-    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws ClassNotFoundException, SQLException, InterruptedException {
+    public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, InterruptedException {
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
