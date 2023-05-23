@@ -31,7 +31,7 @@ public class ProxyFactory {
      * @param target 目标
      * @return {@link Object}
      */
-    public Object serviceProxy(Object target) {
+    public Object securityProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {

@@ -8,10 +8,7 @@ import tv.dao.NftDao;
 import tv.entity.bo.MintNftBo;
 import tv.service.IMintService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.Contract;
 import tv.util.IpfsUtil;
 
@@ -29,7 +26,8 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@SecurityLogger
+@Service
 public class MintServiceImpl implements IMintService {
     @AutoWired
     public NftDao nftDaoImpl;
@@ -51,8 +49,13 @@ public class MintServiceImpl implements IMintService {
         Tuple1<BigInteger> issueNftOutput = nftMarket.getIssueNftOutput(transactionReceipt);
         bo.setNftId(issueNftOutput.getValue1().intValue());
         String status = transactionReceipt.getStatus();
-        int insert = nftDaoImpl.insert(bo.getName(), bo.getIpfs_cid(), bo.getPrice(), bo.getType(), bo.getOwner(), bo.getDescription(), false, bo.getNftId());
-        return insert != 0 || status.equals(Contract.checkStatus) ? 200 : 500;
+        if(status.equals(Contract.checkStatus)){
+            int insert = nftDaoImpl.insert(bo.getName(), bo.getIpfs_cid(), bo.getPrice(), bo.getType(), bo.getOwner(), bo.getDescription(), false, bo.getNftId());
+            if(insert != 0){
+                return 200;
+            }
+        }
+        return 500;
     }
 
 

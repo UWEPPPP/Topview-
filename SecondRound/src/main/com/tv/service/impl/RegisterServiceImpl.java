@@ -7,10 +7,7 @@ import tv.dao.UserDao;
 import tv.entity.bo.RegisterBo;
 import tv.service.IRegisterService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.CastUtil;
 import tv.util.Contract;
 import tv.util.CryptoUtil;
@@ -28,7 +25,8 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@SecurityLogger
+@Service
 public class RegisterServiceImpl implements IRegisterService {
     @AutoWired
     public UserDao userDaoImpl;
@@ -47,13 +45,14 @@ public class RegisterServiceImpl implements IRegisterService {
         String upload = IpfsUtil.upload(byteArray);
         int insert = userDaoImpl.insert(bo.getUsername(), upload, keyPair.getAddress(), privateKey, userPassword);
         NftMarket nftMarket = CastUtil.cast(map.get("nftMarket"));
-        TransactionReceipt register = nftMarket.regiter();
-        String status = register.getStatus();
-        if (!Contract.checkStatus.equals(status) || insert == 0) {
-            return 500;
-        } else {
-            return 200;
+        if (insert != 0) {
+            TransactionReceipt register = nftMarket.regiter();
+            String status = register.getStatus();
+            if(Contract.checkStatus.equals(status)){
+                return 200;
+            }
         }
+        return 500;
     }
 
 }

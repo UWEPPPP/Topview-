@@ -4,10 +4,7 @@ import tv.dao.NftDao;
 import tv.entity.bo.SearchBo;
 import tv.entity.po.Nft;
 import tv.service.ISearchService;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 
 import java.util.List;
 
@@ -22,7 +19,8 @@ import static tv.util.JsonUtil.analysisJson;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@CommonLogger
+@Service
 public class SearchServiceImpl implements ISearchService {
 
     @AutoWired

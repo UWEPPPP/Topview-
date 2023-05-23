@@ -10,5 +10,5 @@ import java.lang.annotation.RetentionPolicy;
  * @date 2023/05/16
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceLogger {
+public @interface SecurityLogger {
 }

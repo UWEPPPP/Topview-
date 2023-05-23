@@ -8,10 +8,7 @@ import tv.entity.po.Nft;
 import tv.entity.po.User;
 import tv.service.ITransferService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.Contract;
 
 import java.math.BigInteger;
@@ -26,7 +23,8 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@SecurityLogger
+@Service
 public class TransferServiceImpl implements ITransferService {
     @AutoWired
     public NftDao nftDaoImpl;
@@ -56,7 +54,7 @@ public class TransferServiceImpl implements ITransferService {
             tv.util.Logger.info("转增成功");
         }
         tv.util.Logger.warning("转增失败");
-        return 500;
+        throw new RuntimeException("转增失败");
     }
 
 

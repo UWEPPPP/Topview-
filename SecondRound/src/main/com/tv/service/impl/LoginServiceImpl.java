@@ -5,10 +5,7 @@ import tv.entity.bo.LoginBo;
 import tv.entity.po.User;
 import tv.service.ILoginService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.CryptoUtil;
 
 import java.math.BigInteger;
@@ -27,7 +24,8 @@ import static tv.util.Contract.setNftMarket;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@CommonLogger
+@Service
 public class LoginServiceImpl implements ILoginService {
     @AutoWired
     public UserDao userDaoImpl;

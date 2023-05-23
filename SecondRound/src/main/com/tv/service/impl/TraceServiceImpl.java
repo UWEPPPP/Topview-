@@ -6,10 +6,7 @@ import tv.entity.po.Nft;
 import tv.service.ITraceService;
 import tv.service.wrapper.NftMarket;
 import tv.service.wrapper.NftStorage;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -23,7 +20,8 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@CommonLogger
+@Service
 public class TraceServiceImpl implements ITraceService {
     @AutoWired
     public NftDao nftDaoImpl;

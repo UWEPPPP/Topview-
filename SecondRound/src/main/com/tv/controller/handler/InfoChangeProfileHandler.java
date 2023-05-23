@@ -32,7 +32,6 @@ public class InfoChangeProfileHandler implements ServletHandler {
     public Object handle(HttpServletRequest request) throws Exception {
         Part part = request.getPart("avatar");
         User user = (User) request.getSession().getAttribute("user");
-
         String profile = infoServiceImpl.changeInfo(null, part, user.getContract_address());
         user.setProfile(profile);
         request.getSession().setAttribute("user", user);

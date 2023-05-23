@@ -3,10 +3,7 @@ package tv.service.impl;
 import tv.dao.NftDao;
 import tv.entity.po.Nft;
 import tv.service.IDisplayService;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 
 import java.util.List;
 
@@ -20,7 +17,8 @@ import static tv.util.JsonUtil.analysisJson;
  */
 @Component
 @Scope("singleton")
-@ServiceLogger
+@CommonLogger
+@Service
 public class DisplayServiceImpl implements IDisplayService {
     @AutoWired
     public NftDao nftDaoImpl;

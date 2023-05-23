@@ -95,7 +95,7 @@ public class ApplicationContext {
         }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if ( beanDefinition.getType().isAnnotationPresent(ServiceLogger.class)) {
+            if ( beanDefinition.getType().isAnnotationPresent(Service.class)) {
                 Object bean = createBean(beanName, beanDefinition);
                 singletonObjects.put(beanName, bean);
             }
@@ -122,8 +122,8 @@ public class ApplicationContext {
                     field.set(instance, getBean(field.getName()));
                 }
             }
-            if (type.isAnnotationPresent(ServiceLogger.class)) {
-                instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).serviceProxy(instance);
+            if (type.isAnnotationPresent(SecurityLogger.class)) {
+                instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).securityProxy(instance);
                 Logger.info("serviceProxy");
             } else if (type.isAnnotationPresent(CommonLogger.class)) {
                 instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).commonProxy(instance);

@@ -4,10 +4,7 @@ import org.fisco.bcos.sdk.model.TransactionReceipt;
 import tv.dao.NftDao;
 import tv.service.IPurchaseService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.Contract;
 
 import java.math.BigInteger;
@@ -21,7 +18,8 @@ import java.math.BigInteger;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@SecurityLogger
+@Service
 public class PurchaseServiceImpl implements IPurchaseService {
 
     @AutoWired
@@ -29,13 +27,15 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
     @Override
     public int buy(int nftId, String owner, NftMarket nftMarket) throws Exception {
-        TransactionReceipt transactionReceipt = nftMarket.buyNft(BigInteger.valueOf(nftId));
-        String status = transactionReceipt.getStatus();
         int result = nftDaoImpl.updateOwnerBuy(false, owner, nftId);
-        if (result == 0 || !status.equals(Contract.checkStatus)) {
-            return 500;
+        if (result != 0 ) {
+            TransactionReceipt transactionReceipt = nftMarket.buyNft(BigInteger.valueOf(nftId));
+            String status = transactionReceipt.getStatus();
+            if (status.equals(Contract.checkStatus)) {
+                return nftMarket.getBalance().intValue();
+            }
         }
-        return nftMarket.getBalance().intValue();
+        throw new RuntimeException("购买失败");
     }
 
 

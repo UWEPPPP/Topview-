@@ -10,10 +10,7 @@ import tv.entity.po.Auction;
 import tv.entity.po.Nft;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.Contract;
 import tv.util.JsonUtil;
 import tv.util.Logger;
@@ -32,9 +29,10 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/10
  */
-@ServiceLogger
+@SecurityLogger
 @Component
 @Scope("singleton")
+@Service
 public class AuctionServiceImpl implements IAuctionService {
     @AutoWired
     public AuctionDao auctionDaoImpl;
@@ -63,14 +61,15 @@ public class AuctionServiceImpl implements IAuctionService {
 
     @Override
     public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws Exception {
-        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()), BigInteger.valueOf(bo.getBidPrice()));
-        String status = transactionReceipt.getStatus();
         int result = auctionDaoImpl.update(new Object[]{bo.getBidPrice(), bidder, bo.getNftId()});
-        if (status.equals(Contract.checkStatus) && result != 0) {
-            return 200;
-        } else {
-            return 500;
+        if ( result != 0) {
+            TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()), BigInteger.valueOf(bo.getBidPrice()));
+            String status = transactionReceipt.getStatus();
+            if(status.equals(Contract.checkStatus)){
+                return 200;
+            }
         }
+        return 500;
     }
 
     private AuctionDto combine(Auction nftA, Nft nftB) {
@@ -93,25 +92,29 @@ public class AuctionServiceImpl implements IAuctionService {
         int nftId = select.get(0).getNftId();
         long time = System.currentTimeMillis() + auctionBeginBo.getDuration() * 1_000L;
         int result = auctionDaoImpl.insert(new Object[]{nftId, auctionBeginBo.getAmount(), time, select.get(0).getOwner()});
-        TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(auctionBeginBo.getAmount()), BigInteger.valueOf(auctionBeginBo.getDuration() * 1_000L));
-        String status = transactionReceipt.getStatus();
         autoCheckEnd(nftId, auctionBeginBo.getDuration());
-        if (status.equals(Contract.checkStatus) && result != 0) {
-            return 200;
+        if (result != 0) {
+            TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(auctionBeginBo.getAmount()), BigInteger.valueOf(auctionBeginBo.getDuration() * 1_000L));
+            String status = transactionReceipt.getStatus();
+            if (status.equals(Contract.checkStatus) ) {
+                return 200;
+            }
         }
         return 500;
     }
 
     @Override
     public void auctionEnd(int nftId, NftMarket nftMarket) throws Exception {
-        TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
-        String status = transactionReceipt.getStatus();
         List<Auction> list = auctionDaoImpl.selectByNftId(nftId);
         String bidder = list.get(0).getHighest_bidder();
         int result = auctionDaoImpl.deleteByNftId(nftId);
         int result1 = nftDaoImpl.updateOwner(bidder, nftId);
-        if (status.equals(Contract.checkStatus) && result != 0 && result1 != 0) {
-            tv.util.Logger.info("拍卖结束成功");
+        if ( result != 0 && result1 != 0) {
+            TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
+            String status = transactionReceipt.getStatus();
+            if(status.equals(Contract.checkStatus)){
+                tv.util.Logger.info("拍卖结束成功");
+            }
         } else {
             tv.util.Logger.warning("拍卖结束失败");
         }

@@ -7,10 +7,7 @@ import tv.dao.UserDao;
 import tv.entity.bo.UpAndDownBo;
 import tv.service.IInfoService;
 import tv.service.wrapper.NftMarket;
-import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.Component;
-import tv.spring.annotate.Scope;
-import tv.spring.annotate.ServiceLogger;
+import tv.spring.annotate.*;
 import tv.util.IpfsUtil;
 
 import javax.servlet.http.Part;
@@ -25,7 +22,8 @@ import java.io.InputStream;
 
 @Component
 @Scope("singleton")
-@ServiceLogger
+@SecurityLogger
+@Service
 public class InfoServiceImpl implements IInfoService {
     @AutoWired
     public UserDao userDaoImpl;
