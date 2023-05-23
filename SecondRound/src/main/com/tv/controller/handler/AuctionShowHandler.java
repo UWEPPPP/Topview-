@@ -1,6 +1,7 @@
 package tv.controller.handler;
 
 import tv.controller.ServletHandler;
+import tv.service.IAuctionBidService;
 import tv.service.IAuctionService;
 import tv.spring.annotate.AutoWired;
 import tv.spring.annotate.Component;
@@ -21,10 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AuctionShowHandler implements ServletHandler {
     @AutoWired
-    public IAuctionService auctionServiceImpl;
+    public IAuctionBidService auctionBidServiceImpl;
 
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        return auctionServiceImpl.showAuction();
+        return auctionBidServiceImpl.showAuction();
     }
 }

@@ -21,6 +21,8 @@
                 img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
             } else if (nft.type === '3d') {
                 img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+            }else if (nft.type === 'video') {
+                img = $("<video controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='video/mp4'></video>").attr("width", "300px");
             }
             const buyBtn = $("<button>购买</button>");
             nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);

@@ -39,6 +39,7 @@ public class ProxyFactory {
             try {
                 Logger.info("method: " + method.getName() + ", args: " + Arrays.toString(args));
                 connection = connectionPool.getConnection();
+                connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
                 connection.setAutoCommit(false);
                 Object invoke = method.invoke(target, args);
                 connection.commit();

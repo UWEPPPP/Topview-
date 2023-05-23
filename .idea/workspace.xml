@@ -12,30 +12,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="improvement:优化了业务异常时链上链下数据的同步问题，以及对数据库事务的开启进行了一些优化调整">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" afterDir="false" />
+    <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="other:正式版">
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IAuctionBidService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionBidServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/Deploy.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/Deploy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeNameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeNameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeProfileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeProfileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/PurchaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/PurchaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/listener/Listener.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/listener/Listener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/CrudImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/CrudImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/DaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/DaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/impl/UserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/entity/bo/RegisterBo.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/entity/bo/RegisterBo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/aop/ProxyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/aop/ProxyFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionBidHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionBidHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionShowHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/AuctionShowHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IAuctionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/IAuctionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/PurchaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/PurchaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/RegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/Contract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/DbTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/util/DbTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/util/SqlBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/dao/util/SqlBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/resources/address.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/resources/address.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction-begin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/casting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/display.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/test/tv/service/impl/AuctionServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/test/tv/service/impl/AuctionServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/项目配置方式.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/项目配置方式.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +50,9 @@
         <option value="JUnit4 Test Class" />
         <option value="HTML File" />
         <option value="JavaScript File" />
-        <option value="Interface" />
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
     <option name="SCHEME" value="项目" />
@@ -452,7 +443,7 @@
       <workItem from="1684685715585" duration="558000" />
       <workItem from="1684686291759" duration="623000" />
       <workItem from="1684815434544" duration="19969000" />
-      <workItem from="1684847794554" duration="5920000" />
+      <workItem from="1684847794554" duration="10338000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
@@ -629,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684837443326</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="other:正式版">
+      <created>1684854350239</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1684854350239</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,7 +681,8 @@
     <MESSAGE value="other:加入了注释" />
     <MESSAGE value="refactor:将sql语句加入dao层（加入sql语句构造器，新增部分dao层接口，与业务层解耦）" />
     <MESSAGE value="improvement:优化了业务异常时链上链下数据的同步问题，以及对数据库事务的开启进行了一些优化调整" />
-    <option name="LAST_COMMIT_MESSAGE" value="improvement:优化了业务异常时链上链下数据的同步问题，以及对数据库事务的开启进行了一些优化调整" />
+    <MESSAGE value="other:正式版" />
+    <option name="LAST_COMMIT_MESSAGE" value="other:正式版" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/blockchain_liujiahui_Traceability_SecondRound$InfoServiceTest_changeInfo.ic" NAME="InfoServiceTest.changeInfo 覆盖结果" MODIFIED="1683530050813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
