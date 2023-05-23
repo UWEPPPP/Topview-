@@ -1,8 +1,6 @@
 package tv.controller.listener;
 
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 import tv.factory.HandlerFactory;
-import tv.service.wrapper.NftMarket;
 import tv.util.Contract;
 
 import javax.servlet.ServletContextEvent;
@@ -16,7 +14,7 @@ import javax.servlet.annotation.WebListener;
  * @date 2023/05/17
  */
 @WebListener(value = "init")
-public class Listener  implements ServletContextListener {
+public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Object bean = HandlerFactory.getInstance();

@@ -7,119 +7,119 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module">
         function show(nft) {
-        const nftContainer = $("#nftContainer");
-        const nftItem = $("<div class='nft-item'></div>");
-        const name = $("<h3></h3>").text(nft.name);
-        const type = $("<p></p>").text("类型:" + nft.type);
-        const price = $("<p></p>").text("价格:" + nft.price);
-        const ipfsCid = $("<p></p>").text("唯一标识:" + nft.ipfs_cid);
-        const owner = $("<p></p>").text("所有者:" + nft.owner);
-        let img;
-        if (nft.type === 'image') {
-            img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
-        } else if (nft.type === 'music') {
-            img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
-        }else if (nft.type === '3d') {
-            img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
-        }
-        const buyBtn = $("<button>购买</button>");
-        nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);
-        nftContainer.append(nftItem);
+            const nftContainer = $("#nftContainer");
+            const nftItem = $("<div class='nft-item'></div>");
+            const name = $("<h3></h3>").text(nft.name);
+            const type = $("<p></p>").text("类型:" + nft.type);
+            const price = $("<p></p>").text("价格:" + nft.price);
+            const ipfsCid = $("<p></p>").text("唯一标识:" + nft.ipfs_cid);
+            const owner = $("<p></p>").text("所有者:" + nft.owner);
+            let img;
+            if (nft.type === 'image') {
+                img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+            } else if (nft.type === 'music') {
+                img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + nft.show + "' type='audio/ogg'></audio>");
+            } else if (nft.type === '3d') {
+                img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + nft.show).attr("width", "100px");
+            }
+            const buyBtn = $("<button>购买</button>");
+            nftItem.append(name, type, price, ipfsCid, owner, img, buyBtn);
+            nftContainer.append(nftItem);
 
-        buyBtn.on("click", function () {
-            const id = nft.nftId;
-            const price = nft.price;
-            $.ajax({
-                url: "/Servlet/purchase",
-                type: "POST",
-                data: {id: id, price: price},
-                success: function (data) {
-                    alert("购买成功!");
-                    location.reload(); // 刷新页面以更新余额和藏品信息
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("购买失败:" + errorThrown);
-                }
+            buyBtn.on("click", function () {
+                const id = nft.nftId;
+                const price = nft.price;
+                $.ajax({
+                    url: "/Servlet/purchase",
+                    type: "POST",
+                    data: {id: id, price: price},
+                    success: function (data) {
+                        alert("购买成功!");
+                        location.reload(); // 刷新页面以更新余额和藏品信息
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("购买失败:" + errorThrown);
+                    }
+                });
+            });
+        }
+
+        $(function () {
+            // 获取个人信息
+            $.getJSON("/Servlet/infoShow", function (data) {
+                $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
+                $("#name").text(data.name);
+                $("#new-name").val(data.name);  // 将当前姓名填入输入框
+                $("#balance").text("余额:" + data.balance); // 显示余额
             });
         });
-    }
-
-    $(function () {
-        // 获取个人信息
-        $.getJSON("/Servlet/infoShow", function (data) {
-            $("#avatar").attr("src", "https://ipfs.io/ipfs/" + data.image);
-            $("#name").text(data.name);
-            $("#new-name").val(data.name);  // 将当前姓名填入输入框
-            $("#balance").text("余额:" + data.balance); // 显示余额
-        });
-    });
 
 
-    $(document).ready(function () {
-        const nftContainer = $("#nftContainer");
-        $.ajax({
-            url: "/Servlet/displayNft",
-            type: "GET",
-            data: {choice: choiceType},
-            success: function (data) {
-                const nfts = JSON.parse(JSON.stringify(data));
-                for (let i = 0; i < nfts.length; i++) {
-                    const nft = nfts[i];
-                    show(nft);
-                }
-            }
-        });
-
-        $("#categoryBtn").on("click", function () {
+        $(document).ready(function () {
+            const nftContainer = $("#nftContainer");
             $.ajax({
                 url: "/Servlet/displayNft",
                 type: "GET",
-                data: {choice:choiceType() },
+                data: {choice: choiceType},
                 success: function (data) {
-                    alert("分类展示成功!");
-                    nftContainer.empty();
                     const nfts = JSON.parse(JSON.stringify(data));
                     for (let i = 0; i < nfts.length; i++) {
                         const nft = nfts[i];
                         show(nft);
                     }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("分类展示失败:" + errorThrown);
                 }
             });
-        });
 
-        $("#searchBtn").on("click", function () {
-            const searchType = $("#searchType").val();
-            const searchText = $("#searchText").val();
-            $.ajax({
-                url: "/Servlet/search",
-                type: "POST",
-                data: {
-                    searchType: searchType,
-                    searchText: searchText
-                },
-                success: function (data) {
-                    alert("搜索成功!");
-                    nftContainer.empty();
-                    const nfts = JSON.parse(JSON.stringify(data));
-                    for (let i = 0; i < nfts.length; i++) {
-                        // 同展示藏品逻辑
-                        const nft = nfts[i];
-                        show(nft);
+            $("#categoryBtn").on("click", function () {
+                $.ajax({
+                    url: "/Servlet/displayNft",
+                    type: "GET",
+                    data: {choice: choiceType()},
+                    success: function (data) {
+                        alert("分类展示成功!");
+                        nftContainer.empty();
+                        const nfts = JSON.parse(JSON.stringify(data));
+                        for (let i = 0; i < nfts.length; i++) {
+                            const nft = nfts[i];
+                            show(nft);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("分类展示失败:" + errorThrown);
                     }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("搜索失败:" + errorThrown);
-                }
+                });
+            });
+
+            $("#searchBtn").on("click", function () {
+                const searchType = $("#searchType").val();
+                const searchText = $("#searchText").val();
+                $.ajax({
+                    url: "/Servlet/search",
+                    type: "POST",
+                    data: {
+                        searchType: searchType,
+                        searchText: searchText
+                    },
+                    success: function (data) {
+                        alert("搜索成功!");
+                        nftContainer.empty();
+                        const nfts = JSON.parse(JSON.stringify(data));
+                        for (let i = 0; i < nfts.length; i++) {
+                            // 同展示藏品逻辑
+                            const nft = nfts[i];
+                            show(nft);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("搜索失败:" + errorThrown);
+                    }
+                });
             });
         });
-    });
 
-    function choiceType() {
-        return document.getElementById('nftType').value;
-    }
+        function choiceType() {
+            return document.getElementById('nftType').value;
+        }
     </script>
     <style>
         #search {

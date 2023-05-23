@@ -1,6 +1,6 @@
 package tv.service.impl;
 
-import tv.dao.IDao;
+import tv.dao.NftDao;
 import tv.entity.bo.SearchBo;
 import tv.entity.po.Nft;
 import tv.service.ISearchService;
@@ -24,35 +24,35 @@ import static tv.util.JsonUtil.analysisJson;
 @Scope("singleton")
 @ServiceLogger
 public class SearchServiceImpl implements ISearchService {
+
     @AutoWired
-    public IDao dao;
+    public NftDao nftDaoImpl;
+
     @Override
     public List<Nft> search(SearchBo bo) throws Exception {
         List<Nft> list;
-        String sql;
-        String text = null;
+        String choice;
+        String text = bo.getSearchText();
         switch (bo.getSearchType()) {
             case "name":
-                sql = "select * from nft.nfts where is_sold = false and  name like ?";
                 text = "%" + bo.getSearchText() + "%";
+                choice = "@name";
                 break;
             case "caster":
-                sql = "select * from nft.nfts where is_sold = false and  owner = ?";
+                choice = "owner";
                 break;
             case "cid":
-                sql = "select * from nft.nfts where is_sold = false and  ipfs_cid = ?";
+                choice = "ipfs_cid";
                 break;
             default:
                 return null;
         }
-        list = dao.select(sql, new Object[]{text}, Nft.class);
+        list = nftDaoImpl.selectBySearch(choice, text);
         if (list.size() == 0) {
             return null;
         }
         return analysisJson(list);
     }
-
-
 
 
 }

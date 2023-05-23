@@ -1,9 +1,7 @@
-package tv.dao;
+package tv.util;
 
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
-import tv.util.Logger;
-import tv.util.ThreadPool;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +13,7 @@ import java.util.logging.Level;
 
 /**
  * 连接池
+ *
  * @author 刘家辉
  * @date 2023/04/06
  */
@@ -50,7 +49,7 @@ public class ConnectionPool {
             }
             startAutoShrinkingThread();
         } catch (IOException | SQLException e) {
-            Logger.logException(Level.WARNING,"连接池初始化异常",e);
+            Logger.logException(Level.WARNING, "连接池初始化异常", e);
         }
     }
 
@@ -63,7 +62,7 @@ public class ConnectionPool {
                 preparedStatement.close();
             }
         } catch (SQLException e) {
-            Logger.logException(Level.WARNING,"关闭连接异常",e);
+            Logger.logException(Level.WARNING, "关闭连接异常", e);
         }
     }
 
@@ -85,7 +84,7 @@ public class ConnectionPool {
 
     private synchronized void shrinkPool(int targetSize) throws SQLException {
         if (targetSize < 0 || targetSize > currentConnections) {
-            Logger.logException(Level.WARNING,"连接池缩容异常",new Exception());
+            Logger.logException(Level.WARNING, "连接池缩容异常", new Exception());
         }
         int numToClose = currentConnections - targetSize;
         for (int i = 0; i < numToClose; i++) {
@@ -108,7 +107,7 @@ public class ConnectionPool {
                         isShrinking = false;
                     }
                 } catch (InterruptedException | SQLException e) {
-                   Logger.logException(Level.WARNING,"连接池自动缩容开启异常",e);
+                    Logger.logException(Level.WARNING, "连接池自动缩容开启异常", e);
                 }
             }
         });
@@ -119,7 +118,7 @@ public class ConnectionPool {
             connectionPool.add(connection);
             notifyAll(); // 唤醒等待连接的线程
         } else {
-            Logger.logException(Level.WARNING,"释放了一个无效连接",new Exception());
+            Logger.logException(Level.WARNING, "释放了一个无效连接", new Exception());
         }
         Logger.info("一个连接被释放");
     }

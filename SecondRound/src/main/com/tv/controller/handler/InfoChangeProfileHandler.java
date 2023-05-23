@@ -27,8 +27,9 @@ import java.sql.SQLException;
 public class InfoChangeProfileHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
+
     @Override
-    public Object handle(HttpServletRequest request) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    public Object handle(HttpServletRequest request) throws Exception {
         Part part = request.getPart("avatar");
         User user = (User) request.getSession().getAttribute("user");
 

@@ -24,9 +24,10 @@ import javax.servlet.http.HttpServletRequest;
 public class SearchHandler implements ServletHandler {
     @AutoWired
     public ISearchService searchServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        SearchBo bo =DataBinder.bind(SearchBo.class, request);
+        SearchBo bo = DataBinder.bind(SearchBo.class, request);
         return searchServiceImpl.search(bo);
     }
 }

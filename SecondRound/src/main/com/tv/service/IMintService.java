@@ -1,10 +1,8 @@
 package tv.service;
 
 import tv.entity.bo.MintNftBo;
-import tv.entity.po.Nft;
 import tv.service.wrapper.NftMarket;
 
-import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -26,5 +24,5 @@ public interface IMintService {
      * @throws ClassNotFoundException 类没有发现异常
      * @throws InterruptedException   中断异常
      */
-    int mint(MintNftBo bo, NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException, InterruptedException;
+    int mint(MintNftBo bo, NftMarket nftMarket) throws Exception;
 }

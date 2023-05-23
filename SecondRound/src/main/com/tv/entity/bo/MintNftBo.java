@@ -9,14 +9,14 @@ import javax.servlet.http.Part;
  * @date 2023/05/21
  */
 public class MintNftBo {
-  private String name;
-  private String description;
-  private String type;
-  private int price;
-  private Part file;
-  private String owner;
-  private String ipfs_cid;
-  private int nftId;
+    private String name;
+    private String description;
+    private String type;
+    private int price;
+    private Part file;
+    private String owner;
+    private String ipfs_cid;
+    private int nftId;
 
     public String getName() {
         return name;

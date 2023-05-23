@@ -6,7 +6,6 @@ import org.fisco.bcos.sdk.crypto.CryptoSuite;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import tv.service.wrapper.NftMarket;
 
-import javax.servlet.http.Part;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ public class Contract {
     public static NftMarket getAdmin() {
         return ADMIN;
     }
+
     public static void setAdmin(NftMarket admin) {
         ADMIN = admin;
     }

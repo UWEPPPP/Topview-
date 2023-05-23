@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * 拍卖服务
  *
- *拍卖服务
  * @author 刘家辉
  * @date 2023/05/11
  */
@@ -36,7 +36,7 @@ public interface IAuctionService {
      * @throws ClassNotFoundException 类没有发现异常
      * @throws InterruptedException   中断异常
      */
-    int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException;
+    int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws Exception;
 
     /**
      * 拍卖开始
@@ -63,5 +63,5 @@ public interface IAuctionService {
      * @param id   id
      * @param time 时间
      */
-    void autoCheckEnd(int id,int time);
+    void autoCheckEnd(int id, int time);
 }

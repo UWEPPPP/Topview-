@@ -24,5 +24,5 @@ public interface IPurchaseService {
      * @throws ContractException      合同例外
      * @throws InterruptedException   中断异常
      */
-    int buy(int id, String owner, NftMarket nftMarket) throws SQLException, ClassNotFoundException, ContractException, InterruptedException;
+    int buy(int id, String owner, NftMarket nftMarket) throws Exception;
 }

@@ -1,7 +1,8 @@
 package tv.service.impl;
 
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import tv.dao.IDao;
+import tv.dao.AuctionDao;
+import tv.dao.NftDao;
 import tv.entity.bo.AuctionBeginBo;
 import tv.entity.bo.AuctionBidBo;
 import tv.entity.dto.AuctionDto;
@@ -13,10 +14,12 @@ import tv.spring.annotate.AutoWired;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
 import tv.spring.annotate.ServiceLogger;
-import tv.util.*;
+import tv.util.Contract;
+import tv.util.JsonUtil;
+import tv.util.Logger;
+import tv.util.ThreadPool;
 
 import java.math.BigInteger;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,13 +37,14 @@ import java.util.logging.Level;
 @Scope("singleton")
 public class AuctionServiceImpl implements IAuctionService {
     @AutoWired
-    public IDao dao;
+    public AuctionDao auctionDaoImpl;
+    @AutoWired
+    public NftDao nftDaoImpl;
+
     @Override
     public List<AuctionDto> showAuction() throws Exception {
-        String sql = "select * from nft.nft_auction";
-        List<Auction> listA = dao.select(sql, new Object[]{}, Auction.class);
-        String sql1 = "select * from nft.nfts";
-        List<Nft> list = dao.select(sql1, new Object[]{}, Nft.class);
+        List<Auction> listA = auctionDaoImpl.selectAll();
+        List<Nft> list = nftDaoImpl.selectAll();
         List<Nft> listB = JsonUtil.analysisJson(list);
         Map<Integer, Auction> mapA = new HashMap<>();
         for (Auction nftA : listA) {
@@ -58,12 +62,11 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
-    public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws SQLException, ClassNotFoundException, InterruptedException {
-        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()),BigInteger.valueOf(bo.getBidPrice()));
+    public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws Exception {
+        TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()), BigInteger.valueOf(bo.getBidPrice()));
         String status = transactionReceipt.getStatus();
-        String sql = " update nft.nft_auction set highest_bid = ?,highest_bidder = ? where nftId = ?";
-        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{bo.getBidPrice(),bidder,bo.getNftId()});
-        if (status.equals(Contract.checkStatus)&&result!=0) {
+        int result = auctionDaoImpl.update(new Object[]{bo.getBidPrice(), bidder, bo.getNftId()});
+        if (status.equals(Contract.checkStatus) && result != 0) {
             return 200;
         } else {
             return 500;
@@ -86,12 +89,10 @@ public class AuctionServiceImpl implements IAuctionService {
 
     @Override
     public int auctionBegin(AuctionBeginBo auctionBeginBo, NftMarket nftMarket) throws Exception {
-        String sql = " select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> select = dao.select(sql, new Object[]{auctionBeginBo.getCid()}, Nft.class);
+        List<Nft> select = nftDaoImpl.selectByCid(auctionBeginBo.getCid());
         int nftId = select.get(0).getNftId();
-        String sqlToInsert = " insert into nft.nft_auction (nftId,highest_bid,end_time,highest_bidder) values (?,?,?,?)";
         long time = System.currentTimeMillis() + auctionBeginBo.getDuration() * 1_000L;
-        int result = dao.insertOrUpdateOrDelete(sqlToInsert, new Object[]{nftId, auctionBeginBo.getAmount(), time,select.get(0).getOwner()});
+        int result = auctionDaoImpl.insert(new Object[]{nftId, auctionBeginBo.getAmount(), time, select.get(0).getOwner()});
         TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(auctionBeginBo.getAmount()), BigInteger.valueOf(auctionBeginBo.getDuration() * 1_000L));
         String status = transactionReceipt.getStatus();
         autoCheckEnd(nftId, auctionBeginBo.getDuration());
@@ -105,34 +106,30 @@ public class AuctionServiceImpl implements IAuctionService {
     public void auctionEnd(int nftId, NftMarket nftMarket) throws Exception {
         TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
         String status = transactionReceipt.getStatus();
-        String sql2 = "select * from nft.nft_auction where nftId = ?";
-        List<Auction> list = dao.select(sql2, new Object[]{nftId}, Auction.class);
+        List<Auction> list = auctionDaoImpl.selectByNftId(nftId);
         String bidder = list.get(0).getHighest_bidder();
-        String sql = " delete from nft.nft_auction where nftId = ?";
-        int result = dao.insertOrUpdateOrDelete(sql, new Object[]{nftId});
-        String sql1 = " update nft.nfts set owner = ? where nftId = ?";
-        int result1 = dao.insertOrUpdateOrDelete(sql1, new Object[]{bidder,nftId});
-        if(status.equals(Contract.checkStatus)&&result!=0&&result1!=0){
+        int result = auctionDaoImpl.deleteByNftId(nftId);
+        int result1 = nftDaoImpl.updateOwner(bidder, nftId);
+        if (status.equals(Contract.checkStatus) && result != 0 && result1 != 0) {
             tv.util.Logger.info("拍卖结束成功");
-        }else {
+        } else {
             tv.util.Logger.warning("拍卖结束失败");
         }
     }
 
     @Override
-    public void autoCheckEnd(int id,int time) {
+    public void autoCheckEnd(int id, int time) {
         NftMarket nftMarket = Contract.getAdmin();
-            Runnable runnable = () -> {
-                try {
-                    Thread.sleep(time * 1000L);
-                    auctionEnd(id, nftMarket);
-                } catch (Exception e) {
-                    Logger.logException(Level.SEVERE, "拍卖结束失败", e);
-                }
-            };
-            ThreadPool.SERVICE.submit(runnable);
-        }
-
+        Runnable runnable = () -> {
+            try {
+                Thread.sleep(time * 1000L);
+                auctionEnd(id, nftMarket);
+            } catch (Exception e) {
+                Logger.logException(Level.SEVERE, "拍卖结束失败", e);
+            }
+        };
+        ThreadPool.SERVICE.submit(runnable);
+    }
 
 
 }

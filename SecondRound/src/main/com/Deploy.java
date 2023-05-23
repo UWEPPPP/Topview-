@@ -24,7 +24,7 @@ public class Deploy {
 //        System.out.println("Proxy address: " + deploy3.getContractAddress());
 //
         NftMarket deploy = NftMarket.deploy(client, cryptoKeyPair, "0xe4d158f92bdde6d0dc3a2ba5597f74f0e3b61af5", "0xe8ea84e6aec0238beeab07c07aeffa7c58051c70");
-        Proxy proxy=Proxy.load("0x941a238fd27260c955b1fa15947435ee990b7692", client, cryptoKeyPair);
-           proxy.upgrade(deploy.getContractAddress());
-      }
+        Proxy proxy = Proxy.load("0x941a238fd27260c955b1fa15947435ee990b7692", client, cryptoKeyPair);
+        proxy.upgrade(deploy.getContractAddress());
+    }
 }

@@ -24,14 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 public class DisplayNftHandler implements ServletHandler {
     @AutoWired
     public IDisplayService displayServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         String choice = request.getParameter("choice");
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         if (choice != null) {
-                return displayServiceImpl.display(choice);
-            } else {
-                return displayServiceImpl.displayByUser(user.getContract_address());
+            return displayServiceImpl.display(choice);
+        } else {
+            return displayServiceImpl.displayByUser(user.getContract_address());
         }
     }
 }

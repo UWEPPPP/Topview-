@@ -27,14 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 public class TransferHandler implements ServletHandler {
     @AutoWired
     public ITransferService transferServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        TransferBo bo= DataBinder.bind(TransferBo.class, request);
+        TransferBo bo = DataBinder.bind(TransferBo.class, request);
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         String contractAddress = user.getContract_address();
         int transfer = transferServiceImpl.transfer(bo, contractAddress, market);
-        if(transfer == CHECK) {
+        if (transfer == CHECK) {
             throw new RuntimeException("转增失败");
         }
         return null;

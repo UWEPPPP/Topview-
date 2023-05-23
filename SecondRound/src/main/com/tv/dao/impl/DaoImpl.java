@@ -1,11 +1,10 @@
 package tv.dao.impl;
 
-import tv.dao.IDao;
 import tv.spring.annotate.AutoWired;
 import tv.spring.annotate.CommonLogger;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
-import tv.dao.ConnectionPool;
+import tv.util.ConnectionPool;
 import tv.util.DbTool;
 
 import java.sql.Connection;
@@ -24,13 +23,13 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-@CommonLogger
-public class Dao implements IDao {
+public class DaoImpl implements tv.dao.Dao {
     @AutoWired
     public ConnectionPool connectionPool;
 
     @Override
     public int insertOrUpdateOrDelete(String sql, Object[] objects) throws SQLException, InterruptedException {
+        System.out.println("sql:" + sql);
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
@@ -44,6 +43,7 @@ public class Dao implements IDao {
 
     @Override
     public <T> List<T> select(String sql, Object[] objects, Class<T> tClass) throws Exception {
+        System.out.println("sql:" + sql);
         Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {

@@ -3,7 +3,7 @@ package tv.aop;
 import tv.spring.annotate.AutoWired;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
-import tv.dao.ConnectionPool;
+import tv.util.ConnectionPool;
 import tv.util.Logger;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +14,7 @@ import java.util.logging.Level;
 
 /**
  * 代理工厂
+ *
  * @author 刘家辉
  * @date 2023/04/13
  */
@@ -44,7 +45,7 @@ public class ProxyFactory {
                 Logger.info("method return result: " + invoke);
                 return invoke;
             } catch (InvocationTargetException e) {
-                Logger.logException(Level.WARNING,"Dao层抛出异常", e);
+                Logger.logException(Level.WARNING, "Dao层抛出异常", e);
                 connection.rollback();
                 return null;
             } finally {
@@ -52,6 +53,7 @@ public class ProxyFactory {
             }
         });
     }
+
     public Object commonProxy(Object target) {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
@@ -64,7 +66,7 @@ public class ProxyFactory {
                 Logger.info("method return result: " + result);
                 return result;
             } catch (InvocationTargetException e) {
-                Logger.logException(Level.WARNING,"Service层抛出异常", e);
+                Logger.logException(Level.WARNING, "Service层抛出异常", e);
                 return null;
             }
         });

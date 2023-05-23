@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple1;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
-import tv.dao.IDao;
+import tv.dao.NftDao;
 import tv.entity.bo.MintNftBo;
 import tv.service.IMintService;
 import tv.service.wrapper.NftMarket;
@@ -15,10 +15,8 @@ import tv.spring.annotate.ServiceLogger;
 import tv.util.Contract;
 import tv.util.IpfsUtil;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +32,10 @@ import java.util.Map;
 @ServiceLogger
 public class MintServiceImpl implements IMintService {
     @AutoWired
-    public IDao dao;
+    public NftDao nftDaoImpl;
+
     @Override
-    public int mint(MintNftBo bo, NftMarket nftMarket) throws IOException, SQLException, ClassNotFoundException, InterruptedException {
+    public int mint(MintNftBo bo, NftMarket nftMarket) throws Exception {
         InputStream inputStream = bo.getFile().getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
         String upload = IpfsUtil.upload(byteArray);
@@ -52,8 +51,7 @@ public class MintServiceImpl implements IMintService {
         Tuple1<BigInteger> issueNftOutput = nftMarket.getIssueNftOutput(transactionReceipt);
         bo.setNftId(issueNftOutput.getValue1().intValue());
         String status = transactionReceipt.getStatus();
-        String sql = "insert into nft.nfts(name, ipfs_cid, price, type, owner, description,is_sold,nftId) values(?,?,?,?,?,?,false,?)";
-        int insert = dao.insertOrUpdateOrDelete(sql, new Object[]{bo.getName(), bo.getIpfs_cid(), bo.getPrice(), bo.getType(), bo.getOwner(), bo.getDescription(), bo.getNftId()});
+        int insert = nftDaoImpl.insert(bo.getName(), bo.getIpfs_cid(), bo.getPrice(), bo.getType(), bo.getOwner(), bo.getDescription(), false, bo.getNftId());
         return insert != 0 || status.equals(Contract.checkStatus) ? 200 : 500;
     }
 

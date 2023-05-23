@@ -55,7 +55,7 @@ public class CryptoUtil {
             result = bytesToHex(encryptedBytes);
         } catch (NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException |
                  InvalidKeyException e) {
-               Logger.logException(Level.WARNING,"加密异常",e);
+            Logger.logException(Level.WARNING, "加密异常", e);
         }
         return result;
     }
@@ -70,7 +70,7 @@ public class CryptoUtil {
             return new String(decrypt, StandardCharsets.UTF_8);
         } catch (NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException |
                  InvalidKeyException e) {
-            Logger.logException(Level.WARNING,"解密异常",e);
+            Logger.logException(Level.WARNING, "解密异常", e);
         }
         return null;
     }
@@ -119,7 +119,7 @@ public class CryptoUtil {
                 return null;
             }
         } catch (IOException e) {
-            Logger.logException(Level.WARNING,"读取密码文件失败",e);
+            Logger.logException(Level.WARNING, "读取密码文件失败", e);
             return null;
         }
     }

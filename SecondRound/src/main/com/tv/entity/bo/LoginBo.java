@@ -7,8 +7,8 @@ package tv.entity.bo;
  * @date 2023/05/21
  */
 public class LoginBo {
-   private String password;
-   private String username;
+    private String password;
+    private String username;
 
     public String getPassword() {
         return password;

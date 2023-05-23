@@ -12,13 +12,13 @@ import java.lang.reflect.Field;
  */
 public class DataBinder {
 
-    public static  <T> T bind(Class<T> clazz,HttpServletRequest request) throws Exception {
+    public static <T> T bind(Class<T> clazz, HttpServletRequest request) throws Exception {
         T obj = clazz.getDeclaredConstructor().newInstance();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             String paramName = field.getName();
             String file = "file";
-            if(paramName.equals(file)){
+            if (paramName.equals(file)) {
                 Part avatar = request.getPart("file");
                 field.setAccessible(true);
                 field.set(obj, avatar);
@@ -43,11 +43,11 @@ public class DataBinder {
             return Float.parseFloat(value);
         } else if (type == double.class || type == Double.class) {
             return Double.parseDouble(value);
-        } else if (type== boolean.class || type == Boolean.class) {
+        } else if (type == boolean.class || type == Boolean.class) {
             return Boolean.parseBoolean(value);
         } else if (type == String.class) {
             return value;
-        } else  {
+        } else {
             throw new IllegalArgumentException("不支持的类型: " + type.getName());
         }
     }

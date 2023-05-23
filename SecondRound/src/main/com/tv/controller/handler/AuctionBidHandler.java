@@ -27,11 +27,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AuctionBidHandler implements ServletHandler {
     @AutoWired
     public IAuctionService auctionServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         AuctionBidBo bind = DataBinder.bind(AuctionBidBo.class, request);
-        NftMarket nftMarket= CastUtil.cast(request.getSession().getAttribute("nftMarket"));
-        User user= CastUtil.cast(request.getSession().getAttribute("user"));
+        NftMarket nftMarket = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
+        User user = CastUtil.cast(request.getSession().getAttribute("user"));
         int offer = auctionServiceImpl.offer(bind, user.getContract_address(), nftMarket);
         if (offer == CHECK) {
             throw new RuntimeException("出价失败");

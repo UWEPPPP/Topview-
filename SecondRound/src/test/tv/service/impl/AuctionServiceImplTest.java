@@ -7,14 +7,12 @@ import tv.service.IAuctionService;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class AuctionServiceImplTest {
 
     @Test
     public void showAuction() throws Exception {
         HandlerFactory instance = HandlerFactory.getInstance();
-        List<AuctionDto> auctionDtos = ((IAuctionService)(instance.getBean("auctionServiceImpl"))).showAuction();
+        List<AuctionDto> auctionDtos = ((IAuctionService) (instance.getBean("auctionServiceImpl"))).showAuction();
         System.out.println(auctionDtos);
     }
 

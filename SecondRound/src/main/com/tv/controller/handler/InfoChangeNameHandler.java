@@ -27,7 +27,7 @@ public class InfoChangeNameHandler implements ServletHandler {
     public IInfoService infoServiceImpl;
 
     @Override
-    public Object handle(HttpServletRequest request) throws SQLException, IOException, ClassNotFoundException {
+    public Object handle(HttpServletRequest request) throws Exception {
         String parameter = request.getParameter("name");
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         String name = infoServiceImpl.changeInfo(parameter, null, user.getContract_address());

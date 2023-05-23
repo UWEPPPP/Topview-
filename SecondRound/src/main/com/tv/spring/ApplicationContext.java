@@ -80,15 +80,22 @@ public class ApplicationContext {
             }
 
         }
-        String[] necessaryBeanNames = {"connectionPool","proxyFactory","dao"};
-         for (String beanName : necessaryBeanNames) {
-             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-             Object bean = createBean(beanName, beanDefinition);
-             singletonObjects.put(beanName, bean);
+        String[] necessaryBeanNames = {"connectionPool", "proxyFactory", "daoImpl","crudImpl"};
+        for (String beanName : necessaryBeanNames) {
+            BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
+            Object bean = createBean(beanName, beanDefinition);
+            singletonObjects.put(beanName, bean);
         }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if (beanDefinition.getScope().equals("singleton")&&beanDefinition.getType().isAnnotationPresent(ServiceLogger.class)) {
+            if ( beanDefinition.getType().isAnnotationPresent(Storage.class)) {
+                Object bean = createBean(beanName, beanDefinition);
+                singletonObjects.put(beanName, bean);
+            }
+        }
+        for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
+            BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
+            if ( beanDefinition.getType().isAnnotationPresent(ServiceLogger.class)) {
                 Object bean = createBean(beanName, beanDefinition);
                 singletonObjects.put(beanName, bean);
             }
@@ -97,7 +104,7 @@ public class ApplicationContext {
 
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if (beanDefinition.getScope().equals("singleton")&&beanDefinition.getType().isAnnotationPresent(Controller.class)) {
+            if (beanDefinition.getScope().equals("singleton") && beanDefinition.getType().isAnnotationPresent(Controller.class)) {
                 Object bean = createBean(beanName, beanDefinition);
                 singletonObjects.put(beanName, bean);
             }
@@ -115,11 +122,11 @@ public class ApplicationContext {
                     field.set(instance, getBean(field.getName()));
                 }
             }
-            if(type.isAnnotationPresent(ServiceLogger.class)){
-                instance=((ProxyFactory)singletonObjects.get("proxyFactory")).serviceProxy(instance);
+            if (type.isAnnotationPresent(ServiceLogger.class)) {
+                instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).serviceProxy(instance);
                 Logger.info("serviceProxy");
-            }else if(type.isAnnotationPresent(CommonLogger.class)){
-                instance=((ProxyFactory)singletonObjects.get("proxyFactory")).commonProxy(instance);
+            } else if (type.isAnnotationPresent(CommonLogger.class)) {
+                instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).commonProxy(instance);
                 Logger.info("commonProxy");
             }
             return instance;

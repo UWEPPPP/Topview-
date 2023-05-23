@@ -7,9 +7,9 @@ package tv.entity.bo;
  * @date 2023/05/21
  */
 public class AuctionBeginBo {
-   private String cid;
-   private int duration;
-   private int amount;
+    private String cid;
+    private int duration;
+    private int amount;
 
     public String getCid() {
         return cid;

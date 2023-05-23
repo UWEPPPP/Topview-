@@ -9,9 +9,9 @@ import javax.servlet.http.Part;
  * @date 2023/05/21
  */
 public class RegisterBo {
-  private   String username;
-  private   String password;
-  private   Part avatar;
+    private String username;
+    private String password;
+    private Part avatar;
 
     public String getUsername() {
         return username;

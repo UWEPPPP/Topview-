@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author 刘家辉
  * @date 2023/05/17
  */
-@WebServlet( value = "/Servlet/*")
+@WebServlet(value = "/Servlet/*")
 @MultipartConfig
 
 public class DispatcherServlet extends HttpServlet {
@@ -28,16 +28,16 @@ public class DispatcherServlet extends HttpServlet {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
         String path = uri.substring(contextPath.length());
-        path=path.substring(9);
-        ServletHandler handler = HandlerFactory.getInstance().getBean(path+"Handler");
+        path = path.substring(9);
+        ServletHandler handler = HandlerFactory.getInstance().getBean(path + "Handler");
         if (handler == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         try {
             Object result = handler.handle(request);
-            if(result == null) {
-              response.setStatus(200);
+            if (result == null) {
+                response.setStatus(200);
             }
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");

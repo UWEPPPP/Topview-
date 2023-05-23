@@ -26,18 +26,19 @@ import javax.servlet.http.HttpServletRequest;
 public class MintHandler implements ServletHandler {
     @AutoWired
     public IMintService mintServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         request.setCharacterEncoding("UTF-8");
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(request.getSession().getAttribute("nftMarket"));
         String contractAddress = user.getContract_address();
-        MintNftBo bo =  DataBinder.bind(MintNftBo.class,request);
+        MintNftBo bo = DataBinder.bind(MintNftBo.class, request);
         bo.setOwner(contractAddress);
         int result = mintServiceImpl.mint(bo, market);
-       if( result ==CHECK){
-           throw new RuntimeException("铸造失败,内部无报错");
-       }
+        if (result == CHECK) {
+            throw new RuntimeException("铸造失败,内部无报错");
+        }
         return null;
     }
 }

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AuctionBeginHandler implements ServletHandler {
     @AutoWired
     public IAuctionService auctionServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         NftMarket user = CastUtil.cast(request.getSession().getAttribute("nftMarket"));

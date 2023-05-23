@@ -7,8 +7,8 @@ package tv.entity.bo;
  * @date 2023/05/21
  */
 public class AuctionBidBo {
-  private int nftId;
-  private int bidPrice;
+    private int nftId;
+    private int bidPrice;
 
     public int getNftId() {
         return nftId;

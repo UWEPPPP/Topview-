@@ -22,8 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AuctionShowHandler implements ServletHandler {
     @AutoWired
     public IAuctionService auctionServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-            return auctionServiceImpl.showAuction();
+        return auctionServiceImpl.showAuction();
     }
 }

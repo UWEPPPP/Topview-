@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TraceHandler implements ServletHandler {
     @AutoWired
     public ITraceService traceServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
         String cid = request.getParameter("cid");

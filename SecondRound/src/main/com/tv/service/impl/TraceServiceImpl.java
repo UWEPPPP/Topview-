@@ -1,7 +1,7 @@
 package tv.service.impl;
 
 import org.fisco.bcos.sdk.abi.datatypes.DynamicArray;
-import tv.dao.IDao;
+import tv.dao.NftDao;
 import tv.entity.po.Nft;
 import tv.service.ITraceService;
 import tv.service.wrapper.NftMarket;
@@ -26,12 +26,11 @@ import java.util.List;
 @ServiceLogger
 public class TraceServiceImpl implements ITraceService {
     @AutoWired
-    public IDao dao;
+    public NftDao nftDaoImpl;
 
     @Override
     public List<NftStorage.ItemLife> getLife(String cid, NftMarket nftMarket) throws Exception {
-        String sql = "select * from nft.nfts where ipfs_cid = ?";
-        List<Nft> select = dao.select(sql, new Object[]{cid}, Nft.class);
+        List<Nft> select = nftDaoImpl.selectByCid(cid);
         Nft nft = select.get(0);
         DynamicArray<NftStorage.ItemLife> nftLife = nftMarket.getNftLife(BigInteger.valueOf(nft.getNftId()));
         return nftLife.getValue();

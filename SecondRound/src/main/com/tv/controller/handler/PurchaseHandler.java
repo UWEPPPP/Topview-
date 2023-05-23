@@ -28,7 +28,7 @@ public class PurchaseHandler implements ServletHandler {
     public IPurchaseService purchaseServiceImpl;
 
     @Override
-    public Object handle(HttpServletRequest request) throws ContractException, SQLException, ClassNotFoundException, InterruptedException {
+    public Object handle(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");
         User user = CastUtil.cast(request.getSession().getAttribute("user"));
         NftMarket market = CastUtil.cast(request.getSession().getAttribute("nftMarket"));

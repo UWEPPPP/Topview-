@@ -37,6 +37,7 @@
             $("#balance").text("余额：" + data.balance); // 显示余额
         });
     });
+
     function msToDateTime(ms) {
         const date = new Date(ms);
         const hours = date.getHours();
@@ -44,14 +45,14 @@
         const seconds = "0" + date.getSeconds();
         const milliseconds = "0" + date.getMilliseconds();
 
-        const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ':' +  milliseconds.substr(-3);
-        const month = date.getMonth()+1;
-        const day =  date.getDate();
+        const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ':' + milliseconds.substr(-3);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
         const year = date.getFullYear();
 
         const formattedDate = month + '/' + day + '/' + year;
 
-        return formattedTime+ ' (' + formattedDate + ')';
+        return formattedTime + ' (' + formattedDate + ')';
     }
 
     // 获取拍卖品列表
@@ -63,7 +64,7 @@
                 img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + auction.show).attr("width", "100px");
             } else if (auction.type === 'music') {
                 img = $("<audio controls='controls' ><source src='https://ipfs.io/ipfs/" + auction.show + "' type='audio/ogg'></audio>");
-            }else if (auction.type === '3d') {
+            } else if (auction.type === '3d') {
                 img = $("<img/>").attr("src", "https://ipfs.io/ipfs/" + auction.show).attr("width", "100px");
             }
             let html = `
@@ -99,7 +100,7 @@
         $.ajax({
             url: '/Servlet/auctionBid',
             type: 'GET',
-            data: {bidPrice:bidPrice, nftId:auctionId},
+            data: {bidPrice: bidPrice, nftId: auctionId},
             success: function (response) {
                 console.log(response);
                 // 处理请求成功的结果

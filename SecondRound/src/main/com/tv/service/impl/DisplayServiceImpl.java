@@ -1,6 +1,6 @@
 package tv.service.impl;
 
-import tv.dao.IDao;
+import tv.dao.NftDao;
 import tv.entity.po.Nft;
 import tv.service.IDisplayService;
 import tv.spring.annotate.AutoWired;
@@ -23,12 +23,11 @@ import static tv.util.JsonUtil.analysisJson;
 @ServiceLogger
 public class DisplayServiceImpl implements IDisplayService {
     @AutoWired
-    public IDao dao;
+    public NftDao nftDaoImpl;
 
     @Override
     public List<Nft> display(String display) throws Exception {
-        String sql = "select * from nft.nfts where is_sold = false and type = ?";
-        List<Nft> list = dao.select(sql, new Object[]{display}, Nft.class);
+        List<Nft> list = nftDaoImpl.selectWhichChoice(display);
         if (list.size() == 0) {
             return null;
         }
@@ -37,15 +36,12 @@ public class DisplayServiceImpl implements IDisplayService {
 
     @Override
     public List<Nft> displayByUser(String owner) throws Exception {
-        String sql = "select * from nft.nfts where owner = ?";
-        List<Nft> list = dao.select(sql, new Object[]{owner}, Nft.class);
+        List<Nft> list = nftDaoImpl.selectByOwner(owner);
         if (list.size() == 0) {
             return null;
         }
         return analysisJson(list);
     }
-
-
 
 
 }

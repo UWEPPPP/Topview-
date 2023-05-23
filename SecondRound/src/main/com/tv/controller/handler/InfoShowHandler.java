@@ -30,17 +30,18 @@ import java.util.Map;
 public class InfoShowHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
+
     @Override
     public Object handle(HttpServletRequest request) throws ContractException, SQLException, ClassNotFoundException {
         HttpSession session = request.getSession();
         User user = CastUtil.cast(session.getAttribute("user"));
         NftMarket nftMarket = CastUtil.cast(session.getAttribute("nftMarket"));
         String profile = user.getProfile();
-        int balance= infoServiceImpl.changeBalance(nftMarket);
+        int balance = infoServiceImpl.changeBalance(nftMarket);
         Map<String, Object> message = new HashMap<>(3);
         message.put("image", profile);
         message.put("name", user.getName());
-        message.put("balance",balance);
+        message.put("balance", balance);
         return message;
     }
 }

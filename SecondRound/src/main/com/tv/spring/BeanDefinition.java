@@ -8,7 +8,7 @@ package tv.spring;
  */
 public class BeanDefinition {
     private Class type;
-private String scope;
+    private String scope;
 
     public Class getType() {
         return type;
