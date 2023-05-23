@@ -11,7 +11,7 @@ import javax.servlet.http.Part;
 public class RegisterBo {
     private String username;
     private String password;
-    private Part avatar;
+    private Part file;
 
     public String getUsername() {
         return username;
@@ -29,11 +29,11 @@ public class RegisterBo {
         this.password = password;
     }
 
-    public Part getAvatar() {
-        return avatar;
+    public Part getFile() {
+        return file;
     }
 
-    public void setAvatar(Part avatar) {
-        this.avatar = avatar;
+    public void setFile(Part file) {
+        this.file = file;
     }
 }

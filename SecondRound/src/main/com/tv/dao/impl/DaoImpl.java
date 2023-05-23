@@ -1,11 +1,10 @@
 package tv.dao.impl;
 
 import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.CommonLogger;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
 import tv.util.ConnectionPool;
-import tv.util.DbTool;
+import tv.dao.util.DbTool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

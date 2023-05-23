@@ -18,7 +18,7 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         Object bean = HandlerFactory.getInstance();
-        Contract.setAdmin(Contract.setNftMarket("a7dc106e8ce088d92d00251147ab53a5822b91c9a11206b10363ba2304229580"));
+        Contract.setAdmin(Contract.setNftMarket("2e994eec1cb4e3cd934829be623a5761fe6bafdd8f295227b118314e1bbf13bf"));
     }
 
     @Override

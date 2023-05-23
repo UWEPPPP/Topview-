@@ -31,13 +31,9 @@ public class ApplicationContext {
             String[] paths = componentScan.value();
             //扫描路径
             for (String path : paths) {
-
                 path = path.replace(".", "/");
-                System.out.println(path);
-
                 ClassLoader classLoader = ApplicationContext.class.getClassLoader();
                 URL resource = classLoader.getResource(path);
-                System.out.println(resource.getPath());
                 assert resource != null;
                 File file = new File(resource.getFile());
                 if (file.isDirectory()) {
@@ -57,7 +53,6 @@ public class ApplicationContext {
                                     if (beanName.equals("")) {
                                         beanName = Introspector.decapitalize(aClass.getSimpleName());
                                     }
-
 
                                     //BeanDefinition
                                     BeanDefinition beanDefinition = new BeanDefinition();
@@ -80,7 +75,7 @@ public class ApplicationContext {
             }
 
         }
-        String[] necessaryBeanNames = {"connectionPool", "proxyFactory", "daoImpl","crudImpl"};
+        String[] necessaryBeanNames = {"connectionPool", "proxyFactory", "daoImpl", "crudImpl"};
         for (String beanName : necessaryBeanNames) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
             Object bean = createBean(beanName, beanDefinition);
@@ -88,14 +83,14 @@ public class ApplicationContext {
         }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if ( beanDefinition.getType().isAnnotationPresent(Storage.class)) {
+            if (beanDefinition.getType().isAnnotationPresent(Storage.class)) {
                 Object bean = createBean(beanName, beanDefinition);
                 singletonObjects.put(beanName, bean);
             }
         }
         for (String beanName : beanDefinitionConcurrentHashMap.keySet()) {
             BeanDefinition beanDefinition = beanDefinitionConcurrentHashMap.get(beanName);
-            if ( beanDefinition.getType().isAnnotationPresent(Service.class)) {
+            if (beanDefinition.getType().isAnnotationPresent(Service.class)) {
                 Object bean = createBean(beanName, beanDefinition);
                 singletonObjects.put(beanName, bean);
             }
@@ -124,10 +119,8 @@ public class ApplicationContext {
             }
             if (type.isAnnotationPresent(SecurityLogger.class)) {
                 instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).securityProxy(instance);
-                Logger.info("serviceProxy");
             } else if (type.isAnnotationPresent(CommonLogger.class)) {
                 instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).commonProxy(instance);
-                Logger.info("commonProxy");
             }
             return instance;
         } catch (InstantiationException e) {

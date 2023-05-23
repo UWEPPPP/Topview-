@@ -32,7 +32,7 @@ public class UserDaoImpl implements tv.dao.UserDao {
 
     @Override
     public int insert(String username, String profile, String address, String privateKey, String userPassword) throws Exception {
-        return crudImpl.insert(User.class, new String[]{"name", "profile", "address", "private_key", "password"}, new Object[]{username, profile, address, privateKey, userPassword});
+        return crudImpl.insert(User.class, new String[]{"name", "profile", "contract_address", "private_key", "password"}, new Object[]{username, profile, address, privateKey, userPassword});
     }
 
     @Override

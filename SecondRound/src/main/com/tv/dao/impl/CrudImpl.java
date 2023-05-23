@@ -2,10 +2,9 @@ package tv.dao.impl;
 
 import tv.dao.Dao;
 import tv.spring.annotate.AutoWired;
-import tv.spring.annotate.CommonLogger;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
-import tv.util.SqlBuilder;
+import tv.dao.util.SqlBuilder;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class CrudImpl implements tv.dao.Crud {
     public int delete(Class<?> clazz, String[] whereParams, Object[] values) throws Exception {
         String sql = new SqlBuilder().delete("nft." + clazz.getSimpleName().toLowerCase()).
                 where(whereParams).
-                buildSelect();
+                buildDelete();
         return daoImpl.insertOrUpdateOrDelete(sql, values);
     }
 

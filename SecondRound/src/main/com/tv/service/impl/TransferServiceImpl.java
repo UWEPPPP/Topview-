@@ -44,16 +44,14 @@ public class TransferServiceImpl implements ITransferService {
     public int transfer(TransferBo bo, String from, NftMarket nftMarket) throws Exception {
         List<Nft> list = nftDaoImpl.selectByCid(bo.getCid());
         Nft nft = list.get(0);
-        TransactionReceipt transactionReceipt = nftMarket.tranferNft(BigInteger.valueOf(nft.getNftId()), bo.getRecipientAddress());
-        String status = transactionReceipt.getStatus();
-        if (status.equals(Contract.checkStatus)) {
-            int update = nftDaoImpl.updateOwnerByCid(bo.getRecipientAddress(), bo.getCid());
-            if (update != 0) {
+        int update = nftDaoImpl.updateOwnerByCid(bo.getRecipientAddress(), bo.getCid());
+       if (update!=0) {
+            TransactionReceipt transactionReceipt = nftMarket.tranferNft(BigInteger.valueOf(nft.getNftId()), bo.getRecipientAddress());
+            String status = transactionReceipt.getStatus();
+            if (status.equals(Contract.checkStatus)) {
                 return 200;
             }
-            tv.util.Logger.info("转增成功");
         }
-        tv.util.Logger.warning("转增失败");
         throw new RuntimeException("转增失败");
     }
 

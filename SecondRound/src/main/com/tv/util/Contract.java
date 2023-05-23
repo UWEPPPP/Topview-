@@ -19,7 +19,7 @@ public class Contract {
     private static final BcosSDK SDK = BcosSDK.build("D:\\AE\\blockchain-liujiahui-Traceability-SecondRound\\SecondRound\\config-example.toml");
     private static final Client CLIENT = SDK.getClient(1);
     private static final CryptoSuite CRYPTO_SUITE = CLIENT.getCryptoSuite();
-    private static final String CONTRACT_ADDRESS = "0x941a238fd27260c955b1fa15947435ee990b7692";
+    private static final String CONTRACT_ADDRESS = "0xa29e95ad93a44477fefadee07de180aa37b2bb1e";
     public static String checkStatus = "0x0";
     private static NftMarket ADMIN;
 

@@ -1,6 +1,5 @@
 package tv.controller.handler;
 
-import org.fisco.bcos.sdk.transaction.model.exception.ContractException;
 import tv.controller.ServletHandler;
 import tv.entity.po.User;
 import tv.service.IPurchaseService;
@@ -12,7 +11,6 @@ import tv.spring.annotate.Scope;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
 /**
  * 购买处理程序

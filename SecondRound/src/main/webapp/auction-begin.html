@@ -14,6 +14,13 @@
                 $("#balance").text("余额：" + data.balance); // 显示余额
             });
         });
+        const durationDays = $("#duration-d").val();
+        const durationHours = $("#duration-h").val();
+        const durationSeconds= $("#duration-s").val();
+        const totalSeconds = durationDays * 24 * 60 * 60 +
+            durationHours * 60 * 60 +
+            durationSeconds;
+
 
         $(document).ready(function () {
             // 处理表单提交事件
@@ -22,7 +29,12 @@
 
                 // 获取表单数据
                 const cid = $("#cid").val();
-                const duration = $("#duration").val();
+                const durationDays = $("#duration-d").val();
+                const durationHours = $("#duration-h").val();
+                const durationSeconds= $("#duration-s").val();
+                const totalSeconds = durationDays * 24 * 60 * 60 +
+                    durationHours * 60 * 60 +
+                    durationSeconds;
                 const amount = $("#amount").val();
 
                 // 向后台发送请求
@@ -31,7 +43,7 @@
                     type: "POST",
                     data: {
                         cid: cid,
-                        duration: duration,
+                        duration: totalSeconds,
                         amount: amount
                     },
                     success: function (data) {
@@ -92,8 +104,16 @@
             <input id="cid" name="cid" type="text">
         </div>
         <div>
-            <label for="duration">拍卖持续时间（秒）：</label>
-            <input id="duration" max="3600" min="1" name="duration" type="number">
+            <label for="duration-d">拍卖持续天数(天):</label>
+            <input id="duration-d" name="duration-d" type="number">
+        </div>
+        <div>
+            <label for="duration-h">拍卖持续小时数(小时):</label>
+            <input id="duration-h" name="duration-h" type="number">
+        </div>
+        <div>
+            <label for="duration-s">拍卖持续秒数(秒):</label>
+            <input id="duration-s" max="3600" min="1" name="duration-s" type="number">
         </div>
         <div>
             <label for="amount">拍卖起始金额：</label>

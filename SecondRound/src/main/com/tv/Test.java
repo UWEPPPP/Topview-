@@ -1,6 +1,6 @@
 package tv;
 
-import tv.util.SqlBuilder;
+import tv.dao.util.SqlBuilder;
 
 public class Test {
     public static void main(String[] args) {

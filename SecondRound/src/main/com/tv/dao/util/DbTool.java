@@ -1,4 +1,4 @@
-package tv.util;
+package tv.dao.util;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;

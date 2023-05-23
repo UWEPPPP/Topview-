@@ -49,9 +49,9 @@ public class MintServiceImpl implements IMintService {
         Tuple1<BigInteger> issueNftOutput = nftMarket.getIssueNftOutput(transactionReceipt);
         bo.setNftId(issueNftOutput.getValue1().intValue());
         String status = transactionReceipt.getStatus();
-        if(status.equals(Contract.checkStatus)){
+        if (status.equals(Contract.checkStatus)) {
             int insert = nftDaoImpl.insert(bo.getName(), bo.getIpfs_cid(), bo.getPrice(), bo.getType(), bo.getOwner(), bo.getDescription(), false, bo.getNftId());
-            if(insert != 0){
+            if (insert != 0) {
                 return 200;
             }
         }

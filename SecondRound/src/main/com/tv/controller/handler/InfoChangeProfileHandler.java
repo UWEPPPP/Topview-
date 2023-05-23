@@ -8,11 +8,8 @@ import tv.spring.annotate.Component;
 import tv.spring.annotate.Controller;
 import tv.spring.annotate.Scope;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * 信息改变配置文件处理程序

@@ -62,10 +62,10 @@ public class AuctionServiceImpl implements IAuctionService {
     @Override
     public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws Exception {
         int result = auctionDaoImpl.update(new Object[]{bo.getBidPrice(), bidder, bo.getNftId()});
-        if ( result != 0) {
+        if (result != 0) {
             TransactionReceipt transactionReceipt = nftMarket.auctionNft(BigInteger.valueOf(bo.getNftId()), BigInteger.valueOf(bo.getBidPrice()));
             String status = transactionReceipt.getStatus();
-            if(status.equals(Contract.checkStatus)){
+            if (status.equals(Contract.checkStatus)) {
                 return 200;
             }
         }
@@ -96,7 +96,7 @@ public class AuctionServiceImpl implements IAuctionService {
         if (result != 0) {
             TransactionReceipt transactionReceipt = nftMarket.auctionBegin(BigInteger.valueOf(nftId), BigInteger.valueOf(auctionBeginBo.getAmount()), BigInteger.valueOf(auctionBeginBo.getDuration() * 1_000L));
             String status = transactionReceipt.getStatus();
-            if (status.equals(Contract.checkStatus) ) {
+            if (status.equals(Contract.checkStatus)) {
                 return 200;
             }
         }
@@ -109,10 +109,10 @@ public class AuctionServiceImpl implements IAuctionService {
         String bidder = list.get(0).getHighest_bidder();
         int result = auctionDaoImpl.deleteByNftId(nftId);
         int result1 = nftDaoImpl.updateOwner(bidder, nftId);
-        if ( result != 0 && result1 != 0) {
+        if (result != 0 && result1 != 0) {
             TransactionReceipt transactionReceipt = nftMarket.auctionEnd(BigInteger.valueOf(nftId));
             String status = transactionReceipt.getStatus();
-            if(status.equals(Contract.checkStatus)){
+            if (status.equals(Contract.checkStatus)) {
                 tv.util.Logger.info("拍卖结束成功");
             }
         } else {

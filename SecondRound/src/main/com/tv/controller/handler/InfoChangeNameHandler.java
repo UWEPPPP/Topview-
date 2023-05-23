@@ -10,8 +10,6 @@ import tv.spring.annotate.Scope;
 import tv.util.CastUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * 信息变更处理程序名称

@@ -28,7 +28,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
     @Override
     public int buy(int nftId, String owner, NftMarket nftMarket) throws Exception {
         int result = nftDaoImpl.updateOwnerBuy(false, owner, nftId);
-        if (result != 0 ) {
+        if (result != 0) {
             TransactionReceipt transactionReceipt = nftMarket.buyNft(BigInteger.valueOf(nftId));
             String status = transactionReceipt.getStatus();
             if (status.equals(Contract.checkStatus)) {

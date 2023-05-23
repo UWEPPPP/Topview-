@@ -1,4 +1,4 @@
-package tv.util;
+package tv.dao.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,14 +66,14 @@ public class SqlBuilder {
                 if (where[i].charAt(0) == '!') {
                     where[i] = where[i].substring(1);
                     where[i] = new StringBuilder(where[i]).append("!=?").toString();
-                } else if(where[i].charAt(0) == '@') {
+                } else if (where[i].charAt(0) == '@') {
                     where[i] = where[i].substring(1);
                     where[i] = new StringBuilder(where[i]).append(" LIKE ?").toString();
-                }else {
+                } else {
                     where[i] = new StringBuilder(where[i]).append("=?").toString();
-                    }
                 }
             }
+        }
 
         this.where = String.join(" ", where);
         return this;
@@ -107,7 +107,7 @@ public class SqlBuilder {
             sql.append("*");
         }
         sql.append(" FROM ").append(table);
-        if (where != null) {
+        if (where != null&& !"".equals(where)) {
             sql.append(" WHERE ").append(where);
         }
         if (groupBy != null) {
@@ -133,7 +133,7 @@ public class SqlBuilder {
         } else {
             sql.append("*");
         }
-        if (where != null) {
+        if (where != null&&!"".equals(where)) {
             sql.append(" WHERE ").append(where);
         }
         return sql.toString();
@@ -157,7 +157,7 @@ public class SqlBuilder {
         } else {
             sql.append("*");
         }
-        if (where != null) {
+        if (where != null&&!"".equals(where)) {
             sql.append(" WHERE ").append(where);
         }
         return sql.toString();
@@ -166,7 +166,7 @@ public class SqlBuilder {
     public String buildDelete() {
         StringBuilder sql = new StringBuilder("DELETE FROM ");
         sql.append(table);
-        if (where != null) {
+        if (where != null&&!"".equals(where)) {
             sql.append(" WHERE ").append(where);
         }
         return sql.toString();

@@ -36,7 +36,7 @@ public class RegisterServiceImpl implements IRegisterService {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
         String hexPrivateKey = keyPair.getHexPrivateKey();
-        InputStream inputStream = bo.getAvatar().getInputStream();
+        InputStream inputStream = bo.getFile().getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);
         inputStream.close();
         String paddedStr = String.format("%-32s", bo.getPassword()).replace(' ', '0');
@@ -48,7 +48,7 @@ public class RegisterServiceImpl implements IRegisterService {
         if (insert != 0) {
             TransactionReceipt register = nftMarket.regiter();
             String status = register.getStatus();
-            if(Contract.checkStatus.equals(status)){
+            if (Contract.checkStatus.equals(status)) {
                 return 200;
             }
         }
