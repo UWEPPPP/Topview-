@@ -42,6 +42,7 @@ public class InfoServiceImpl implements IInfoService {
             byte[] byteArray = IOUtils.toByteArray(inputStream);
             update = IpfsUtil.upload(byteArray);
             choice = "profile";
+            inputStream.close();
         }
         int result = userDaoImpl.updateInfo(choice, update, contractAddress);
         if (result == 0) {

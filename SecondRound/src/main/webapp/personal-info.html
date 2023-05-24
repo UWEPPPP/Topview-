@@ -96,14 +96,10 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: $.getJSON("/login", function (data) {
-                    const da = JSON.parse(data);
-                    $("#avatar").attr("src", "https://ipfs.io/ipfs/" + da.image);
-                    $("#name").text(da.name);
-                    $("#balance").text("余额：" + da.balance); // 显示余额
-                    alert("头像已更新！");
-                }),
-
+                success: function () {
+                alert("头像已更新！");
+                location.reload();
+        },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.error(errorThrown);
                     alert("更新失败，请稍后再试！");

@@ -21,13 +21,13 @@ import javax.servlet.http.Part;
 @Component
 @Scope("singleton")
 @Controller
-public class InfoChangeProfileHandler implements ServletHandler {
+public class InfoChangeAvatarHandler implements ServletHandler {
     @AutoWired
     public IInfoService infoServiceImpl;
 
     @Override
     public Object handle(HttpServletRequest request) throws Exception {
-        Part part = request.getPart("avatar");
+        Part part = request.getPart("file");
         User user = (User) request.getSession().getAttribute("user");
         String profile = infoServiceImpl.changeInfo(null, part, user.getContract_address());
         user.setProfile(profile);

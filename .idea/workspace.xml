@@ -13,23 +13,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3dd23da6-1d40-47d8-823a-b8f66eee1def" name="更改" comment="other:修buging">
-      <change afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/annotate/Transaction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5b8fe374-388b-4d90-810e-4870b613921b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/aop/ProxyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/aop/ProxyFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionBidServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionBidServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/AuctionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/DisplayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/DisplayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeProfileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/controller/handler/InfoChangeAvatarHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/InfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/InfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/LoginServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/MintServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/PurchaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/PurchaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/RegisterServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/SearchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TraceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TraceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/service/impl/TransferServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/com/tv/spring/ApplicationContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/auction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/SecondRound/src/main/webapp/personal-info.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -449,6 +437,7 @@
       <workItem from="1684847794554" duration="10587000" />
       <workItem from="1684900566401" duration="7761000" />
       <workItem from="1684908388943" duration="786000" />
+      <workItem from="1684925449357" duration="314000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1682333500520</created>
