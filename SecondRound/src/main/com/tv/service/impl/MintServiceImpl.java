@@ -26,13 +26,13 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@SecurityLogger
 @Service
 public class MintServiceImpl implements IMintService {
     @AutoWired
     public NftDao nftDaoImpl;
 
     @Override
+    @Transaction
     public int mint(MintNftBo bo, NftMarket nftMarket) throws Exception {
         InputStream inputStream = bo.getFile().getInputStream();
         byte[] byteArray = IOUtils.toByteArray(inputStream);

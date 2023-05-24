@@ -24,7 +24,6 @@ import java.util.Map;
  * @author 刘家辉
  * @date 2023/05/24
  */
-@CommonLogger
 @Component
 @Scope("singleton")
 @Service
@@ -68,6 +67,7 @@ public class AuctionBidServiceImpl implements tv.service.IAuctionBidService {
     }
 
     @Override
+    @Transaction
     public int offer(AuctionBidBo bo, String bidder, NftMarket nftMarket) throws Exception {
         int result = auctionDaoImpl.update(new Object[]{bo.getBidPrice(), bidder, bo.getNftId()});
         if (result != 0) {

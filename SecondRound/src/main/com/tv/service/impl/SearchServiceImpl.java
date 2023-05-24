@@ -19,7 +19,6 @@ import static tv.util.JsonUtil.analysisJson;
 
 @Component
 @Scope("singleton")
-@CommonLogger
 @Service
 public class SearchServiceImpl implements ISearchService {
 

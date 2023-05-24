@@ -1,5 +1,6 @@
 package tv.aop;
 
+import tv.spring.annotate.Transaction;
 import tv.spring.annotate.AutoWired;
 import tv.spring.annotate.Component;
 import tv.spring.annotate.Scope;
@@ -35,22 +36,33 @@ public class ProxyFactory {
         ClassLoader classLoader = target.getClass().getClassLoader();
         Class<?>[] interfaces = target.getClass().getInterfaces();
         return Proxy.newProxyInstance(classLoader, interfaces, (proxy, method, args) -> {
-            Connection connection = null;
-            try {
-                Logger.info("method: " + method.getName() + ", args: " + Arrays.toString(args));
-                connection = connectionPool.getConnection();
-                connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-                connection.setAutoCommit(false);
-                Object invoke = method.invoke(target, args);
-                connection.commit();
-                Logger.info("method return result: " + invoke);
-                return invoke;
-            } catch (InvocationTargetException e) {
-                Logger.logException(Level.WARNING, "Dao层抛出异常", e);
-                connection.rollback();
-                return null;
-            } finally {
-                connectionPool.releaseConnection(connection);
+            Logger.info("method: " + method.getName() + ", args: " + Arrays.toString(args));
+            if (method.isAnnotationPresent(Transaction.class)) {
+                Connection connection = null;
+                try {
+                    connection = connectionPool.getConnection();
+                    connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+                    connection.setAutoCommit(false);
+                    Object invoke = method.invoke(target, args);
+                    connection.commit();
+                    Logger.info("method return result: " + invoke);
+                    return invoke;
+                } catch (InvocationTargetException e) {
+                    Logger.logException(Level.WARNING, "service层抛出异常", e);
+                    connection.rollback();
+                    return null;
+                } finally {
+                    connectionPool.releaseConnection(connection);
+                }
+            } else {
+                try {
+                    Object invoke = method.invoke(target, args);
+                    Logger.info("method return result: " + invoke);
+                    return invoke;
+                } catch (InvocationTargetException e) {
+                    Logger.logException(Level.WARNING, "service层抛出异常", e);
+                    return null;
+                }
             }
         });
     }
@@ -67,7 +79,7 @@ public class ProxyFactory {
                 Logger.info("method return result: " + result);
                 return result;
             } catch (InvocationTargetException e) {
-                Logger.logException(Level.WARNING, "Service层抛出异常", e);
+                Logger.logException(Level.WARNING, "抛出异常", e);
                 return null;
             }
         });

@@ -4,23 +4,17 @@ import org.fisco.bcos.sdk.model.TransactionReceipt;
 import tv.dao.AuctionDao;
 import tv.dao.NftDao;
 import tv.entity.bo.AuctionBeginBo;
-import tv.entity.bo.AuctionBidBo;
-import tv.entity.dto.AuctionDto;
 import tv.entity.po.Auction;
 import tv.entity.po.Nft;
 import tv.service.IAuctionService;
 import tv.service.wrapper.NftMarket;
 import tv.spring.annotate.*;
 import tv.util.Contract;
-import tv.util.JsonUtil;
 import tv.util.Logger;
 import tv.util.ThreadPool;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -29,7 +23,6 @@ import java.util.logging.Level;
  * @author 刘家辉
  * @date 2023/05/10
  */
-@CommonLogger
 @Component
 @Scope("singleton")
 @Service
@@ -41,6 +34,7 @@ public class AuctionServiceImpl implements IAuctionService {
 
 
     @Override
+    @Transaction
     public int auctionBegin(AuctionBeginBo auctionBeginBo, NftMarket nftMarket) throws Exception {
         List<Nft> select = nftDaoImpl.selectByCid(auctionBeginBo.getCid());
         int nftId = select.get(0).getNftId();
@@ -58,6 +52,7 @@ public class AuctionServiceImpl implements IAuctionService {
     }
 
     @Override
+    @Transaction
     public void auctionEnd(int nftId, NftMarket nftMarket) throws Exception {
         List<Auction> list = auctionDaoImpl.selectByNftId(nftId);
         String bidder = list.get(0).getHighest_bidder();

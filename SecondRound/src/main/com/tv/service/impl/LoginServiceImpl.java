@@ -24,7 +24,6 @@ import static tv.util.Contract.setNftMarket;
 
 @Component
 @Scope("singleton")
-@CommonLogger
 @Service
 public class LoginServiceImpl implements ILoginService {
     @AutoWired

@@ -20,7 +20,6 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-@CommonLogger
 @Service
 public class TraceServiceImpl implements ITraceService {
     @AutoWired

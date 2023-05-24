@@ -18,7 +18,6 @@ import java.math.BigInteger;
 
 @Component
 @Scope("singleton")
-@SecurityLogger
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
 
@@ -26,6 +25,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
     public NftDao nftDaoImpl;
 
     @Override
+    @Transaction
     public int buy(int nftId, String owner, NftMarket nftMarket) throws Exception {
         int result = nftDaoImpl.updateOwnerBuy(false, owner, nftId);
         if (result != 0) {

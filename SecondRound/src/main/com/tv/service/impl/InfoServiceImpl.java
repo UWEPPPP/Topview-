@@ -22,7 +22,6 @@ import java.io.InputStream;
 
 @Component
 @Scope("singleton")
-@SecurityLogger
 @Service
 public class InfoServiceImpl implements IInfoService {
     @AutoWired
@@ -31,6 +30,7 @@ public class InfoServiceImpl implements IInfoService {
     public NftDao nftDaoImpl;
 
     @Override
+    @Transaction
     public String changeInfo(String newName, Part avatar, String contractAddress) throws Exception {
         String update;
         String choice;
@@ -51,6 +51,7 @@ public class InfoServiceImpl implements IInfoService {
     }
 
     @Override
+    @Transaction
     public int upAndDown(UpAndDownBo bo) throws Exception {
         boolean result = !bo.getOnSale();
         int size = nftDaoImpl.updateSold(result, bo.getCid());

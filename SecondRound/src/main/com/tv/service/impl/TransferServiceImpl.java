@@ -23,7 +23,6 @@ import java.util.List;
 
 @Component
 @Scope("singleton")
-@SecurityLogger
 @Service
 public class TransferServiceImpl implements ITransferService {
     @AutoWired
@@ -41,6 +40,7 @@ public class TransferServiceImpl implements ITransferService {
     }
 
     @Override
+    @Transaction
     public int transfer(TransferBo bo, String from, NftMarket nftMarket) throws Exception {
         List<Nft> list = nftDaoImpl.selectByCid(bo.getCid());
         Nft nft = list.get(0);

@@ -117,7 +117,7 @@ public class ApplicationContext {
                     field.set(instance, getBean(field.getName()));
                 }
             }
-            if (type.isAnnotationPresent(SecurityLogger.class)) {
+            if (type.isAnnotationPresent(Service.class)) {
                 instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).securityProxy(instance);
             } else if (type.isAnnotationPresent(CommonLogger.class)) {
                 instance = ((ProxyFactory) singletonObjects.get("proxyFactory")).commonProxy(instance);

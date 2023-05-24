@@ -25,13 +25,13 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-@SecurityLogger
 @Service
 public class RegisterServiceImpl implements IRegisterService {
     @AutoWired
     public UserDao userDaoImpl;
 
     @Override
+    @Transaction
     public int register(RegisterBo bo) throws Exception {
         Map<String, Object> map = Contract.setNftMarket();
         CryptoKeyPair keyPair = CastUtil.cast(map.get("keyPair"));
